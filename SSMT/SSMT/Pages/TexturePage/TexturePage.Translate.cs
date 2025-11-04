@@ -31,6 +31,7 @@ namespace SSMT
                 Menu_GenerateHashStyleTextureModTemplate.Text = "生成Hash风格贴图Mod模板";
 
                 ComboBox_MarkName.Header = "标记名称";
+                Text_Block_MarkName.Text = "标记名称";
                 Button_MarkTexture.Content = "标记此贴图";
                 TextBox_DIYMarkName.Header = "自定义标记名称";
                 Button_DIYMarkTexture.Content = "标记此贴图为自定义名称";
@@ -55,6 +56,7 @@ namespace SSMT
                 Menu_GenerateHashStyleTextureModTemplate.Text = "Generate Hash Style Texture Mod Template";
 
                 ComboBox_MarkName.Header = "MarkName";
+                Text_Block_MarkName.Text = "MarkName";
                 Button_MarkTexture.Content = "Mark Texture";
                 TextBox_DIYMarkName.Header = "DIY MarkName";
                 Button_DIYMarkTexture.Content = "Mark Texture As DIY MarkName";

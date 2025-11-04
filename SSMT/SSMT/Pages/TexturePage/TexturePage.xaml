@@ -8,8 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="Transparent"
-    CacheMode="BitmapCache"
-    >
+    CacheMode="BitmapCache">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -23,34 +22,36 @@
         </Grid.ColumnDefinitions>
 
         <!-- 顶部菜单 -->
-        <MenuBar Grid.Row="0" Grid.Column="0" Margin="10,5,0,0">
-            <MenuBarItem 
+        <MenuBar Grid.Row="0"
+                Grid.Column="0"
+                Margin="10,5,0,0">
+            <MenuBarItem
                 x:Name="Menu_File">
                 <!--<MenuFlyoutItem 
                     x:Name="Menu_OpenGameTextureConfigsFolder" 
                     Click="Menu_OpenGameTextureConfigsFolder_Click"/>
                 <MenuFlyoutSeparator />-->
-                <MenuFlyoutItem 
-                    x:Name="Menu_OpenCurrentWorkSpaceFolder" 
+                <MenuFlyoutItem
+                    x:Name="Menu_OpenCurrentWorkSpaceFolder"
                     Click="Menu_OpenCurrentWorkSpaceFolder_Click"/>
-                <MenuFlyoutItem 
-                    x:Name="Menu_SeeDDSInfo" 
-                    Click="Menu_SeeDDSInfo_Click" />
+                <MenuFlyoutItem
+                    x:Name="Menu_SeeDDSInfo"
+                    Click="Menu_SeeDDSInfo_Click"/>
             </MenuBarItem>
-            
-            <MenuBarItem 
-                x:Name="Menu_GenerateTextureMod" >
-                <MenuFlyoutItem 
-                    x:Name="Menu_GenerateHashStyleTextureModTemplate" 
+
+            <MenuBarItem
+                x:Name="Menu_GenerateTextureMod">
+                <MenuFlyoutItem
+                    x:Name="Menu_GenerateHashStyleTextureModTemplate"
                     Click="Menu_GenerateHashStyleTextureModTemplate_Click"/>
             </MenuBarItem>
         </MenuBar>
 
-        <ListView  
+        <ListView
             Margin="20"
-            Grid.Row="1" 
+            Grid.Row="1"
             Grid.Column="0"
-            x:Name="ImageListView" >
+            x:Name="ImageListView">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
@@ -63,16 +64,29 @@
                             <ColumnDefinition Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
-                        <Image Grid.Row="0" Grid.Column="0" Source="{Binding ImageSource}" Stretch="UniformToFill" Height="125" Width="125"/>
+                        <Image Grid.Row="0"
+                                Grid.Column="0"
+                                Source="{Binding ImageSource}"
+                                Stretch="UniformToFill"
+                                Height="125"
+                                Width="125"/>
 
-                        <StackPanel Grid.Row="0" Grid.Column="1" Orientation="Vertical">
-                            <TextBlock Text="{Binding FileName}" VerticalAlignment="Center" Margin="10,10,0,0"/>
-                            <TextBlock Text="{Binding InfoBar}" VerticalAlignment="Center" Margin="10,10,0,0"/>
-                            <TextBlock VerticalAlignment="Center" Margin="10,10,0,0">
+                        <StackPanel Grid.Row="0"
+                                Grid.Column="1"
+                                Orientation="Vertical">
+                            <TextBlock Text="{Binding FileName}"
+                                    VerticalAlignment="Center"
+                                    Margin="10,10,0,0"/>
+                            <TextBlock Text="{Binding InfoBar}"
+                                    VerticalAlignment="Center"
+                                    Margin="10,10,0,0"/>
+                            <TextBlock VerticalAlignment="Center"
+                                    Margin="10,10,0,0">
                                 <Run Text="MarkName:"/>
                                 <Run Text="{Binding MarkName}"/>
                             </TextBlock>
-                            <TextBlock VerticalAlignment="Center" Margin="10,10,0,0">
+                            <TextBlock VerticalAlignment="Center"
+                                    Margin="10,10,0,0">
                                 <Run Text="AutoTexture Style:"/>
                                 <Run Text="{Binding MarkStyle}"/>
                             </TextBlock>
@@ -85,77 +99,159 @@
         </ListView>
 
 
-        <ScrollViewer     
+        <ScrollViewer
             Grid.Column="1"
             Grid.Row="1">
-            <StackPanel 
+            <StackPanel
                 Margin="5"
                 Orientation="Vertical">
 
-                <ComboBox CornerRadius="15,15,15,15" x:Name="ComboBoxDrawIB" Header="DrawIB" Width="200" Margin="5" SelectionChanged="ComboBoxDrawIB_SelectionChanged" />
-                <ComboBox CornerRadius="15,15,15,15" x:Name="ComboBoxComponent" Header="Component" Width="200" Margin="5" SelectionChanged="ComboBoxComponent_SelectionChanged" />
-                <ComboBox CornerRadius="15,15,15,15" x:Name="ComboBoxDrawCall" Header="DrawCall" Width="200" Margin="5" SelectionChanged="ComboBoxDrawCall_SelectionChanged" />
+                <ComboBox CornerRadius="15,15,15,15"
+                        x:Name="ComboBoxDrawIB"
+                        Header="DrawIB"
+                        Width="200"
+                        Margin="5"
+                        SelectionChanged="ComboBoxDrawIB_SelectionChanged"/>
+                <ComboBox CornerRadius="15,15,15,15"
+                        x:Name="ComboBoxComponent"
+                        Header="Component"
+                        Width="200"
+                        Margin="5"
+                        SelectionChanged="ComboBoxComponent_SelectionChanged"/>
+                <ComboBox CornerRadius="15,15,15,15"
+                        x:Name="ComboBoxDrawCall"
+                        Header="DrawCall"
+                        Width="200"
+                        Margin="5"
+                        SelectionChanged="ComboBoxDrawCall_SelectionChanged"/>
 
                 <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
-                <ComboBox 
-                    CornerRadius="15,15,15,15" 
-                    x:Name="ComboBox_MarkName" 
-                    Width="200" 
-                    Margin="5" >
+                <!--PxncAcd: 好像直接去掉有些问题，懒得管了，暂且Collapse掉-->
+                <ComboBox   CornerRadius="15,15,15,15"
+                            x:Name="ComboBox_MarkName"
+                            Width="200"
+                            Margin="5"
+                            Visibility="Collapsed">
                 </ComboBox>
-                <Button 
+
+                <StackPanel Orientation="Vertical" Margin="5">
+                    <TextBlock x:Name ="Text_Block_MarkName" 
+                               Margin="0,0,0,8"
+                               Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
+                    <Border Background="Transparent"
+                            BorderBrush="{ThemeResource SystemControlForegroundBaseLowBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8"
+                            Padding="1">
+
+                        <StackPanel>
+                            <ListBox x:Name="ZZMI_MenuListBox" 
+                                 Background="Transparent"
+                                 ItemContainerStyle="{StaticResource NoSelectionListBoxItemStyle}"
+                                 Tapped="OnMenuTapped">
+                                <ListBoxItem Tag="DiffuseMap">
+                                    <TextBlock Text="DiffuseMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="NormalMap">
+                                    <TextBlock Text="NormalMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="MaterialMap">
+                                    <TextBlock Text="MaterialMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="LightMap">
+                                    <TextBlock Text="LightMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="StockingMap">
+                                    <TextBlock Text="StockingMap"/>
+                                </ListBoxItem>
+                            </ListBox>
+
+                            <ListBox x:Name="Default_MenuListBox" 
+                                 Background="Transparent"
+                                 ItemContainerStyle="{StaticResource NoSelectionListBoxItemStyle}"
+                                 Tapped="OnMenuTapped">
+                                <ListBoxItem Tag="DiffuseMap">
+                                    <TextBlock Text="DiffuseMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="NormalMap">
+                                    <TextBlock Text="NormalMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="LightMap">
+                                    <TextBlock Text="LightMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="HighLightMap">
+                                    <TextBlock Text="HighLightMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="RampMap">
+                                    <TextBlock Text="RampMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="MaterialMap">
+                                    <TextBlock Text="MaterialMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="StockingMap">
+                                    <TextBlock Text="StockingMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="NightSoulMap">
+                                    <TextBlock Text="NightSoulMap"/>
+                                </ListBoxItem>
+                            </ListBox>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+                <Button
                     Style="{StaticResource AccentButtonStyle}"
-                    x:Name="Button_MarkTexture" 
-                    Margin="5" 
-                    Click="Button_MarkTexture_Click">
+                    x:Name="Button_MarkTexture"
+                    Margin="5"
+                    Click="Button_MarkTexture_Click"
+                    Visibility="Collapsed">
                 </Button>
 
-                <TextBox 
-                    HorizontalAlignment="Left" 
+                <TextBox
+                    HorizontalAlignment="Left"
                     x:Name="TextBox_DIYMarkName"
-                    Width="200" 
+                    Width="200"
                     Margin="5"></TextBox>
-                <Button 
-                    x:Name="Button_DIYMarkTexture" 
-                    Click="Button_DIYMarkTexture_Click" 
-                    Margin="5" />
-                <Button 
-                    x:Name="Button_CancelMarkTexture" 
-                    Margin="5" 
-                    Click="Button_CancelMarkTexture_Click" />
+                <Button
+                    x:Name="Button_DIYMarkTexture"
+                    Click="Button_DIYMarkTexture_Click"
+                    Margin="5"/>
+                <Button
+                    x:Name="Button_CancelMarkTexture"
+                    Margin="5"
+                    Click="Button_CancelMarkTexture_Click"/>
 
                 <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
-                <Button 
-                    x:Name="Button_MarkAutoTextureSlotStyle" 
-                    Margin="5" 
+                <Button
+                    x:Name="Button_MarkAutoTextureSlotStyle"
+                    Margin="5"
                     Click="Button_MarkAutoTextureSlotStyle_Click"></Button>
-                <Button 
-                    x:Name="Button_MarkAutoTextureHashStyle" 
-                    Margin="5" 
-                    Click="Button_MarkAutoTextureHashStyle_Click" ></Button>
-                <Button 
+                <Button
+                    x:Name="Button_MarkAutoTextureHashStyle"
+                    Margin="5"
+                    Click="Button_MarkAutoTextureHashStyle_Click"></Button>
+                <Button
                     Style="{StaticResource AccentButtonStyle}"
-                    x:Name="Button_ApplyToAutoTexture" 
-                    Margin="5" 
+                    x:Name="Button_ApplyToAutoTexture"
+                    Margin="5"
                     Click="Button_ApplyToAutoTexture_Click">
                 </Button>
-                <Button 
-                    x:Name="Button_CancelAutoTextureForCurrentDrawIB" 
-                    Margin="5" 
+                <Button
+                    x:Name="Button_CancelAutoTextureForCurrentDrawIB"
+                    Margin="5"
                     Click="Button_CancelAutoTextureForCurrentDrawIB_Click"></Button>
-                <Button 
+                <Button
                     Click="Button_ApplyToPreViewTexture_Click"
                     Style="{StaticResource AccentButtonStyle}"
-                    x:Name="Button_ApplyToPreViewTexture" 
+                    x:Name="Button_ApplyToPreViewTexture"
                     Margin="5">
                 </Button>
             </StackPanel>
         </ScrollViewer>
-    
+
 
     </Grid>
-    
+
 
 </Page>

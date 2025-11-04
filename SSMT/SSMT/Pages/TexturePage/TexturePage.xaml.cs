@@ -1,26 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
+﻿using CommunityToolkit.WinUI.Animations;
+using DirectXTexNet;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media;
-using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Media.Imaging;
-using Windows.Storage;
-using System.Diagnostics;
+using Microsoft.UI.Xaml.Navigation;
 using Newtonsoft.Json.Linq;
-using System.Threading.Tasks;
-using DirectXTexNet;
-using static System.Net.Mime.MediaTypeNames;
 using SSMT_Core;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Windows.Foundation;
+using Windows.Foundation.Collections;
+using Windows.Storage;
+using static System.Net.Mime.MediaTypeNames;
 
 
 // To learn more about WinUI, the WinUI project structure,
@@ -42,27 +43,38 @@ namespace SSMT
 
             GameConfig gameConfig = new GameConfig();
 
+            //if (gameConfig.LogicName == LogicName.ZZMI)
+            //{
+            //    ComboBox_MarkName.Items.Add("DiffuseMap");
+            //    ComboBox_MarkName.Items.Add("NormalMap");
+            //    ComboBox_MarkName.Items.Add("MaterialMap");
+            //    ComboBox_MarkName.Items.Add("LightMap");
+            //    ComboBox_MarkName.Items.Add("StockingMap");
+            //}
+            //else
+            //{
+            //    ComboBox_MarkName.Items.Add("DiffuseMap");
+            //    ComboBox_MarkName.Items.Add("NormalMap");
+            //    ComboBox_MarkName.Items.Add("LightMap");
+            //    ComboBox_MarkName.Items.Add("HighLightMap");
+            //    ComboBox_MarkName.Items.Add("RampMap");
+            //    ComboBox_MarkName.Items.Add("MaterialMap");
+            //    ComboBox_MarkName.Items.Add("StockingMap");
+            //    ComboBox_MarkName.Items.Add("NightSoulMap");
+
+            //}
+
             if (gameConfig.LogicName == LogicName.ZZMI)
             {
-                ComboBox_MarkName.Items.Add("DiffuseMap");
-                ComboBox_MarkName.Items.Add("NormalMap");
-                ComboBox_MarkName.Items.Add("MaterialMap");
-                ComboBox_MarkName.Items.Add("LightMap");
-                ComboBox_MarkName.Items.Add("StockingMap");
+                ZZMI_MenuListBox.Visibility = Visibility.Visible;
+                Default_MenuListBox.Visibility = Visibility.Collapsed;
             }
             else
             {
-                ComboBox_MarkName.Items.Add("DiffuseMap");
-                ComboBox_MarkName.Items.Add("NormalMap");
-                ComboBox_MarkName.Items.Add("LightMap");
-                ComboBox_MarkName.Items.Add("HighLightMap");
-                ComboBox_MarkName.Items.Add("RampMap");
-                ComboBox_MarkName.Items.Add("MaterialMap");
-                ComboBox_MarkName.Items.Add("StockingMap");
-                ComboBox_MarkName.Items.Add("NightSoulMap");
-
+                ZZMI_MenuListBox.Visibility = Visibility.Collapsed;
+                Default_MenuListBox.Visibility = Visibility.Visible;
             }
-       
+
 
             // 设置ListView的数据源为imageCollection
             ImageListView.ItemsSource = imageCollection;
@@ -632,6 +644,55 @@ namespace SSMT
             TextureConfig.ApplyTextureConfig(imageCollection.ToList(), DrawIB, ComponentName,false);
 
             _ = SSMTMessageHelper.Show("应用成功", "Apply Texture Success!");
+        }
+
+        private void ColorListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void OnMenuTapped(object sender, TappedRoutedEventArgs e)
+        {
+            if (sender is ListBox listBox && listBox.SelectedItem is ListBoxItem selectedItem)
+            {
+                // 获取 Tag
+                string tag = selectedItem.Tag?.ToString();
+
+                // 立即清除选择状态
+                DispatcherQueue.TryEnqueue(() =>
+                {
+                    listBox.SelectedItem = null;
+                });
+
+                // 根据 Tag 执行不同逻辑
+                if (!string.IsNullOrEmpty(tag))
+                {
+                    ExecuteMenuLogic(tag);
+                }
+            }
+        }
+
+        private void ExecuteMenuLogic(string tag)
+        {
+            // 获取选中的项
+            int selectedIndex = ImageListView.SelectedIndex;
+
+            if (selectedIndex < 0)
+            {
+                _ = SSMTMessageHelper.Show("请先选中要标记的贴图", "Please select a texture");
+                return;
+            }
+
+            ImageItem selected_item = imageCollection[selectedIndex];
+
+            selected_item.MarkName = tag;
+
+            imageCollection[selectedIndex] = selected_item;
+
+            ImageListView.SelectedIndex = selectedIndex;
+
+            //每次标记完自动保存配置
+            SaveCurrentTextureConfig();
         }
     }
 }

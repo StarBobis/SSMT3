@@ -177,7 +177,7 @@ namespace SSMT
             {
                 CheckUpdateIng = true;
 
-                var source = new GithubSource("https://github.com/StarBobis/SSMT3/", GlobalConfig.GlobalGithubToken, false);
+                var source = new GithubSource("https://github.com/StarBobis/SSMT3/", null, false);
                 var mgr = new UpdateManager(source);
                 // check for new version
                 ProgressRing_UpdateRing.Visibility = Visibility.Visible;

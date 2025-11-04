@@ -17,9 +17,7 @@ namespace SSMT
     {
         public static string analyse_options = "deferred_ctx_immediate dump_rt dump_cb dump_vb dump_ib buf txt dds dump_tex dds";
 
-        public static string GlobalGithubToken = "";
-
-        public static string SSMT_Version = "V3.0.1";
+        public static string SSMT_Version = "V3.0.2";
 
         public static string GIPluginName = "GoodWorkGI.exe";
 

@@ -259,28 +259,26 @@
                                     >
                                     <Border.Background>
                                         <LinearGradientBrush StartPoint="1,1" EndPoint="0,1">
-                                            <!-- 顶部完全透明 -->
-                                            <GradientStop Color="Transparent" Offset="0"/>
-                                            <GradientStop Color="Red" Offset="1"/>
+                                            <GradientStop Color="#BBFF3333" Offset="0"/>
                                         </LinearGradientBrush>
                                     </Border.Background>
 
                                 </Border>
 
                                 <StackPanel 
-    Margin="12,0,0,0" 
-    Grid.Column="1" >
+                                    Margin="12,0,0,0" 
+                                    Grid.Column="1" >
                                     <TextBlock 
-        Text="{x:Bind Name}" 
-        FontSize="14" 
-        FontWeight="SemiBold" 
-        Style="{ThemeResource BaseTextBlockStyle}"
-        HorizontalAlignment="Left" 
-        Margin="0,0,0,6" 
-        MaxWidth="260"
-        TextTrimming="CharacterEllipsis"
-        TextWrapping="Wrap"
-        LineHeight="20"/>
+                                        Text="{x:Bind Name}" 
+                                        FontSize="14" 
+                                        FontWeight="SemiBold" 
+                                        Style="{ThemeResource BaseTextBlockStyle}"
+                                        HorizontalAlignment="Left" 
+                                        Margin="0,0,0,6" 
+                                        MaxWidth="260"
+                                        TextTrimming="CharacterEllipsis"
+                                        TextWrapping="Wrap"
+                                        LineHeight="20"/>
 
                                     <StackPanel Orientation="Horizontal">
                                         <TextBlock Text="{x:Bind ModNumber}" HorizontalAlignment="Left" Style="{ThemeResource CaptionTextBlockStyle}" />
@@ -368,11 +366,7 @@
                                     >
                                     <Border.Background>
                                         <LinearGradientBrush StartPoint="1,1" EndPoint="0,1">
-                                            <!-- 顶部完全透明 -->
-                                            <GradientStop Color="Transparent" Offset="0"/>
-                                            <!-- 底部 30 % 处开始出现绿色 -->
-                                            <GradientStop Color="Transparent" Offset="0.05"/>
-                                            <GradientStop Color="#FF00C853" Offset="1"/>
+                                            <GradientStop Color="#BB33FF33" Offset="0"/>
                                         </LinearGradientBrush>
                                     </Border.Background>
 

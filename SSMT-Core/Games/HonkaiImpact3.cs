@@ -129,21 +129,24 @@ namespace SSMT
                             LOG.Info("CategoryTxtFileName: " + CategoryTxtFileName);
                             string CategoryTxtFilePath = FrameAnalysisLogUtilsV2.Get_DedupedFilePath(CategoryTxtFileName, GlobalConfig.Path_LatestFrameAnalysisFolder, GlobalConfig.Path_LatestFrameAnalysisLogTxt);
                             LOG.Info("CategoryTxtFilePath: " + CategoryTxtFilePath);
-                            
-                            string VertexCountTxtShow = DBMTFileUtils.FindMigotoIniAttributeInFile(CategoryTxtFilePath, "vertex count");
-                            if (VertexCountTxtShow.Trim() != "")
-                            {
-                                int TxtShowVertexCount = int.Parse(VertexCountTxtShow);
-                                if (TxtShowVertexCount != TmpNumber)
-                                {
-                                    LOG.Info("槽位的txt文件顶点数与Buffer数据类型统计顶点数不符，跳过此数据类型。");
-                                    AllMatch = false;
-                                    break;
-                                }
-                            }
-                            else
-                            {
-                                string ShowStride = DBMTFileUtils.FindMigotoIniAttributeInFile(CategoryTxtFilePath, "stride");
+
+                            //Nico: 崩坏三有些模型在每个DrawCallIndex中只提交部分数据到txt文件，这导致txt文件的顶点数总是小于Buffer文件的顶点数
+                            //所以此时判断Buffer和Txt的顶点数是否一致屁用没有
+
+                            //string VertexCountTxtShow = DBMTFileUtils.FindMigotoIniAttributeInFile(CategoryTxtFilePath, "vertex count");
+                            //if (VertexCountTxtShow.Trim() != "")
+                            //{
+                            //    int TxtShowVertexCount = int.Parse(VertexCountTxtShow);
+                            //    if (TxtShowVertexCount != TmpNumber)
+                            //    {
+                            //        LOG.Info("槽位的txt文件顶点数与Buffer数据类型统计顶点数不符，跳过此数据类型。");
+                            //        AllMatch = false;
+                            //        break;
+                            //    }
+                            //}
+                            //else
+                            //{
+                            string ShowStride = DBMTFileUtils.FindMigotoIniAttributeInFile(CategoryTxtFilePath, "stride");
                                 if (ShowStride.Trim() != "")
                                 {
                                     int ShowStrideCount = int.Parse(ShowStride);
@@ -157,7 +160,7 @@ namespace SSMT
                                     }
                                 }
 
-                            }
+                            //}
 
                         }
                     }
@@ -214,6 +217,35 @@ namespace SSMT
             }
             else
             {
+
+                //Nico: 如果有多个CPU数据类型匹配成功，则需要筛选出其Category数量最大的
+                //比如Position长度是40，Texcoord长度是12，此时匹配到了两个数据类型，
+                //其中一个是Position+Texcoord长度为40+12，另一个是只有Position长度为40
+                //此时就需要过滤出Category数量最大的
+                //GPU很少出现这种情况，但是即使是出现，也适用。
+                int MaxCategoryCount = 0;
+                foreach (D3D11GameType d3d11GameType in PossibleGameTypeList)
+                {
+                    int CategoryCount = d3d11GameType.CategoryDrawCategoryDict.Count;
+                    if (MaxCategoryCount < CategoryCount)
+                    {
+                        MaxCategoryCount = CategoryCount;
+                    }
+                }
+
+                List<D3D11GameType> MaxCategoryCountPossibleGameTypeList = new List<D3D11GameType>();
+                foreach (D3D11GameType d3d11GameType in PossibleGameTypeList)
+                {
+                    int CategoryCount = d3d11GameType.CategoryDrawCategoryDict.Count;
+                    if (MaxCategoryCount == CategoryCount)
+                    {
+                        MaxCategoryCountPossibleGameTypeList.Add(d3d11GameType);
+                    }
+                }
+
+                PossibleGameTypeList = MaxCategoryCountPossibleGameTypeList;
+
+
                 LOG.Info("All Matched GameType:");
                 foreach (D3D11GameType d3d11GameType in PossibleGameTypeList)
                 {

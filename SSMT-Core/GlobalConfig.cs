@@ -17,7 +17,7 @@ namespace SSMT
     {
         public static string analyse_options = "deferred_ctx_immediate dump_rt dump_cb dump_vb dump_ib buf txt dds dump_tex dds";
 
-        public static string SSMT_Version = "V3.0.4";
+        public static string SSMT_Version = "V3.0.5";
 
         public static string GIPluginName = "GoodWorkGI.exe";
 
@@ -55,10 +55,7 @@ namespace SSMT
         /// 是否显示Mod管理页面
         /// </summary>
         public static bool ShowModManagePage { get; set; } = false;
-        /// <summary>
-        /// 是否显示Mod逆向页面
-        /// </summary>
-        public static bool ShowModReversePage { get; set; } = false;
+       
         /// <summary>
         /// 是否显示Mod保护页面
         /// </summary>
@@ -199,11 +196,7 @@ namespace SSMT
                     ShowModManagePage = (bool)SettingsJsonObject["ShowModManagePage"];
                 }
 
-                //ShowModReversePage
-                if (SettingsJsonObject.ContainsKey("ShowModReversePage"))
-                {
-                    ShowModReversePage = (bool)SettingsJsonObject["ShowModReversePage"];
-                }
+               
 
                 //ShowModProtectPage
                 if (SettingsJsonObject.ContainsKey("ShowModProtectPage"))
@@ -246,7 +239,6 @@ namespace SSMT
             SettingsJsonObject["Chinese"] = Chinese;
             SettingsJsonObject["ShowGameTypePage"] = ShowGameTypePage;
             SettingsJsonObject["ShowModManagePage"] = ShowModManagePage;
-            SettingsJsonObject["ShowModReversePage"] = ShowModReversePage;
             SettingsJsonObject["ShowModProtectPage"] = ShowModProtectPage;
             SettingsJsonObject["ShowTextureToolBoxPage"] = ShowTextureToolBoxPage;
 

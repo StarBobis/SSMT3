@@ -229,11 +229,6 @@
                             Toggled="ToggleSwitch_ShowModManagePage_Toggled"
                             />
                         
-                        <ToggleSwitch 
-                            Margin="5"
-                            x:Name="ToggleSwitch_ShowModReversePage"
-                            Toggled="ToggleSwitch_ShowModReversePage_Toggled"
-                            />
 
                         <ToggleSwitch 
                             Margin="5"

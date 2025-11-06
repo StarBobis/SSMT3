@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Media.Core;
+using Windows.Media.Playback;
 using WinUI3Helper;
 
 namespace SSMT
@@ -191,33 +193,66 @@ namespace SSMT
 
         private async void Button_SelectBackgroundFile_Click(object sender, RoutedEventArgs e)
         {
-            string filepath = await SSMTCommandHelper.ChooseFileAndGetPath(".png");
-            if (filepath == "")
-            {
+            string filepath = await SSMTCommandHelper.ChooseFileAndGetPath(".png;.mp4");
+            if (string.IsNullOrWhiteSpace(filepath))
                 return;
-            }
 
             try
             {
-                string PossibleWebpPicture = Path.Combine(GlobalConfig.Path_CurrentGamesFolder, "Background.webp");
-                if (File.Exists(PossibleWebpPicture))
+                string folder = GlobalConfig.Path_CurrentGamesFolder;
+
+                // 清理旧背景文件
+                foreach (var file in new[] { "Background.webp", "Background.png", "Background.mp4" })
                 {
-                    File.Delete(PossibleWebpPicture);
+                    string fullPath = Path.Combine(folder, file);
+                    if (File.Exists(fullPath))
+                        File.Delete(fullPath);
                 }
 
-                string NewBackgroundPath = Path.Combine(GlobalConfig.Path_CurrentGamesFolder, "Background.png");
-                File.Copy(filepath, NewBackgroundPath, true);
+                string ext = Path.GetExtension(filepath).ToLowerInvariant();
 
-                VisualHelper.CreateScaleAnimation(imageVisual);
-                VisualHelper.CreateFadeAnimation(imageVisual);
-                MainWindowImageBrush.Source = new BitmapImage(new Uri(NewBackgroundPath));
+                if (ext == ".png")
+                {
+                    string NewBackgroundPath = Path.Combine(folder, "Background.png");
+                    File.Copy(filepath, NewBackgroundPath, true);
+
+                    BackgroundVideo.Visibility = Visibility.Collapsed;
+                    MainWindowImageBrush.Visibility = Visibility.Visible;
+
+                    VisualHelper.CreateScaleAnimation(MainWindowImageBrush);
+                    VisualHelper.CreateFadeAnimation(MainWindowImageBrush);
+                    MainWindowImageBrush.Source = new BitmapImage(new Uri(NewBackgroundPath));
+                }
+                else if (ext == ".mp4")
+                {
+                    string NewBackgroundPath = Path.Combine(folder, "Background.mp4");
+                    File.Copy(filepath, NewBackgroundPath, true);
+
+                    MainWindowImageBrush.Visibility = Visibility.Collapsed;
+                    BackgroundVideo.Visibility = Visibility.Visible;
+
+                    var player = new MediaPlayer
+                    {
+                        Source = MediaSource.CreateFromUri(new Uri(NewBackgroundPath)),
+                        IsLoopingEnabled = true
+                    };
+                    BackgroundVideo.SetMediaPlayer(player);
+                    player.Play();
+
+                    VisualHelper.CreateFadeAnimation(BackgroundVideo);
+                }
+                else
+                {
+                    await SSMTMessageHelper.Show($"不支持的背景文件类型：{ext}");
+                }
             }
             catch (Exception ex)
             {
                 _ = SSMTMessageHelper.Show(ex.ToString());
             }
-
         }
+
+
 
 
 

@@ -283,20 +283,29 @@ namespace SSMT
         {
             FileOpenPicker picker = new FileOpenPicker();
 
-            // 获取当前窗口的HWND
+            // 获取当前窗口的 HWND
             nint windowHandle = WindowNative.GetWindowHandle(App.m_window);
             InitializeWithWindow.Initialize(picker, windowHandle);
 
             picker.ViewMode = PickerViewMode.Thumbnail;
-            
-            //还不如不设置起始位置，让用户跟着上一次的位置去选
-            //picker.SuggestedStartLocation = PickerLocationId.Desktop;
-            
-            picker.FileTypeFilter.Add(Suffix);
+
+            // 💡 支持多个扩展名，例如 ".png;.mp4;.jpg"
+            foreach (var ext in Suffix.Split(';', StringSplitOptions.RemoveEmptyEntries))
+            {
+                string cleanExt = ext.Trim();
+
+                // 确保以 "." 开头并去除通配符
+                if (!cleanExt.StartsWith("."))
+                    cleanExt = "." + cleanExt.TrimStart('*');
+
+                picker.FileTypeFilter.Add(cleanExt);
+            }
+
             return picker;
         }
 
-        
+
+
 
         public static FileOpenPicker Get_FileOpenPicker(List<string> SuffixList)
         {
@@ -344,7 +353,7 @@ namespace SSMT
             }
             catch (Exception exception)
             {
-                await SSMTMessageHelper.Show("此功能不支持管理员权限运行，请切换到普通用户打开DBMT。\n" + exception.ToString(), "This functio can't run on admin user please use normal user to open DBMT. \n" + exception.ToString());
+                await SSMTMessageHelper.Show("此功能不支持管理员权限运行，请切换到普通用户打开SSMT。\n" + exception.ToString(), "This functio can't run on admin user please use normal user to open SSMT. \n" + exception.ToString());
             }
             return "";
         }

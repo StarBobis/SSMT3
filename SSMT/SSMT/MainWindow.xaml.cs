@@ -170,7 +170,6 @@ namespace SSMT
             //设置页面是否显示
             this.SetGameTypePageVisibility(GlobalConfig.ShowGameTypePage);
             this.SetModManagePageVisibility(GlobalConfig.ShowModManagePage);
-            this.SetModProtectPageVisibility(GlobalConfig.ShowModProtectPage);
             this.SetTextureToolBoxPageVisibility(GlobalConfig.ShowTextureToolBoxPage);
 
 
@@ -188,7 +187,6 @@ namespace SSMT
                 NavigationViewItem_WorkPage.Content = "工作台";
                 NavigationViewItem_TexturePage.Content = "贴图标记";
                 NavigationViewItem_TextureToolBoxPage.Content = "贴图工具箱";
-                NavigationViewItem_ProtectPage.Content = "Mod保护";
                 NavigationViewItem_GameTypePage.Content = "数据类型管理";
                 NavigationViewItem_ModManagePage.Content = "Mod管理";
             }
@@ -198,7 +196,6 @@ namespace SSMT
                 NavigationViewItem_WorkPage.Content = "Work";
                 NavigationViewItem_TexturePage.Content = "Mark Texture";
                 NavigationViewItem_TextureToolBoxPage.Content = "Texture ToolBox";
-                NavigationViewItem_ProtectPage.Content = "Mod Protect";
                 NavigationViewItem_GameTypePage.Content = "GameType Management";
                 NavigationViewItem_ModManagePage.Content = "Mod Management";
             }
@@ -254,9 +251,6 @@ namespace SSMT
                         break;
                     case "GameTypePage":
                         pageType = typeof(GameTypePage);
-                        break;
-                    case "ProtectPage":
-                        pageType = typeof(ProtectPage);
                         break;
                     case "ModManagePage":
                         pageType = typeof(ModManagePage);
@@ -365,17 +359,7 @@ namespace SSMT
         }
 
      
-        public void SetModProtectPageVisibility(bool Visible)
-        {
-            if (Visible)
-            {
-                NavigationViewItem_ProtectPage.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                NavigationViewItem_ProtectPage.Visibility = Visibility.Collapsed;
-            }
-        }
+
 
         public void SetTextureToolBoxPageVisibility(bool Visible)
         {

@@ -62,11 +62,7 @@
                     Content="贴图工具箱" 
                     Tag="TextureToolBoxPage" />
                 
-                <NavigationViewItem 
-                    x:Name="NavigationViewItem_ProtectPage" 
-                    Icon="ProtectedDocument" 
-                    Content="Mod保护" 
-                    Tag="ProtectPage"  />
+               
                 <NavigationViewItem 
                     x:Name="NavigationViewItem_GameTypePage" 
                     Icon="Priority" 

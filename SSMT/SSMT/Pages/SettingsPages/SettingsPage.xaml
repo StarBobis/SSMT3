@@ -218,28 +218,22 @@
                     <StackPanel Orientation="Vertical" Spacing="1">
 
                         <ToggleSwitch
-        x:Name="ToggleSwitch_ShowGameTypePage"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Stretch"
-        Toggled="ToggleSwitch_ShowGameTypePage_Toggled"/>
+                            x:Name="ToggleSwitch_ShowGameTypePage"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            Toggled="ToggleSwitch_ShowGameTypePage_Toggled"/>
 
                         <ToggleSwitch
-        x:Name="ToggleSwitch_ShowModManagePage"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Stretch"
-        Toggled="ToggleSwitch_ShowModManagePage_Toggled"/>
-        
-                        <ToggleSwitch
-        x:Name="ToggleSwitch_ShowModProtectPage"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Stretch"
-        Toggled="ToggleSwitch_ShowModProtectPage_Toggled"/>
+                            x:Name="ToggleSwitch_ShowModManagePage"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            Toggled="ToggleSwitch_ShowModManagePage_Toggled"/>
 
                         <ToggleSwitch
-        x:Name="ToggleSwitch_ShowTextureToolBoxPage"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Stretch"
-        Toggled="ToggleSwitch_ShowTextureToolBoxPage_Toggled"/>
+                            x:Name="ToggleSwitch_ShowTextureToolBoxPage"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Stretch"
+                            Toggled="ToggleSwitch_ShowTextureToolBoxPage_Toggled"/>
 
                     </StackPanel>
 

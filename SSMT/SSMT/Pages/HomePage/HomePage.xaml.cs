@@ -1,18 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using Microsoft.UI.Composition;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Newtonsoft.Json.Linq;
-using System.Diagnostics;
-using System.Collections.ObjectModel;
-using Microsoft.UI.Composition;
-using Microsoft.UI.Xaml.Hosting;
-using WinUI3Helper;
 using SSMT.SSMTHelper;
 using SSMT_Core;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using Windows.Media.Core;
+using Windows.Media.Playback;
+using WinUI3Helper;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -66,7 +68,9 @@ namespace SSMT
             {
                 StackPanel_GIError.Visibility = Visibility.Visible;
             }
-            
+
+            LoadBackgroundIfExists();
+
         }
 
 
@@ -903,6 +907,61 @@ namespace SSMT
             GameConfig gameConfig = new GameConfig();
             gameConfig.DllInitializationDelay = (int)NumberBox_DllInitializationDelay.Value;
             gameConfig.SaveConfig();
+        }
+
+        private void LoadBackgroundIfExists()
+        {
+            try
+            {
+                string folder = GlobalConfig.Path_CurrentGamesFolder;
+                string png = Path.Combine(folder, "Background.png");
+                string mp4 = Path.Combine(folder, "Background.mp4");
+
+                if (File.Exists(mp4))
+                {
+                    // 显示视频、隐藏图片
+                    if (BackgroundVideo != null && MainWindowImageBrush != null)
+                    {
+                        MainWindowImageBrush.Visibility = Visibility.Collapsed;
+                        BackgroundVideo.Visibility = Visibility.Visible;
+
+                        var player = new MediaPlayer
+                        {
+                            Source = MediaSource.CreateFromUri(new Uri(mp4)),
+                            IsLoopingEnabled = true
+                        };
+                        BackgroundVideo.SetMediaPlayer(player);
+                        player.Play();
+
+                        VisualHelper.CreateFadeAnimation(BackgroundVideo);
+                    }
+                }
+                else if (File.Exists(png))
+                {
+                    // 显示图片、隐藏视频
+                    if (BackgroundVideo != null && MainWindowImageBrush != null)
+                    {
+                        BackgroundVideo.Visibility = Visibility.Collapsed;
+                        MainWindowImageBrush.Visibility = Visibility.Visible;
+                        MainWindowImageBrush.Source = new BitmapImage(new Uri(png));
+
+                        VisualHelper.CreateScaleAnimation(MainWindowImageBrush);
+                        VisualHelper.CreateFadeAnimation(MainWindowImageBrush);
+                    }
+                }
+                else
+                {
+                    // 两者都不存在
+                    if (BackgroundVideo != null)
+                        BackgroundVideo.Visibility = Visibility.Collapsed;
+                    if (MainWindowImageBrush != null)
+                        MainWindowImageBrush.Source = null;
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine("LoadBackgroundIfExists failed: " + ex);
+            }
         }
     }
 }

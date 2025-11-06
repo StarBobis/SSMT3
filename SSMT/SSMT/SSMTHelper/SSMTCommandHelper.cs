@@ -110,7 +110,7 @@ namespace SSMT
                     {
                         _ = SSMTMessageHelper.Show(
                         "运行结果: " + runResult + ". \n\n很遗憾运行失败了，参考运行结果和运行日志改变策略再试一次吧。\n\n1.请检查您的配置是否正确.\n2.请查看日志获取更多细节信息.\n3.请检查您是否使用的是最新版本，新版本可能已修复此问题\n4.请联系NicoMico寻求帮助或在Github上提交issue: https://github.com/StarBobis/DirectX-BufferModTool.\n\n点击确认为后您打开本次运行日志。",
-                        "Run result: " + runResult + ". \n1.Please check your config.\n2.Please check log for more information.\n3.Please ask NicoMico for help, remember to send him the latest log file.\n4.Ask @Developer in ShaderFreedom for help.\n5.Read the source code of DBMT and try analyse the reason for Error with latest log file.");
+                        "Run result: " + runResult + ". \n1.Please check your config.\n2.Please check log for more information.\n3.Please ask NicoMico for help, remember to send him the latest log file.\n4.Ask @Developer in ShaderFreedom for help.\n5.Read the source code of SSMT and try analyse the reason for Error with latest log file.");
                     }
                     return false;
                 }
@@ -121,7 +121,7 @@ namespace SSMT
             }
             catch (Exception ex)
             {
-                _ = SSMTMessageHelper.Show("执行DBMT核心时发生中断，请查看Log日志获取具体内容", "Error when execute DBMT.exe, please see log file for details." + ex.ToString());
+                _ = SSMTMessageHelper.Show("执行SSMT核心时发生中断，请查看Log日志获取具体内容", "Error when execute SSMT.exe, please see log file for details." + ex.ToString());
                 return false;
             }
         }
@@ -375,7 +375,7 @@ namespace SSMT
             }
             catch (Exception exception)
             {
-                await SSMTMessageHelper.Show("此功能不支持管理员权限运行，请切换到普通用户打开DBMT。\n" + exception.ToString(), "This functio can't run on admin user please use normal user to open DBMT. \n" + exception.ToString());
+                await SSMTMessageHelper.Show("此功能不支持管理员权限运行，请切换到普通用户打开SSMT。\n" + exception.ToString(), "This functio can't run on admin user please use normal user to open SSMT. \n" + exception.ToString());
             }
             return "";
         }
@@ -398,7 +398,7 @@ namespace SSMT
             }
             catch (Exception exception)
             {
-                await SSMTMessageHelper.Show("此功能不支持管理员权限运行，请切换到普通用户打开DBMT。\n" + exception.ToString());
+                await SSMTMessageHelper.Show("此功能不支持管理员权限运行，请切换到普通用户打开SSMT。\n" + exception.ToString());
             }
             return "";
             

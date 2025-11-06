@@ -61,11 +61,7 @@
                     Icon="Scan" 
                     Content="贴图工具箱" 
                     Tag="TextureToolBoxPage" />
-                <NavigationViewItem 
-                    x:Name="NavigationViewItem_ReversePage" 
-                    Icon="Permissions" 
-                    Content="Mod逆向" 
-                    Tag="ReversePage" />
+                
                 <NavigationViewItem 
                     x:Name="NavigationViewItem_ProtectPage" 
                     Icon="ProtectedDocument" 

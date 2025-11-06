@@ -44,8 +44,6 @@ namespace SSMT
         public DesktopAcrylicController _controller;
 
         public static MainWindow CurrentWindow;
-
-
         
 
         public MainWindow()
@@ -173,7 +171,6 @@ namespace SSMT
             this.SetGameTypePageVisibility(GlobalConfig.ShowGameTypePage);
             this.SetModManagePageVisibility(GlobalConfig.ShowModManagePage);
             this.SetModProtectPageVisibility(GlobalConfig.ShowModProtectPage);
-            this.SetModReversePageVisibility(GlobalConfig.ShowModReversePage);
             this.SetTextureToolBoxPageVisibility(GlobalConfig.ShowTextureToolBoxPage);
 
 
@@ -191,7 +188,6 @@ namespace SSMT
                 NavigationViewItem_WorkPage.Content = "工作台";
                 NavigationViewItem_TexturePage.Content = "贴图标记";
                 NavigationViewItem_TextureToolBoxPage.Content = "贴图工具箱";
-                NavigationViewItem_ReversePage.Content = "Mod逆向";
                 NavigationViewItem_ProtectPage.Content = "Mod保护";
                 NavigationViewItem_GameTypePage.Content = "数据类型管理";
                 NavigationViewItem_ModManagePage.Content = "Mod管理";
@@ -202,7 +198,6 @@ namespace SSMT
                 NavigationViewItem_WorkPage.Content = "Work";
                 NavigationViewItem_TexturePage.Content = "Mark Texture";
                 NavigationViewItem_TextureToolBoxPage.Content = "Texture ToolBox";
-                NavigationViewItem_ReversePage.Content = "Mod Reverse";
                 NavigationViewItem_ProtectPage.Content = "Mod Protect";
                 NavigationViewItem_GameTypePage.Content = "GameType Management";
                 NavigationViewItem_ModManagePage.Content = "Mod Management";
@@ -259,9 +254,6 @@ namespace SSMT
                         break;
                     case "GameTypePage":
                         pageType = typeof(GameTypePage);
-                        break;
-                    case "ReversePage":
-                        pageType = typeof(ReversePage);
                         break;
                     case "ProtectPage":
                         pageType = typeof(ProtectPage);
@@ -372,18 +364,7 @@ namespace SSMT
             }
         }
 
-        public void SetModReversePageVisibility(bool Visible)
-        {
-            if (Visible)
-            {
-                NavigationViewItem_ReversePage.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                NavigationViewItem_ReversePage.Visibility = Visibility.Collapsed;
-            }
-        }
-
+     
         public void SetModProtectPageVisibility(bool Visible)
         {
             if (Visible)

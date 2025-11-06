@@ -228,13 +228,7 @@
         VerticalAlignment="Center"
         HorizontalAlignment="Stretch"
         Toggled="ToggleSwitch_ShowModManagePage_Toggled"/>
-
-                        <ToggleSwitch
-        x:Name="ToggleSwitch_ShowModReversePage"
-        VerticalAlignment="Center"
-        HorizontalAlignment="Stretch"
-        Toggled="ToggleSwitch_ShowModReversePage_Toggled"/>
-
+        
                         <ToggleSwitch
         x:Name="ToggleSwitch_ShowModProtectPage"
         VerticalAlignment="Center"

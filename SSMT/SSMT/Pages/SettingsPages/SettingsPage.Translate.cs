@@ -82,9 +82,6 @@ namespace SSMT
                 ToggleSwitch_ShowModProtectPage.OnContent = "显示 Mod 保护页面";
                 ToggleSwitch_ShowModProtectPage.OffContent = "隐藏 Mod 保护页面";
 
-                ToggleSwitch_ShowModReversePage.OnContent = "显示 Mod 逆向页面";
-                ToggleSwitch_ShowModReversePage.OffContent = "隐藏 Mod 逆向页面";
-
                 ToggleSwitch_ShowTextureToolBoxPage.OnContent = "显示贴图工具箱页面";
                 ToggleSwitch_ShowTextureToolBoxPage.OffContent = "隐藏贴图工具箱页面";
 
@@ -149,9 +146,6 @@ namespace SSMT
 
                 ToggleSwitch_ShowModProtectPage.OnContent = "Show Mod Protection Page";
                 ToggleSwitch_ShowModProtectPage.OffContent = "Hide Mod Protection Page";
-
-                ToggleSwitch_ShowModReversePage.OnContent = "Show Mod Reverse Page";
-                ToggleSwitch_ShowModReversePage.OffContent = "Hide Mod Reverse Page";
 
                 ToggleSwitch_ShowTextureToolBoxPage.OnContent = "Show Texture Toolbox Page";
                 ToggleSwitch_ShowTextureToolBoxPage.OffContent = "Hide Texture Toolbox Page";

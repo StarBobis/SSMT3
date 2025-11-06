@@ -79,7 +79,8 @@ namespace SSMT
 
                 
                 ToggleSwitch_ShowModManagePage.OnContent = "显示 Mod 管理页面";
-                ToggleSwitch_ShowModManagePage.OffContent = "不显示 Mod 管理页面";
+                ToggleSwitch_ShowModManagePage.OffContent = "隐藏 Mod 管理页面";
+
 
                 ToggleSwitch_ShowTextureToolBoxPage.OnContent = "显示贴图工具箱页面";
                 ToggleSwitch_ShowTextureToolBoxPage.OffContent = "隐藏贴图工具箱页面";
@@ -142,6 +143,7 @@ namespace SSMT
 
                 ToggleSwitch_ShowModManagePage.OnContent = "Show Mod Management Page";
                 ToggleSwitch_ShowModManagePage.OffContent = "Hide Mod Management Page";
+
 
                 ToggleSwitch_ShowTextureToolBoxPage.OnContent = "Show Texture Toolbox Page";
                 ToggleSwitch_ShowTextureToolBoxPage.OffContent = "Hide Texture Toolbox Page";

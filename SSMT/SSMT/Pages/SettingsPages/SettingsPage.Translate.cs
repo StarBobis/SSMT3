@@ -81,9 +81,6 @@ namespace SSMT
                 ToggleSwitch_ShowModManagePage.OnContent = "显示";
                 ToggleSwitch_ShowModManagePage.OffContent = "不显示";
 
-                ToggleSwitch_ShowModProtectPage.Header = "是否显示Mod保护页面";
-                ToggleSwitch_ShowModProtectPage.OnContent = "显示";
-                ToggleSwitch_ShowModProtectPage.OffContent = "不显示";
 
                
 
@@ -151,11 +148,6 @@ namespace SSMT
                 ToggleSwitch_ShowModManagePage.OnContent = "Show";
                 ToggleSwitch_ShowModManagePage.OffContent = "Not Show";
 
-                ToggleSwitch_ShowModProtectPage.Header = "Show Mod Protect Page";
-                ToggleSwitch_ShowModProtectPage.OnContent = "Show";
-                ToggleSwitch_ShowModProtectPage.OffContent = "Not Show";
-
-                
 
                 ToggleSwitch_ShowTextureToolBoxPage.Header = "Show Texture ToolBox Page";
                 ToggleSwitch_ShowTextureToolBoxPage.OnContent = "Show";

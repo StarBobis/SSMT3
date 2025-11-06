@@ -56,10 +56,7 @@ namespace SSMT
         /// </summary>
         public static bool ShowModManagePage { get; set; } = false;
        
-        /// <summary>
-        /// 是否显示Mod保护页面
-        /// </summary>
-        public static bool ShowModProtectPage { get; set; } = false;
+   
         /// <summary>
         /// 是否显示贴图工具箱页面，因为这个页面用的人非常少。
         /// </summary>
@@ -198,11 +195,6 @@ namespace SSMT
 
                
 
-                //ShowModProtectPage
-                if (SettingsJsonObject.ContainsKey("ShowModProtectPage"))
-                {
-                    ShowModProtectPage = (bool)SettingsJsonObject["ShowModProtectPage"];
-                }
 
                 //ShowTextureToolBoxPage
                 if (SettingsJsonObject.ContainsKey("ShowTextureToolBoxPage"))
@@ -239,7 +231,6 @@ namespace SSMT
             SettingsJsonObject["Chinese"] = Chinese;
             SettingsJsonObject["ShowGameTypePage"] = ShowGameTypePage;
             SettingsJsonObject["ShowModManagePage"] = ShowModManagePage;
-            SettingsJsonObject["ShowModProtectPage"] = ShowModProtectPage;
             SettingsJsonObject["ShowTextureToolBoxPage"] = ShowTextureToolBoxPage;
 
             //写出内容

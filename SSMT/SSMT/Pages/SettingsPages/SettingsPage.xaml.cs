@@ -73,7 +73,6 @@ namespace SSMT
 
                 GlobalConfig.ShowGameTypePage = ToggleSwitch_ShowGameTypePage.IsOn;
                 GlobalConfig.ShowModManagePage = ToggleSwitch_ShowModManagePage.IsOn;
-                GlobalConfig.ShowModProtectPage = ToggleSwitch_ShowModProtectPage.IsOn;
                 GlobalConfig.ShowTextureToolBoxPage = ToggleSwitch_ShowTextureToolBoxPage.IsOn;
 
                 GlobalConfig.SaveConfig();
@@ -105,7 +104,6 @@ namespace SSMT
 
             ToggleSwitch_ShowGameTypePage.IsOn = GlobalConfig.ShowGameTypePage;
             ToggleSwitch_ShowModManagePage.IsOn = GlobalConfig.ShowModManagePage;
-            ToggleSwitch_ShowModProtectPage.IsOn = GlobalConfig.ShowModProtectPage;
             ToggleSwitch_ShowTextureToolBoxPage.IsOn = GlobalConfig.ShowTextureToolBoxPage;
 
             ReadOver = true;
@@ -306,15 +304,7 @@ namespace SSMT
 
         
 
-        private void ToggleSwitch_ShowModProtectPage_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (ReadOver)
-            {
-                SaveSettingsToConfig();
-
-                MainWindow.CurrentWindow.SetModProtectPageVisibility(ToggleSwitch_ShowModProtectPage.IsOn);
-            }
-        }
+    
 
         private void ToggleSwitch_ShowTextureToolBoxPage_Toggled(object sender, RoutedEventArgs e)
         {

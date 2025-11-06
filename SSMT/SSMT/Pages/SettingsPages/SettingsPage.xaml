@@ -230,11 +230,7 @@
                             />
                         
 
-                        <ToggleSwitch 
-                            Margin="5"
-                            x:Name="ToggleSwitch_ShowModProtectPage"
-                            Toggled="ToggleSwitch_ShowModProtectPage_Toggled"
-                            />
+                        
 
                         <ToggleSwitch 
                             Margin="5"

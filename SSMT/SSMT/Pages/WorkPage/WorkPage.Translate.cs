@@ -73,13 +73,13 @@ namespace SSMT
                 WorkGameSelectionComboBox.Header = "游戏名称";
                 ComboBoxWorkSpaceSelection.Header = "工作空间";
                 Button_CreateWorkSpace.Content = "创建工作空间";
-                Button_OpenWorkSpaceFolder.Content = "打开当前工作空间";
+                Button_OpenWorkSpaceFolder.Content = "打开当前工作空间文件夹";
                 Button_CleanWorkSpace.Content = "清空当前工作空间内容";
                 Button_DeleteCurrentWorkSpaceFolder.Content = "删除当前工作空间";
 
                 ToolTipService.SetToolTip(ToggleSwitch_DumpIBListConfig, "指定IB列表Dump模式下，禁用Mods文件夹，并且F8只会Dump DrawIB列表中的IB，适合提取特定角色或场景的模型。全局Dump模式下，启用Mods文件夹，Dump游戏运行时所有当前帧内容。");
-                ToggleSwitch_DumpIBListConfig.OnContent = "指定IB列表Dump模式";
-                ToggleSwitch_DumpIBListConfig.OffContent = "全局Dump模式";
+                ToggleSwitch_DumpIBListConfig.OnContent = "当前Dump模式：指定IB列表";
+                ToggleSwitch_DumpIBListConfig.OffContent = "当前Dump模式：全局";
 
                 ToggleSwitch_ConvertDedupedTextures.OnContent = "转换DedupedTextures贴图";
                 ToggleSwitch_ConvertDedupedTextures.OffContent = "不转换DedupedTextures贴图";

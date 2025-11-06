@@ -69,15 +69,15 @@ namespace SSMT
                 ToggleSwitch_Symlink.OnContent = "当前开启Symlink特性";
                 ToggleSwitch_Symlink.OffContent = "当前关闭Symlink特性";
 
-                ToggleSwitch_AutoSetAnalyseOptions.OnContent = "自动重置analyse_options";
-                ToggleSwitch_AutoSetAnalyseOptions.OffContent = "不重置analyse_options";
+                ToggleSwitch_AutoSetAnalyseOptions.OnContent = "analyse_options：自动重置";
+                ToggleSwitch_AutoSetAnalyseOptions.OffContent = "analyse_options：不自动重置";
 
                 ToggleSwitch_ShowWarning.OnContent = "当前隐藏左上角红字报错显示";
                 ToggleSwitch_ShowWarning.OffContent = "当前显示左上角红字报错";
 
 
-                ToggleSwitch_DllMode.OffContent = "以Dev版本d3d11.dll启动";
-                ToggleSwitch_DllMode.OnContent = "以Play版本d3d11.dll启动";
+                ToggleSwitch_DllMode.OffContent = "d3d11.dll版本：Dev";
+                ToggleSwitch_DllMode.OnContent = "d3d11.dll版本：Play";
 
                 Button_Run3DmigotoLoader.Content = " 启动3Dmigoto";
                 ToolTipService.SetToolTip(Button_Run3DmigotoLoader, "执行高级启动设置并运行3Dmigoto加载器");

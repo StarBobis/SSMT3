@@ -99,10 +99,7 @@
                 <MenuFlyoutItem 
                     x:Name="Menu_AutoDetect_CPUPreSkinning_DrawIBList" 
                     Click="Menu_AutoDetect_CPUPreSkinning_DrawIBList_Click"/>
-                <MenuFlyoutSeparator></MenuFlyoutSeparator>
-                <MenuFlyoutItem 
-                    x:Name="Menu_ObfuscateDev" 
-                    Click="Encryption_Obfuscate"/>
+                
             </MenuBarItem>
 
             <MenuBarItem 

@@ -49,7 +49,6 @@ namespace SSMT
                 Menu_AutoDetect_UnityVS_GPUPreSkinning_DrawIBList.Text = "自动检测UntiyVS_GPU-PreSkinning的DrawIB列表";
                 Menu_AutoDetect_CPUPreSkinning_DrawIBList.Text = "自动检测CPU-PreSkinning的DrawIB列表";
 
-                Menu_ObfuscateDev.Text = "一键混淆Mod中的资源名称";
 
                 Menu_Texture.Title = "贴图";
 
@@ -143,7 +142,6 @@ namespace SSMT
                 Menu_AutoDetect_UnityVS_GPUPreSkinning_DrawIBList.Text = "Auto Detect UntiyVS_GPU-PreSkinning DrawIB List";
                 Menu_AutoDetect_CPUPreSkinning_DrawIBList.Text = "Auto Detect CPU-PreSkinning DrawIB List";
 
-                Menu_ObfuscateDev.Text = "Obfuscate Resource Name In Mod's .ini File";
 
                 Menu_Texture.Title = "Texture";
 

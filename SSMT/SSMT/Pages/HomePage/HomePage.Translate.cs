@@ -89,6 +89,14 @@ namespace SSMT
                 NumberBox_DllInitializationDelay.Header = "d3d11.dll初始化延迟";
                 ToolTipService.SetToolTip(NumberBox_DllInitializationDelay,"d3d11.dll初始化时的延迟，单位为毫秒，一般WWMI填200，若仍然闪退则以每次100为单位增加此值直到不闪退\n鸣潮在2.4版本更新后至少需要50ms的延迟以确保启动时不会闪退\n此外，如果要让Reshade和3Dmigoto一起使用，至少需要150ms的延迟");
 
+                SettingsExpander_DllRelatedSettings.Header = "DLL相关设置";
+                SettingsExpander_DllRelatedSettings.Description = "与d3d11.dll相关的高级设置选项";
+
+                SettingsCard_DllPreProcess.Header = "DLL预处理";
+                SettingsCard_DllPreProcess.Description = "在启动3Dmigoto加载器之前对d3d11.dll进行预处理的选项";
+
+                ComboBox_DllPreProcess_None.Content = "无";
+                ComboBox_DllPreProcess_PackWithUPX.Content = "使用UPX默认选项加壳";
             }
             else
             {
@@ -146,6 +154,15 @@ namespace SSMT
                 NumberBox_DllInitializationDelay.Header = "d3d11.dll Initialization Delay";
                 ToolTipService.SetToolTip(NumberBox_DllInitializationDelay, "Delay in milliseconds for DLL initialization. We'll go with 200ms for WWMI:\nWuthering Waves requires at least 50ms delay since 2.4 update to not crash on startup.\nAlso, to inject Reshade along with 3dmigoto, 150ms delay is required.");
 
+
+                SettingsExpander_DllRelatedSettings.Header = "Dll Related Settings";
+                SettingsExpander_DllRelatedSettings.Description = "Various High Level Settings For d3d11.dll";
+
+                SettingsCard_DllPreProcess.Header = "DLL Pre-Process";
+                SettingsCard_DllPreProcess.Description = "Do something for d3d11.dll before inject";
+
+                ComboBox_DllPreProcess_None.Content = "None";
+                ComboBox_DllPreProcess_PackWithUPX.Content = "Pack With UPX";
             }
         }
 

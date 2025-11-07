@@ -403,10 +403,41 @@ The following sets the maximum # of items to show before wrapping.-->
                                 x:Name="NumberBox_DllInitializationDelay"
                                 LostFocus="NumberBox_DllInitializationDelay_LostFocus"
                                 ></NumberBox>
+
                             
+
                         </StackPanel>
 
                     </Expander>
+
+
+                    <controls:SettingsExpander 
+                        x:Name="SettingsExpander_DllRelatedSettings"
+                        IsExpanded="True"
+                        VerticalAlignment="Top">
+
+                        <controls:SettingsExpander.Items>
+
+                            <controls:SettingsCard x:Name="SettingsCard_DllPreProcess">
+
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xE745;"     
+                                        FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
+                                <ComboBox 
+                                    SelectedIndex="1"
+                                    x:Name="ComboBox_DllPreProcess">
+                                    <ComboBoxItem x:Name="ComboBox_DllPreProcess_None" />
+                                    <ComboBoxItem x:Name="ComboBox_DllPreProcess_PackWithUPX" />
+                                </ComboBox>
+
+                            </controls:SettingsCard>
+
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+
 
                     <StackPanel
                         x:Name="StackPanel_GIError"
@@ -440,13 +471,7 @@ The following sets the maximum # of items to show before wrapping.-->
                                     Margin="5"
                                     Content="启动第四代防报错技术: 网络加固插件"></Button>
 
-                                <ToggleSwitch 
-                                    IsOn="True"
-                                    Margin="5"
-                                    ToolTipService.ToolTip="开启后，Mod全程仅使用SSMT的情况下不会出现【与服务器的连接已断开】问题，使用此方法前建议清理缓存并关闭其它所有第三方工具然后重启电脑，确保环境纯净。"
-                                    x:Name="ToggleSwitch_IgnoreGIError25"
-                                    OffContent="当前不开启2.5代防报错"
-                                    OnContent="当前开启2.5代防报错"/>
+                                
                             </StackPanel>
                             
                         </Expander>

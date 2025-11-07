@@ -642,11 +642,7 @@ namespace SSMT
 
 
 
-        public async void Encryption_Obfuscate(object sender, RoutedEventArgs e)
-        {
-            await Obfuscate_ModFileName("Dev");
-        }
-
+    
         private void Button_SaveSkipIBList_Click(object sender, RoutedEventArgs e)
         {
             SaveSkipIBList();

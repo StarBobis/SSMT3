@@ -99,10 +99,7 @@
                 <MenuFlyoutItem 
                     x:Name="Menu_AutoDetect_CPUPreSkinning_DrawIBList" 
                     Click="Menu_AutoDetect_CPUPreSkinning_DrawIBList_Click"/>
-                <MenuFlyoutSeparator></MenuFlyoutSeparator>
-                <MenuFlyoutItem 
-                    x:Name="Menu_ObfuscateDev" 
-                    Click="Encryption_Obfuscate"/>
+                
             </MenuBarItem>
 
             <MenuBarItem 
@@ -125,26 +122,6 @@
                     Click="Menu_ExtractRenderTextures_Click" />
             </MenuBarItem>
 
-            <MenuBarItem 
-                x:Name="Menu_ModEncryption" >
-                <MenuFlyoutItem 
-                    x:Name="Menu_ObfuscateAndEncryptBufferAndIni" 
-                    Click="Encryption_EncryptAll"/>
-                <MenuFlyoutItem 
-                    x:Name="Menu_EncryptBufferAndIni" 
-                    Click="Encryption_EncryptBufferAndIni"/>
-                <MenuFlyoutSeparator />
-                <MenuFlyoutItem 
-                    x:Name="Menu_Obfuscate" 
-                    Click="Encryption_ObfuscatePlay"/>
-                <MenuFlyoutSeparator />
-                <MenuFlyoutItem 
-                    x:Name="Menu_EncryptBuffer" 
-                    Click="Encryption_EncryptBuffer"/>
-                <MenuFlyoutItem 
-                    x:Name="Menu_EncryptIni" 
-                    Click="Encryption_EncryptIni"/>
-            </MenuBarItem>
 
         </MenuBar>
 

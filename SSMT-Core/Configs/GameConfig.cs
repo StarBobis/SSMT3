@@ -52,6 +52,8 @@ namespace SSMT
         public string GithubPackageVersion { get; set; } = "";
 
         public int DllInitializationDelay { get; set; } = 500;
+        public int DllReplaceSelectedIndex { get; set; } = 0;
+        public int DllPreProcessSelectedIndex { get; set; } = 1;
 
 
         public List<LaunchItem> LaunchItemList { get; set; } = [];
@@ -143,6 +145,22 @@ namespace SSMT
                     this.DllInitializationDelay = DllInitializationDelay;
                 }
 
+                //DllReplaceSelectedIndex
+                if (jobj.ContainsKey("DllReplaceSelectedIndex"))
+                {
+
+                    int DllReplaceSelectedIndex = (int)jobj["DllReplaceSelectedIndex"];
+                    this.DllReplaceSelectedIndex = DllReplaceSelectedIndex;
+                }
+
+                //DllPreProcessSelectedIndex
+                if (jobj.ContainsKey("DllPreProcessSelectedIndex"))
+                {
+
+                    int DllPreProcessSelectedIndex = (int)jobj["DllPreProcessSelectedIndex"];
+                    this.DllPreProcessSelectedIndex = DllPreProcessSelectedIndex;
+                }
+
                 //LaunchItems
                 if (jobj.ContainsKey("LaunchItems"))
                 {
@@ -202,6 +220,8 @@ namespace SSMT
             jobj["AutoSetAnalyseOptions"] = this.AutoSetAnalyseOptions;
             jobj["GithubPackageVersion"] = this.GithubPackageVersion;
             jobj["DllInitializationDelay"] = this.DllInitializationDelay;
+            jobj["DllReplaceSelectedIndex"] = this.DllReplaceSelectedIndex;
+            jobj["DllPreProcessSelectedIndex"] = this.DllPreProcessSelectedIndex;
             jobj["LaunchItems"] = jobjArray;
             DBMTJsonUtils.SaveJObjectToFile(jobj, GlobalConfig.Path_CurrentGameConfigJson);
         }

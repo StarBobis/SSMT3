@@ -76,8 +76,6 @@ namespace SSMT
                 ToggleSwitch_ShowWarning.OffContent = "当前显示左上角红字报错";
 
 
-                ToggleSwitch_DllMode.OffContent = "d3d11.dll版本：Dev";
-                ToggleSwitch_DllMode.OnContent = "d3d11.dll版本：Play";
 
                 Button_Run3DmigotoLoader.Content = " 启动3Dmigoto";
                 ToolTipService.SetToolTip(Button_Run3DmigotoLoader, "执行高级启动设置并运行3Dmigoto加载器");
@@ -89,6 +87,21 @@ namespace SSMT
                 NumberBox_DllInitializationDelay.Header = "d3d11.dll初始化延迟";
                 ToolTipService.SetToolTip(NumberBox_DllInitializationDelay,"d3d11.dll初始化时的延迟，单位为毫秒，一般WWMI填200，若仍然闪退则以每次100为单位增加此值直到不闪退\n鸣潮在2.4版本更新后至少需要50ms的延迟以确保启动时不会闪退\n此外，如果要让Reshade和3Dmigoto一起使用，至少需要150ms的延迟");
 
+                SettingsExpander_DllRelatedSettings.Header = "DLL相关设置";
+                SettingsExpander_DllRelatedSettings.Description = "与d3d11.dll相关的高级设置选项";
+
+                SettingsCard_DllPreProcess.Header = "DLL预处理";
+                SettingsCard_DllPreProcess.Description = "在启动3Dmigoto加载器之前对d3d11.dll进行预处理的选项";
+
+                ComboBox_DllPreProcess_None.Content = "无";
+                ComboBox_DllPreProcess_PackWithUPX.Content = "使用UPX默认选项加壳";
+
+                SettingsCard_DllReplace.Header = "DLL替换";
+                SettingsCard_DllReplace.Description = "在启动3Dmigoto加载器之前使用自定义d3d11.dll替换3Dmigoto中现有的d3d11.dll的选项";
+
+                ComboBoxItem_DllReplace_Dev.Content = "替换为Dev版本d3d11.dll";
+                ComboBoxItem_DllReplace_Play.Content = "替换为Play版本d3d11.dll";
+                ComboBoxItem_DllReplace_None.Content = "不进行任何替换";
             }
             else
             {
@@ -137,14 +150,29 @@ namespace SSMT
                 ToggleSwitch_ShowWarning.OnContent = "Current Hide Top Left Red Warnings";
                 ToggleSwitch_ShowWarning.OffContent = "Current Show Top Left Red Warnings";
 
-                ToggleSwitch_DllMode.OnContent = "Start With Dev Version d3d11.dll";
-                ToggleSwitch_DllMode.OnContent = "Start With Play Version d3d11.dll";
 
                 Button_Run3DmigotoLoader.Content = " Start 3Dmigoto";
                 Button_RunLaunchPath.Content = " Start Game";
 
                 NumberBox_DllInitializationDelay.Header = "d3d11.dll Initialization Delay";
                 ToolTipService.SetToolTip(NumberBox_DllInitializationDelay, "Delay in milliseconds for DLL initialization. We'll go with 200ms for WWMI:\nWuthering Waves requires at least 50ms delay since 2.4 update to not crash on startup.\nAlso, to inject Reshade along with 3dmigoto, 150ms delay is required.");
+
+
+                SettingsExpander_DllRelatedSettings.Header = "Dll Related Settings";
+                SettingsExpander_DllRelatedSettings.Description = "Various High Level Settings For d3d11.dll";
+
+                SettingsCard_DllPreProcess.Header = "DLL Pre-Process";
+                SettingsCard_DllPreProcess.Description = "Do something for d3d11.dll before inject";
+
+                ComboBox_DllPreProcess_None.Content = "None";
+                ComboBox_DllPreProcess_PackWithUPX.Content = "Pack With UPX";
+
+                SettingsCard_DllReplace.Header = "Dll Replace";
+                SettingsCard_DllReplace.Description = "Use Our d3d11.dll to replace 3Dmigoto folder's d3d11.dll before inject";
+
+                ComboBoxItem_DllReplace_Dev.Content = "Replace with Dev version d3d11.dll";
+                ComboBoxItem_DllReplace_Play.Content = "Replace with Play version d3d11.dll";
+                ComboBoxItem_DllReplace_None.Content = "Not Replace";
 
             }
         }

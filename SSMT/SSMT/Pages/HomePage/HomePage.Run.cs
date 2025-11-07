@@ -41,21 +41,13 @@ namespace SSMT
                 SyncD3D11DllFile();
 
                 string MigotoTargetDll = Path.Combine(gameConfig.MigotoPath, "d3d11.dll");
-                if (File.Exists(PathManager.Path_UpxExe))
+                
+                //用户需要仪式感和掌控力，所以不能直接运行，必须检测到按钮开启才运行
+                //必须是能看见的情况下才解决报错，否则不解决。
+                if (ComboBox_DllPreProcess.SelectedIndex == 1)
                 {
-                    //用户需要仪式感和掌控力，所以不能直接运行，必须检测到按钮开启才运行
-                    //必须是能看见的情况下才解决报错，否则不解决。
-                    if (ToggleSwitch_IgnoreGIError25.IsOn && StackPanel_GIError.Visibility == Visibility.Visible)
-                    {
-                        SSMTCommandHelper.RunUPX(MigotoTargetDll, false);
-                    }
+                    SSMTCommandHelper.RunUPX(MigotoTargetDll, false);
                 }
-                else
-                {
-                    _ = SSMTMessageHelper.Show("您的SSMT似乎缺少了一些组件，重新安装以解决此问题");
-                    return;
-                }
-
 
 
                 //强制设置analyse_options 使用deferred_ctx_immediate确保IdentityV和YYSLS都能正确Dump出东西

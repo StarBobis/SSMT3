@@ -287,7 +287,9 @@ namespace SSMT
             //读取dll初始化延迟
 
             NumberBox_DllInitializationDelay.Value = gameConfig.DllInitializationDelay;
-            ToggleSwitch_DllMode.IsOn = gameConfig.PlayVersionDll;
+            ComboBox_DllPreProcess.SelectedIndex = gameConfig.DllPreProcessSelectedIndex;
+            ComboBox_DllReplace.SelectedIndex = gameConfig.DllReplaceSelectedIndex;
+
             ToggleSwitch_AutoSetAnalyseOptions.IsOn = gameConfig.AutoSetAnalyseOptions;
 
 
@@ -492,7 +494,7 @@ namespace SSMT
                 //这个函数只会在初始化的时候调用，所以默认复制Dev版本的d3d11.dll
                 string DllModeFolderName = "ReleaseX64Dev";
 
-                if (ToggleSwitch_DllMode.IsOn)
+                if (ComboBox_DllReplace.SelectedIndex == 1)
                 {
                     //如果是Play版本，则复制Play版本的d3d11.dll
                     DllModeFolderName = "ReleaseX64Play";
@@ -519,8 +521,12 @@ namespace SSMT
 
                 string MigotoTargetDll = Path.Combine(TargetCopyDllDir, "d3d11.dll");
 
-
-                File.Copy(MigotoSourceDll, MigotoTargetDll, true);
+                //0是Dev 1是Play 2是None，所以只有0和1时才替换d3d11.dll
+                if (ComboBox_DllReplace.SelectedIndex == 0 || ComboBox_DllReplace.SelectedIndex == 1)
+                {
+                    File.Copy(MigotoSourceDll, MigotoTargetDll, true);
+                }
+                
             }
             catch(Exception ex)
             {
@@ -660,11 +666,8 @@ namespace SSMT
             TextBox_LaunchPath.Text = "";
             TextBox_LaunchArgsPath.Text = "";
 
-            ToggleSwitch_DllMode.IsOn = false;
+            
             ToggleSwitch_AutoSetAnalyseOptions.IsOn = false;
-            //ToggleSwitch_IgnoreGIError25.IsOn = false;
-
-            //ToggleSwitch_IgnoreGameError.IsOn = false;  
 
             IsLoading = false;
         }
@@ -819,17 +822,7 @@ namespace SSMT
 
         }
 
-        private void ToggleSwitch_DllMode_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (IsLoading)
-            {
-                return;
-            }
 
-            GameConfig gameConfig = new GameConfig();
-            gameConfig.PlayVersionDll = ToggleSwitch_DllMode.IsOn;
-            gameConfig.SaveConfig();
-        }
 
 
         private async void Button_RunIgnoreGIError40_Click(object sender, RoutedEventArgs e)
@@ -940,6 +933,29 @@ namespace SSMT
             gameConfig.SaveConfig();
         }
 
-        
+        private void ComboBox_DllReplace_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsLoading)
+            {
+                return;
+            }
+
+            GameConfig gameConfig = new GameConfig();
+            gameConfig.DllReplaceSelectedIndex = ComboBox_DllReplace.SelectedIndex;
+            gameConfig.SaveConfig();
+
+        }
+
+        private void ComboBox_DllPreProcess_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsLoading)
+            {
+                return;
+            }
+
+            GameConfig gameConfig = new GameConfig();
+            gameConfig.DllPreProcessSelectedIndex = ComboBox_DllPreProcess.SelectedIndex;
+            gameConfig.SaveConfig();
+        }
     }
 }

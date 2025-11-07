@@ -386,11 +386,7 @@ The following sets the maximum # of items to show before wrapping.-->
                                     Toggled="ToggleSwitch_ShowWarning_Toggled"
                                     ToolTipService.ToolTip=""/>
                                 
-                                <ToggleSwitch 
-                                    Margin="5"
-                                    x:Name="ToggleSwitch_DllMode"
-                                    Toggled="ToggleSwitch_DllMode_Toggled"
-                                    />
+                                
 
                             </StackPanel>
 
@@ -418,6 +414,27 @@ The following sets the maximum # of items to show before wrapping.-->
 
                         <controls:SettingsExpander.Items>
 
+                            <controls:SettingsCard 
+                                x:Name="SettingsCard_DllReplace"
+                                Description=""
+                                Header="">
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xEfa5;" FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
+                                <ComboBox 
+                                    SelectionChanged="ComboBox_DllReplace_SelectionChanged"
+                                    x:Name="ComboBox_DllReplace" 
+                                    >
+                                    <ComboBoxItem x:Name="ComboBoxItem_DllReplace_Dev" />
+                                    <ComboBoxItem x:Name="ComboBoxItem_DllReplace_Play" />
+                                    <ComboBoxItem x:Name="ComboBoxItem_DllReplace_None" />
+                                </ComboBox>
+
+
+                            </controls:SettingsCard>
+
+
                             <controls:SettingsCard x:Name="SettingsCard_DllPreProcess">
 
                                 <!-- 这里换成你查到的编码 -->
@@ -427,7 +444,8 @@ The following sets the maximum # of items to show before wrapping.-->
                                 </controls:SettingsCard.HeaderIcon>
 
                                 <ComboBox 
-                                    SelectedIndex="1"
+                                    SelectionChanged="ComboBox_DllPreProcess_SelectionChanged"
+                                    
                                     x:Name="ComboBox_DllPreProcess">
                                     <ComboBoxItem x:Name="ComboBox_DllPreProcess_None" />
                                     <ComboBoxItem x:Name="ComboBox_DllPreProcess_PackWithUPX" />

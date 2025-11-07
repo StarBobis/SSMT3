@@ -76,8 +76,6 @@ namespace SSMT
                 ToggleSwitch_ShowWarning.OffContent = "当前显示左上角红字报错";
 
 
-                ToggleSwitch_DllMode.OffContent = "d3d11.dll版本：Dev";
-                ToggleSwitch_DllMode.OnContent = "d3d11.dll版本：Play";
 
                 Button_Run3DmigotoLoader.Content = " 启动3Dmigoto";
                 ToolTipService.SetToolTip(Button_Run3DmigotoLoader, "执行高级启动设置并运行3Dmigoto加载器");
@@ -97,6 +95,13 @@ namespace SSMT
 
                 ComboBox_DllPreProcess_None.Content = "无";
                 ComboBox_DllPreProcess_PackWithUPX.Content = "使用UPX默认选项加壳";
+
+                SettingsCard_DllReplace.Header = "DLL替换";
+                SettingsCard_DllReplace.Description = "在启动3Dmigoto加载器之前使用自定义d3d11.dll替换3Dmigoto中现有的d3d11.dll的选项";
+
+                ComboBoxItem_DllReplace_Dev.Content = "替换为Dev版本d3d11.dll";
+                ComboBoxItem_DllReplace_Play.Content = "替换为Play版本d3d11.dll";
+                ComboBoxItem_DllReplace_None.Content = "不进行任何替换";
             }
             else
             {
@@ -145,8 +150,6 @@ namespace SSMT
                 ToggleSwitch_ShowWarning.OnContent = "Current Hide Top Left Red Warnings";
                 ToggleSwitch_ShowWarning.OffContent = "Current Show Top Left Red Warnings";
 
-                ToggleSwitch_DllMode.OnContent = "Start With Dev Version d3d11.dll";
-                ToggleSwitch_DllMode.OnContent = "Start With Play Version d3d11.dll";
 
                 Button_Run3DmigotoLoader.Content = " Start 3Dmigoto";
                 Button_RunLaunchPath.Content = " Start Game";
@@ -163,6 +166,14 @@ namespace SSMT
 
                 ComboBox_DllPreProcess_None.Content = "None";
                 ComboBox_DllPreProcess_PackWithUPX.Content = "Pack With UPX";
+
+                SettingsCard_DllReplace.Header = "Dll Replace";
+                SettingsCard_DllReplace.Description = "Use Our d3d11.dll to replace 3Dmigoto folder's d3d11.dll before inject";
+
+                ComboBoxItem_DllReplace_Dev.Content = "Replace with Dev version d3d11.dll";
+                ComboBoxItem_DllReplace_Play.Content = "Replace with Play version d3d11.dll";
+                ComboBoxItem_DllReplace_None.Content = "Not Replace";
+
             }
         }
 

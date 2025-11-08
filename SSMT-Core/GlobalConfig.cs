@@ -74,108 +74,93 @@ namespace SSMT
         {
             try
             {
-                //读取配置时优先读取全局的
-                JObject SettingsJsonObject = DBMTJsonUtils.CreateJObject();
-                try
+                //只有存在这个全局配置文件时，才读取
+                if (File.Exists(GlobalConfig.Path_MainConfig_Global))
                 {
-                    if (File.Exists(GlobalConfig.Path_MainConfig_Global))
+                    //读取配置时优先读取全局的
+                    JObject SettingsJsonObject = DBMTJsonUtils.ReadJObjectFromFile(GlobalConfig.Path_MainConfig_Global);
+
+                    //古法读取
+                    if (SettingsJsonObject.ContainsKey("CurrentGameName"))
                     {
-                        string json = File.ReadAllText(GlobalConfig.Path_MainConfig_Global);
-                        SettingsJsonObject = JObject.Parse(json);
+                        CurrentGameName = (string)SettingsJsonObject["CurrentGameName"];
+                    }
+
+                    if (SettingsJsonObject.ContainsKey("CurrentWorkSpace"))
+                    {
+                        CurrentWorkSpace = (string)SettingsJsonObject["CurrentWorkSpace"];
+                    }
+
+                    if (SettingsJsonObject.ContainsKey("DBMTWorkFolder"))
+                    {
+                        SSMTCacheFolderPath = (string)SettingsJsonObject["DBMTWorkFolder"];
+                    }
+
+                    //WindowWidth
+                    if (SettingsJsonObject.ContainsKey("WindowWidth"))
+                    {
+                        WindowWidth = (double)SettingsJsonObject["WindowWidth"];
+                    }
+
+                    //WindowHeight
+                    if (SettingsJsonObject.ContainsKey("WindowHeight"))
+                    {
+                        WindowHeight = (double)SettingsJsonObject["WindowHeight"];
+                    }
+
+
+                    //WindowLuminosityOpacity
+                    if (SettingsJsonObject.ContainsKey("WindowLuminosityOpacity"))
+                    {
+                        WindowLuminosityOpacity = (double)SettingsJsonObject["WindowLuminosityOpacity"];
+                    }
+
+
+
+                    //OpenToWorkPage
+                    if (SettingsJsonObject.ContainsKey("OpenToWorkPage"))
+                    {
+                        OpenToWorkPage = (bool)SettingsJsonObject["OpenToWorkPage"];
+                    }
+
+                    if (SettingsJsonObject.ContainsKey("Theme"))
+                    {
+                        Theme = (bool)SettingsJsonObject["Theme"];
+                    }
+
+                    if (SettingsJsonObject.ContainsKey("Chinese"))
+                    {
+                        Chinese = (bool)SettingsJsonObject["Chinese"];
+                    }
+
+
+                    //ShowGameTypePage
+                    if (SettingsJsonObject.ContainsKey("ShowGameTypePage"))
+                    {
+                        ShowGameTypePage = (bool)SettingsJsonObject["ShowGameTypePage"];
+                    }
+
+                    //ShowModManagePage
+                    if (SettingsJsonObject.ContainsKey("ShowModManagePage"))
+                    {
+                        ShowModManagePage = (bool)SettingsJsonObject["ShowModManagePage"];
+                    }
+
+                    //ShowTextureToolBoxPage
+                    if (SettingsJsonObject.ContainsKey("ShowTextureToolBoxPage"))
+                    {
+                        ShowTextureToolBoxPage = (bool)SettingsJsonObject["ShowTextureToolBoxPage"];
                     }
                 }
-                catch (Exception ex) {
-                    //如果全局的配置文件读取错误的话，直接删掉重新保存一个全局的配置文件
-                    //这是因为蓝屏的时候这里的配置文件会直接被损坏。
-                    ex.ToString();
-                    File.Delete(GlobalConfig.Path_MainConfig);
-                    GlobalConfig.SaveConfig();
-                }
                 
-                //古法读取
-                if (SettingsJsonObject.ContainsKey("CurrentGameName"))
-                {
-                    CurrentGameName = (string)SettingsJsonObject["CurrentGameName"];
-                }
-
-                if (SettingsJsonObject.ContainsKey("CurrentWorkSpace"))
-                {
-                    CurrentWorkSpace = (string)SettingsJsonObject["CurrentWorkSpace"];
-                }
-
-                if (SettingsJsonObject.ContainsKey("DBMTWorkFolder"))
-                {
-                    SSMTCacheFolderPath = (string)SettingsJsonObject["DBMTWorkFolder"];
-                }
-
-                //WindowWidth
-                if (SettingsJsonObject.ContainsKey("WindowWidth"))
-                {
-                    WindowWidth = (double)SettingsJsonObject["WindowWidth"];
-                }
-
-                //WindowHeight
-                if (SettingsJsonObject.ContainsKey("WindowHeight"))
-                {
-                    WindowHeight = (double)SettingsJsonObject["WindowHeight"];
-                }
-
-               
-
-           
-
-
-            
-
-                //WindowLuminosityOpacity
-                if (SettingsJsonObject.ContainsKey("WindowLuminosityOpacity"))
-                {
-                    WindowLuminosityOpacity = (double)SettingsJsonObject["WindowLuminosityOpacity"];
-                }
-
-                
-
-                //OpenToWorkPage
-                if (SettingsJsonObject.ContainsKey("OpenToWorkPage"))
-                {
-                    OpenToWorkPage = (bool)SettingsJsonObject["OpenToWorkPage"];
-                }
-
-                if (SettingsJsonObject.ContainsKey("Theme"))
-                {
-                    Theme = (bool)SettingsJsonObject["Theme"];
-                }
-
-                if (SettingsJsonObject.ContainsKey("Chinese"))
-                {
-                    Chinese = (bool)SettingsJsonObject["Chinese"];
-                }
-
-
-                //ShowGameTypePage
-                if (SettingsJsonObject.ContainsKey("ShowGameTypePage"))
-                {
-                    ShowGameTypePage = (bool)SettingsJsonObject["ShowGameTypePage"];
-                }
-
-                //ShowModManagePage
-                if (SettingsJsonObject.ContainsKey("ShowModManagePage"))
-                {
-                    ShowModManagePage = (bool)SettingsJsonObject["ShowModManagePage"];
-                }
-
-               
-
-
-                //ShowTextureToolBoxPage
-                if (SettingsJsonObject.ContainsKey("ShowTextureToolBoxPage"))
-                {
-                    ShowTextureToolBoxPage = (bool)SettingsJsonObject["ShowTextureToolBoxPage"];
-                }
 
             }
             catch (Exception ex) {
+                //如果全局的配置文件读取错误的话，直接删掉重新保存一个全局的配置文件
+                //这是因为蓝屏的时候这里的配置文件会直接被损坏。
                 ex.ToString();
+                File.Delete(GlobalConfig.Path_MainConfig);
+                GlobalConfig.SaveConfig();
             }
         }
 

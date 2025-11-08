@@ -94,25 +94,9 @@ namespace SSMT
 
                 if (!gameIconConfig.GameName_Show_Dict.ContainsKey(GameFolderName))
                 {
-                    //如果是默认的GIMI、SRMI、HIMI、ZZMI则显示，其他的都不显示
-                    if (GameFolderName == "GIMI" 
-                        || GameFolderName == "HIMI"
-                        || GameFolderName == "SRMI"
-                        || GameFolderName == "ZZMI"
-                        )
-                    {
-                        //如果这个配置里不包含，则默认显示
-                        GameIconItem gameIconItem2 = new GameIconItem();
-                        gameIconItem2.GameName = GameFolderName;
-                        gameIconItem2.GameIconImage = Path.Combine(GlobalConfig.Path_GamesFolder, GameFolderName + "\\Icon.png");
-                        GameIconItemList.Add(gameIconItem2);
-                    }
-                   
-
                     continue;
                 }
 
-                //上面已经说了不包含的都显示，这里包含的话，就读取其中的配置来决定是否显示。
                 if (!gameIconConfig.GameName_Show_Dict[GameFolderName])
                 {
                     continue;

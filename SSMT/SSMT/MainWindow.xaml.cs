@@ -51,11 +51,13 @@ namespace SSMT
 
             this.InitializeComponent();
 
-            
-
             CurrentWindow = this;
 
-            this.ExtendsContentIntoTitleBar = true;
+            //为了最大程度提升用户体验，这个标题栏必须的显示出来，不能隐藏
+            //因为右上角的几个按钮，经常会由于使用透明背景等等原因，和背景融为一体
+            //导致用户无法找到关闭按钮等，体验极差。
+            //SSMT首先是一个生产力工具，其次才是一个炫酷的工具。
+            //this.ExtendsContentIntoTitleBar = true;
 
             //MainWindowImageBrushW = MainWindowImageBrush;
 

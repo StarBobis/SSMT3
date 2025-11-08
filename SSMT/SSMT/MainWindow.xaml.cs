@@ -218,6 +218,7 @@ namespace SSMT
             if (args.IsSettingsInvoked)
             {
                 // 如果当前页面就是设置页，则返回上一页
+                
                 if (contentFrame.CurrentSourcePageType == typeof(SettingsPage))
                 {
                     if (contentFrame.CanGoBack)
@@ -260,10 +261,31 @@ namespace SSMT
                         break;
                 }
 
-                if (pageType != null && contentFrame.Content?.GetType() != pageType)
-                {
-                    contentFrame.Navigate(pageType);
+                if (pageType != null) {
+                    if (contentFrame.Content?.GetType() != pageType)
+                    {
+                        //如果当前点击的页面不是当前页面，就跳转到目标页面
+                        contentFrame.Navigate(pageType);
+                    }
+                    else
+                    {
+                        //如果重复点击了当前页面，那就返回原来的页面
+                        //最早由Xeon-Acid提出并应用在设置页面上
+                        //我发现这样用起来就跟咱们主页的设置按钮一样了，实现了点一下显示，再点一下隐藏的效果
+                        //同理我们可以用这种方式，把任何一个页面都可以当成"当前页面"，然后只要点别的页面，别的页面就显示
+                        //然后再点一下别的页面的按钮，又切换回来当前的页面
+                        //这样就能把左上角的返回按钮干掉了，UI更简洁。
+                        //且因为很少有人会重复嘎嘎点击相同的页面，所以这个逻辑会很少触发
+                        //所以算是一个过得去的设计。
+                        if (contentFrame.CanGoBack)
+                        {
+                            contentFrame.GoBack();
+                        }
+                    }
+
                 }
+
+                
             }
 
         }

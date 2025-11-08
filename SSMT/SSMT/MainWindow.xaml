@@ -32,7 +32,7 @@
             ItemInvoked="nvSample_ItemInvoked" 
             BackRequested="nvSample_BackRequested"
             IsBackEnabled="{Binding ElementName=contentFrame,Path=CanGoBack}" 
-            IsBackButtonVisible="Visible">
+            IsBackButtonVisible="Collapsed">
             
             <Grid>
                 <Frame 

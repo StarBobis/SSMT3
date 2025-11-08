@@ -141,7 +141,7 @@ The following sets the maximum # of items to show before wrapping.-->
             Grid.Column="0" 
             Grid.Row="1"  
             Grid.RowSpan="2"
-            Margin="40,50,40,40" >
+            Margin="40" >
             
             <Border.Background>
                 <AcrylicBrush

@@ -386,10 +386,9 @@ namespace SSMT
 
         public void ExtractModel(object sender, RoutedEventArgs e)
         {
-         
-
-
+            //初始化日志类
             LOG.Initialize(GlobalConfig.Path_LogsFolder);
+
             try
             {
                 bool Prepare = PreCheckBeforeExtract();
@@ -397,7 +396,6 @@ namespace SSMT
                 {
                     return;
                 }
-
                 SaveDrawIBList();
 
 
@@ -412,7 +410,8 @@ namespace SSMT
                 GameConfig gameConfig = new GameConfig();
                 LOG.Info("游戏名称: " + GlobalConfig.CurrentGameName);
                 LOG.Info("执行逻辑名称: " + gameConfig.LogicName);
-
+                LOG.Info("数据类型文件夹名称: " + gameConfig.GameTypeName);
+                LOG.NewLine();
 
                 List<DrawIBItem> DrawIBItemList = [];
                 foreach (DrawIBItem drawIBItem in DrawIBItems)
@@ -425,11 +424,7 @@ namespace SSMT
                 bool RunResult = CoreFunctions.ExtractModel(DrawIBItemList);
                 if (RunResult)
                 {
-                    if (ToggleSwitch_ConvertDedupedTextures.IsOn)
-                    {
-                        LOG.Info("ConvertDedupedTexturesToTargetFormat:");
-                        SSMTTextureHelper.ConvertDedupedTexturesToTargetFormat();
-                    }
+                    
 
                     LOG.Info("PostDoAfterExtract:");
                     CoreFunctions.PostDoAfterExtract();

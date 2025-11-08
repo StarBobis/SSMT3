@@ -77,7 +77,7 @@ namespace SSMT
         }
 
 
-        public static void ExtractDedupedTextures(bool ReverseExtract = false)
+        public static void  ExtractDedupedTextures(bool ReverseExtract = false)
         {
             Debug.WriteLine("ExtractDedupedTextures::Start");
             List<string> DrawIBList = DrawIBConfig.GetDrawIBListFromConfig();
@@ -126,7 +126,7 @@ namespace SSMT
             LOG.Info("ExtractDedupedTextures::End");
         }
 
-        public static void ExtractRenderTextures(bool ReverseExtract = false)
+        public static async Task ExtractRenderTextures(bool ReverseExtract = false)
         {
             LOG.Info("ExtractRenderTextures::Start");
 

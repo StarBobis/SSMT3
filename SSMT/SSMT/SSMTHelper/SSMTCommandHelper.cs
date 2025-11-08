@@ -174,41 +174,6 @@ namespace SSMT
         }
 
 
-        public static async void ConvertTexture(string SourceTextureFilePath, string TextureFormatString, string TargetOutputDirectory)
-        {
-            SourceTextureFilePath = SourceTextureFilePath.Replace("\\", "/");
-            TargetOutputDirectory = TargetOutputDirectory.Replace("\\", "/");
-
-            string channels = " -f rgba ";
-            if (TextureFormatString == "jpg")
-            {
-
-                if (!SourceTextureFilePath.Contains("BC5_UNORM"))
-                {
-                    channels = " ";
-                }
-            }
-
-
-            string arugmentsstr = " \"" + SourceTextureFilePath + "\" -ft \"" + TextureFormatString + "\" "+ channels + " -o \"" + TargetOutputDirectory + "\"";
-            string texconv_filepath = PathManager.Path_TexconvExe;
-            if (!File.Exists(texconv_filepath))
-            {
-                await SSMTMessageHelper.Show("当前要执行的路径不存在: " + texconv_filepath, "Current run path didn't exsits: " + texconv_filepath);
-                return;
-            }
-
-            //https://github.com/microsoft/DirectXTex/wiki/Texconv
-            Process process = new Process();
-            process.StartInfo.FileName = texconv_filepath;
-            process.StartInfo.Arguments = arugmentsstr;
-            process.StartInfo.UseShellExecute = false;  // 不使用操作系统的shell启动程序
-            process.StartInfo.RedirectStandardOutput = true;  // 重定向标准输出
-            process.StartInfo.RedirectStandardError = true;   // 重定向标准错误输出
-            process.StartInfo.CreateNoWindow = true;  // 不创建新窗口
-            process.Start();
-            process.WaitForExit();
-        }
 
         public static void OpenWebLink(string Url)
         {

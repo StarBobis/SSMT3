@@ -16,15 +16,12 @@ namespace SSMT
             //提取DedupedTextures和RenderTextures方便Mod制作时使用。
             bool RunResult = false;
 
-            
-
             try
             {
                 
                 LOG.Info("FrameAnalysisFolderPath: " + GlobalConfig.Path_LatestFrameAnalysisFolder);
 
-                CoreFunctions.ExtractDedupedTextures();
-                CoreFunctions.ExtractRenderTextures();
+                
 
                 GameConfig gameConfig = new GameConfig();
 

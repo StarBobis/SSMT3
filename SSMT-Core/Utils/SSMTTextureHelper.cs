@@ -5,11 +5,13 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SSMT;
 using SSMT_Core;
+using SSMT_Core.Utils;
 
-namespace SSMT
+namespace SSMT_Core
 {
-    class SSMTTextureHelper
+    public class SSMTTextureHelper
     {
 
         public static void ConvertAllTextureFilesToTargetFolder(string SourceFolderPath, string TargetFolderPath)
@@ -27,7 +29,7 @@ namespace SSMT
                 if (ddsFilePath.EndsWith(".dds"))
                 {
                     string TextureFormatString = "jpg";
-                    SSMTCommandHelper.ConvertTexture(ddsFilePath, TextureFormatString, TargetFolderPath);
+                    SSMTCommandUtils.ConvertTexture(ddsFilePath, TextureFormatString, TargetFolderPath);
                 }
                 else if (ddsFilePath.EndsWith(".jpg") || ddsFilePath.EndsWith(".png"))
                 {
@@ -52,7 +54,7 @@ namespace SSMT
                 //只转换dds格式和png格式贴图
                 if (ddsFilePath.EndsWith(".dds"))
                 {
-                    SSMTCommandHelper.ConvertTexture(ddsFilePath, TextureSuffix, TargetFolderPath);
+                    SSMTCommandUtils.ConvertTexture(ddsFilePath, TextureSuffix, TargetFolderPath);
                 }
                 else if (ddsFilePath.EndsWith(".jpg") || ddsFilePath.EndsWith(".png"))
                 {
@@ -112,24 +114,23 @@ namespace SSMT
                 string ModFolderParentPath = Path.GetDirectoryName(ModFolderPath);
                 string ModReverseFolderPath = ModFolderParentPath + "\\" + ModFolderName + "-Reverse\\";
 
-                SSMTCommandHelper.ShellOpenFolder(ModReverseFolderPath);
+                SSMTCommandUtils.ShellOpenFolder(ModReverseFolderPath);
             }
         }
 
 
 
-        public static async void ConvertDedupedTexturesToTargetFormat()
+        public static async Task ConvertDedupedTexturesToTargetFormat()
         {
 
             List<string> DrawIBList = DrawIBConfig.GetDrawIBListFromConfig();
             foreach (string DrawIB in DrawIBList)
             {
-                //在这里把所有output目录下的dds转为png格式
+                //在这里把所有output目录下的dds转为jpg格式
                 string DedupedTexturesFolderPath = Path.Combine(GlobalConfig.Path_CurrentWorkSpaceFolder ,DrawIB + "\\DedupedTextures\\");
                 if (!Directory.Exists(DedupedTexturesFolderPath))
                 {
-                    await SSMTMessageHelper.Show("无法找到DedupedTextures文件夹: " + DedupedTexturesFolderPath);
-                    return;
+                    throw new Exception("无法找到DedupedTextures文件夹: " + DedupedTexturesFolderPath);
                 }
 
                 string DedupedTexturesConvertFolderPath = TextureConfig.GetConvertedTexturesFolderPath(DrawIB);

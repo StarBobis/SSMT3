@@ -124,6 +124,16 @@ namespace SSMT
         /// </summary>
         public static void PostDoAfterExtract(bool ReverseExtract = false)
         {
+            CoreFunctions.ExtractDedupedTextures();
+
+            
+                //异步执行，我才懒得等它全部转换完毕才弹出文件夹
+                LOG.Info("ConvertDedupedTexturesToTargetFormat:");
+                _ = SSMTTextureHelper.ConvertDedupedTexturesToTargetFormat();
+            
+            //提取Render贴图直接异步执行算了，无所谓是否成功，反正用不上
+            _ = CoreFunctions.ExtractRenderTextures();
+
             List<string> DrawIBList = DrawIBConfig.GetDrawIBListFromConfig();
 
             //(1) 贴图标记功能前置1

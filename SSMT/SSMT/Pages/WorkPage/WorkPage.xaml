@@ -173,11 +173,6 @@
                     Toggled="ToggleSwitch_DumpIBListConfig_Toggled"
                     ></ToggleSwitch>
 
-                <ToggleSwitch
-                    IsOn="True"
-                    x:Name="ToggleSwitch_ConvertDedupedTextures"
-                    Margin="5"
-                    ></ToggleSwitch>
 
             </StackPanel>
         </ScrollViewer>

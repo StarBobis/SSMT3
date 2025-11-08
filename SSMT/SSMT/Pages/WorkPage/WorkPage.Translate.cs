@@ -73,9 +73,6 @@ namespace SSMT
                 ToggleSwitch_DumpIBListConfig.OnContent = "当前Dump模式：指定IB列表";
                 ToggleSwitch_DumpIBListConfig.OffContent = "当前Dump模式：全局";
 
-                ToggleSwitch_ConvertDedupedTextures.OnContent = "转换DedupedTextures贴图";
-                ToggleSwitch_ConvertDedupedTextures.OffContent = "不转换DedupedTextures贴图";
-                ToolTipService.SetToolTip(ToggleSwitch_ConvertDedupedTextures, "推荐开启，开启后将会在提取模型后把DedupedTextures中的dds格式贴图转换为你设置中指定格式的贴图，关闭后将导致贴图标记相关功能无法使用");
 
                 //主要内容
                 TextBlock_DrawIBList.Text = "DrawIB列表";
@@ -165,8 +162,6 @@ namespace SSMT
                 ToggleSwitch_DumpIBListConfig.OnContent = "Dump Specific IB List";
                 ToggleSwitch_DumpIBListConfig.OffContent = "Dump Everything";
 
-                ToggleSwitch_ConvertDedupedTextures.OnContent = "Convert DedupedTextures";
-                ToggleSwitch_ConvertDedupedTextures.OffContent = "Not Convert DedupedTextures";
 
                 //主要内容
                 TextBlock_DrawIBList.Text = "DrawIB List";

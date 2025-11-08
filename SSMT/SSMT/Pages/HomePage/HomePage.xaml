@@ -130,36 +130,7 @@ The following sets the maximum # of items to show before wrapping.-->
             </GridView.ItemsPanel>
         </GridView>
 
-        <!--版本号显示-->
-        <Grid 
-            Grid.ColumnSpan="2"
-            HorizontalAlignment="Center"
-            VerticalAlignment="Top">
 
-            <Rectangle
-                RadiusX="12"
-                RadiusY="12"
-                Margin="-12, -8, -12, -8">
-                <Rectangle.Fill>
-                    <AcrylicBrush
-                        TintColor="{ThemeResource SystemChromeLowColor}"
-                        TintOpacity="0.7"
-                        FallbackColor="{ThemeResource SystemChromeLowColor}"/>
-                </Rectangle.Fill>
-
-            </Rectangle>
-            <!-- 原来的StackPanel -->
-            <StackPanel 
-                Orientation="Horizontal">
-
-                
-                
-                <HyperlinkButton
-                    x:Name="HyperlinkButton_MigotoPackageVersion"
-                    Content="3Dmigoto Package Version: "
-                    />
-            </StackPanel>
-        </Grid>
 
 
         <!--当前游戏配置-->
@@ -306,6 +277,12 @@ The following sets the maximum # of items to show before wrapping.-->
                                     Margin="5"
                                     x:Name="Button_Open3DmigotoFolder"
                                     Click="Button_Open3DmigotoFolder_Click"/>
+
+                                <HyperlinkButton
+                                    Margin="5"
+                                    x:Name="HyperlinkButton_MigotoPackageVersion"
+                                    Content="3Dmigoto Package Version: "
+                                    />
                             </StackPanel>
                             
                             

@@ -55,11 +55,7 @@ namespace SSMT
         /// </summary>
         public static bool ShowTextureToolBoxPage { get; set; } = false;
 
-        //// 配置文件路径
-        public static string Path_MainConfig
-        {
-            get { return Path.Combine(Path_ConfigsFolder, PathManager.Name_GlobalConfigFileName); }
-        }
+     
 
         /// <summary>
         /// 肯定是要放在我们的全局配置文件夹里，放别的地方不得劲
@@ -82,7 +78,14 @@ namespace SSMT
             get { return Path.Combine(Path_AppDataLocal, "SSMT3GlobalConfigs\\"); }
         }
 
-
+        public static string Path_AppDataLocal
+        {
+            get
+            { // 如果你需要非漫游配置文件路径（AppData\Local），可以这样做：
+                string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+                return localAppDataPath;
+            }
+        }
 
         /// <summary>
         /// 使用古法读取，不要自作聪明用C#的某些语法糖特性实现全自动
@@ -176,7 +179,7 @@ namespace SSMT
                 //如果全局的配置文件读取错误的话，直接删掉重新保存一个全局的配置文件
                 //这是因为蓝屏的时候这里的配置文件会直接被损坏。
                 ex.ToString();
-                File.Delete(GlobalConfig.Path_MainConfig);
+                File.Delete(GlobalConfig.Path_MainConfig_Global);
                 GlobalConfig.SaveConfig();
             }
         }
@@ -223,17 +226,13 @@ namespace SSMT
         {
             get { return Path.Combine(Path_3DmigotoLoaderFolder, "Mods\\"); }
         }
-       
-
-        public static string Path_ModRepoFolder
-        {
-            get { return Path_ModsFolder; }
-        }
+        
 
         public static string Path_GamesFolder
         {
             get { return Path.Combine(GlobalConfig.SSMTCacheFolderPath, "Games\\"); }
         }
+
         public static string Path_CurrentGamesFolder
         {
             get { return Path.Combine(GlobalConfig.Path_GamesFolder, GlobalConfig.CurrentGameName + "\\"); }
@@ -319,8 +318,6 @@ namespace SSMT
         {
             get { return Path.Combine(GlobalConfig.SSMTCacheFolderPath, "Plugins\\"); }
         }
-
-
 
         public static string LatestFrameAnalysisFolderName
         {
@@ -474,29 +471,12 @@ namespace SSMT
             }
         }
 
-        public static string Path_AppDataLocal
-        {
-            get
-            { // 如果你需要非漫游配置文件路径（AppData\Local），可以这样做：
-                string localAppDataPath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-                return localAppDataPath;
-            }
-        }
+      
 
-        public static string Path_ConfigsFolder
-        {
-            get { return Path.Combine(GlobalConfig.SSMTCacheFolderPath, "Configs\\"); }
-        }
-
-        //ReverseResult.json
-        public static string Path_ReverseResultConfig
-        {
-            get { return Path.Combine(GlobalConfig.Path_ConfigsFolder, "ReverseResult.json"); }
-        }
-
+      
         public static string Path_ModManageConfig
         {
-            get { return Path.Combine(GlobalConfig.Path_ConfigsFolder, "ModManageConfig.json"); }
+            get { return Path.Combine(GlobalConfig.Path_SSMT3GlobalConfigsFolder, "ModManageConfig.json"); }
         }
 
         public static string Path_TexturePageIndexConfig
@@ -505,15 +485,8 @@ namespace SSMT
         }
 
    
-        public static string Path_RunResultJson
-        {
-            get { return Path.Combine(Path_ConfigsFolder, "RunResult.json"); }
-        }
-
-        public static string Path_RunInputJson
-        {
-            get { return Path.Combine(Path_ConfigsFolder, "RunInput.json"); }
-        }
+        
+       
 
 
         public static string Path_BaseFolder

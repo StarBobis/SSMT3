@@ -27,7 +27,7 @@ namespace SSMT
             ModCategory PrimaryCategory = Get_SelectedCategoryPrimary();
             ModCategory SecondaryCategory = Get_SelectedCategorySecondary();
 
-            string PrimaryCategoryModFolderPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, PrimaryCategory.Name + "\\");
+            string PrimaryCategoryModFolderPath = Path.Combine(GlobalConfig.Path_ModsFolder, PrimaryCategory.Name + "\\");
             if (!Directory.Exists(PrimaryCategoryModFolderPath))
             {
                 Directory.CreateDirectory(PrimaryCategoryModFolderPath);
@@ -167,7 +167,7 @@ namespace SSMT
                 ModCategory PrimaryCategory = Get_SelectedCategoryPrimary();
                 ModCategory SecondaryCategory = Get_SelectedCategorySecondary();
 
-                string PrimaryCategoryModFolderPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, PrimaryCategory.Name + "\\");
+                string PrimaryCategoryModFolderPath = Path.Combine(GlobalConfig.Path_ModsFolder, PrimaryCategory.Name + "\\");
                 if (!Directory.Exists(PrimaryCategoryModFolderPath))
                 {
                     Directory.CreateDirectory(PrimaryCategoryModFolderPath);
@@ -259,7 +259,7 @@ namespace SSMT
             ModCategory PrimaryCategory = Get_SelectedCategoryPrimary();
             ModCategory SecondaryCategory = Get_SelectedCategorySecondary();
 
-            string PrimaryCategoryModFolderPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, PrimaryCategory.Name + "\\");
+            string PrimaryCategoryModFolderPath = Path.Combine(GlobalConfig.Path_ModsFolder, PrimaryCategory.Name + "\\");
             if (!Directory.Exists(PrimaryCategoryModFolderPath))
             {
                 Directory.CreateDirectory(PrimaryCategoryModFolderPath);
@@ -344,7 +344,7 @@ namespace SSMT
 
                 ModItem SelectedModItem = ModItemList[SelectedIndex];
 
-                string ModFolderPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, Get_SelectedCategoryPrimary().Name, Get_SelectedCategorySecondary().Name, SelectedModItem.ModName + "\\");
+                string ModFolderPath = Path.Combine(GlobalConfig.Path_ModsFolder, Get_SelectedCategoryPrimary().Name, Get_SelectedCategorySecondary().Name, SelectedModItem.ModName + "\\");
 
                 if (Directory.Exists(ModFolderPath))
                 {

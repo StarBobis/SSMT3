@@ -19,10 +19,7 @@ namespace SSMT
         {
             if (Directory.Exists(GlobalConfig.SSMTCacheFolderPath) && GlobalConfig.SSMTCacheFolderPath != "")
             {
-                if (!Directory.Exists(GlobalConfig.Path_ConfigsFolder))
-                {
-                    Directory.CreateDirectory(GlobalConfig.Path_ConfigsFolder);
-                }
+                
 
                 if (!Directory.Exists(GlobalConfig.Path_LogsFolder))
                 {

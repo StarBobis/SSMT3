@@ -38,7 +38,6 @@ namespace SSMT
                 Menu_OpenDBMTLocationFolder.Text = "打开SSMT缓存文件夹";
                 Menu_OpenLogsFolder.Text = "打开Logs文件夹";
                 Menu_OpenLatestLogFile.Text = "打开最新的日志文件";
-                Menu_OpenConfigsFolder.Text = "打开Configs文件夹";
                 Menu_OpenPluginsFolder.Text = "打开Plugins文件夹";
 
                 Menu_GameTypeFolder.Text = "打开数据类型文件夹";
@@ -128,7 +127,6 @@ namespace SSMT
                 Menu_OpenDBMTLocationFolder.Text = "Open SSMT Cache Folder";
                 Menu_OpenLogsFolder.Text = "Open Logs Folder";
                 Menu_OpenLatestLogFile.Text = "Open Latest Log File";
-                Menu_OpenConfigsFolder.Text = "Open Configs Folder";
                 Menu_OpenPluginsFolder.Text = "Open Plugins Folder";
 
                 Menu_GameTypeFolder.Text = "Open GameType Folder";

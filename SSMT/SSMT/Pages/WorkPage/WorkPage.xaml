@@ -67,9 +67,7 @@
                 <MenuFlyoutItem 
                     x:Name="Menu_OpenLatestLogFile" 
                     Click="OpenLatestLogFile"/>
-                <MenuFlyoutItem 
-                    x:Name="Menu_OpenConfigsFolder" 
-                    Click="OpenConfigsFolder"/>
+    
                 <MenuFlyoutItem 
                     x:Name="Menu_OpenPluginsFolder" 
                     Click="Menu_OpenPluginsFolder_Click"/>
@@ -85,8 +83,6 @@
                     x:Name="Menu_OpenGlobalConfigFolder"
                     Click="Menu_OpenGlobalConfigFolder_Click"
                     />
-
-
 
             </MenuBarItem>
 

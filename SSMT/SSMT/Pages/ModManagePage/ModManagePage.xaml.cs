@@ -110,14 +110,14 @@ namespace SSMT
             LOG.Info("ReloadCategoryPrimary::Start");
             MakeSureModRepoExists();
 
-            string[] CategoryPrimaryNameList = Directory.GetDirectories(GlobalConfig.Path_ModRepoFolder);
+            string[] CategoryPrimaryNameList = Directory.GetDirectories(GlobalConfig.Path_ModsFolder);
 
             //如果一个分类都没有，那就创建一个默认分类
             if (CategoryPrimaryNameList.Length == 0)
             {
-                string DefaultCategoryPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, "Default\\");
+                string DefaultCategoryPath = Path.Combine(GlobalConfig.Path_ModsFolder, "Default\\");
                 Directory.CreateDirectory(DefaultCategoryPath);
-                CategoryPrimaryNameList = Directory.GetDirectories(GlobalConfig.Path_ModRepoFolder);
+                CategoryPrimaryNameList = Directory.GetDirectories(GlobalConfig.Path_ModsFolder);
             }
 
             List<ModCategory> NormalPrimaryCategoryList = new List<ModCategory>();
@@ -129,12 +129,12 @@ namespace SSMT
 
                 //获取Mod数量
                 int ModNumber = 0;
-                if (!Directory.Exists(GlobalConfig.Path_ModRepoFolder))
+                if (!Directory.Exists(GlobalConfig.Path_ModsFolder))
                 {
-                    Directory.CreateDirectory(GlobalConfig.Path_ModRepoFolder);
+                    Directory.CreateDirectory(GlobalConfig.Path_ModsFolder);
                 }
 
-                string ModRepoPrimaryPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, CategoryName + "\\");
+                string ModRepoPrimaryPath = Path.Combine(GlobalConfig.Path_ModsFolder, CategoryName + "\\");
 
                 if (Directory.Exists(ModRepoPrimaryPath))
                 {
@@ -243,7 +243,7 @@ namespace SSMT
 
                 LOG.Info("当前记录的CategorySecondaryName: " + modManageConfig.CategorySecondaryName);
 
-                string CategoryPrimaryPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, CategoryPrimaryName);
+                string CategoryPrimaryPath = Path.Combine(GlobalConfig.Path_ModsFolder, CategoryPrimaryName);
 
                 string[] CategoryNameList = Directory.GetDirectories(CategoryPrimaryPath);
 
@@ -268,12 +268,12 @@ namespace SSMT
 
                     //获取Mod数量
                     int SecondaryModNumber = 0;
-                    if (!Directory.Exists(GlobalConfig.Path_ModRepoFolder))
+                    if (!Directory.Exists(GlobalConfig.Path_ModsFolder))
                     {
-                        Directory.CreateDirectory(GlobalConfig.Path_ModRepoFolder);
+                        Directory.CreateDirectory(GlobalConfig.Path_ModsFolder);
                     }
 
-                    string CategorySecondaryModFolderPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, CategoryPrimaryName, CategorySecondaryName + "\\");
+                    string CategorySecondaryModFolderPath = Path.Combine(GlobalConfig.Path_ModsFolder, CategoryPrimaryName, CategorySecondaryName + "\\");
                     if (!Directory.Exists(CategorySecondaryModFolderPath))
                     {
                         Directory.CreateDirectory(CategorySecondaryModFolderPath);
@@ -506,7 +506,7 @@ namespace SSMT
 
 
                 //直接去删除分类及其下面所有的文件，然后重载整个页面
-                string ModRepoFolderPrimaryPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, Get_SelectedCategoryPrimary().Name + "\\") ;
+                string ModRepoFolderPrimaryPath = Path.Combine(GlobalConfig.Path_ModsFolder, Get_SelectedCategoryPrimary().Name + "\\") ;
                 if (Directory.Exists(ModRepoFolderPrimaryPath))
                 {
                     Directory.Delete(ModRepoFolderPrimaryPath, true);
@@ -585,13 +585,13 @@ namespace SSMT
                 if (FolderName.ToLower().StartsWith("disabled"))
                 {
                     string NewNameWithoutDisabled = FolderName.Substring("disabled".Length);
-                    string NewFolderPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, NewNameWithoutDisabled + "\\");
+                    string NewFolderPath = Path.Combine(GlobalConfig.Path_ModsFolder, NewNameWithoutDisabled + "\\");
                     Directory.Move(ModRepoFolderPrimaryPath, NewFolderPath);
                 }
                 else
                 {
                     string NewFolderName = "DISABLED" + FolderName;
-                    string NewFolderPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, NewFolderName + "\\");
+                    string NewFolderPath = Path.Combine(GlobalConfig.Path_ModsFolder, NewFolderName + "\\");
                     Directory.Move(ModRepoFolderPrimaryPath, NewFolderPath);
                 }
                 ReloadCategoryPrimary();

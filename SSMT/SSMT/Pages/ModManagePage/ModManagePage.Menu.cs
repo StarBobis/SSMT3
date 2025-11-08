@@ -26,9 +26,9 @@ namespace SSMT
         private void Menu_OpenCategoryRepoFolder_Click(object sender, RoutedEventArgs e)
         {
             MakeSureModRepoExists();
-            if (Directory.Exists(GlobalConfig.Path_ModRepoFolder))
+            if (Directory.Exists(GlobalConfig.Path_ModsFolder))
             {
-                SSMTCommandHelper.ShellOpenFolder(GlobalConfig.Path_ModRepoFolder);
+                SSMTCommandHelper.ShellOpenFolder(GlobalConfig.Path_ModsFolder);
             }
         }
 

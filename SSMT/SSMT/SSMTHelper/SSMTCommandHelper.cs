@@ -20,27 +20,9 @@ namespace SSMT
 {
     public class SSMTCommandHelper
     {
-        public static void InitializeRunInputJson(string arguments)
-        {
-            //把当前运行的命令保存到RunInput.json
-            JObject runInputJson = new JObject();
-            if (File.Exists(GlobalConfig.Path_RunInputJson))
-            {
-                string json = File.ReadAllText(GlobalConfig.Path_RunInputJson); // 读取文件内容
-                runInputJson = JObject.Parse(json);
+      
 
-            }
-            runInputJson["RunCommand"] = arguments;
-            string runInputJsonStr = runInputJson.ToString(Formatting.Indented);
-            File.WriteAllText(GlobalConfig.Path_RunInputJson, runInputJsonStr);
-        }
-
-        public static void InitializeRunResultJson()
-        {
-            JObject jsonObject = new JObject();
-            jsonObject["result"] = "Unknown Error!";
-            File.WriteAllText(GlobalConfig.Path_RunResultJson, jsonObject.ToString());
-        }
+       
 
 
         public static void RunUPX(string arguments, bool ShowRunResultWindow = true, bool ShellExecute = false)

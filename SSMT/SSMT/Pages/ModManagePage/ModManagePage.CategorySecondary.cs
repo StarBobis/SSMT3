@@ -37,12 +37,12 @@ namespace SSMT
             ModCategory ModCategoryPrimary = Get_SelectedCategoryPrimary();
             ModCategory ModCategorySecondary = Get_SelectedCategorySecondary();
 
-            string ModRepoFolderSecondaryPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, ModCategoryPrimary.Name, ModCategorySecondary.Name + "\\");
+            string ModRepoFolderSecondaryPath = Path.Combine(GlobalConfig.Path_ModsFolder, ModCategoryPrimary.Name, ModCategorySecondary.Name + "\\");
             return ModRepoFolderSecondaryPath;
         }
 
         public string Get_CategoryPrimary_ModRepoFolderPath() {
-            string ModRepoFolderPrimaryPath = Path.Combine(GlobalConfig.Path_ModRepoFolder, Get_SelectedCategoryPrimary().Name + "\\");
+            string ModRepoFolderPrimaryPath = Path.Combine(GlobalConfig.Path_ModsFolder, Get_SelectedCategoryPrimary().Name + "\\");
 
             return ModRepoFolderPrimaryPath;
         }

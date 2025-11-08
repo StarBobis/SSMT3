@@ -144,10 +144,7 @@ namespace SSMT
             }
         }
 
-        public void OpenConfigsFolder(object sender, RoutedEventArgs e)
-        {
-            SSMTCommandHelper.ShellOpenFolder(GlobalConfig.Path_ConfigsFolder);
-        }
+   
 
         private async void OpenD3dxIniFile(object sender, RoutedEventArgs e)
         {

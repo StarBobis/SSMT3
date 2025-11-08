@@ -982,7 +982,7 @@ namespace SSMT
                 //c9f2b46571d22858 新增的Shader
                 else if (CSCB0FileName.Contains("c9f2b46571d22858"))
                 {
-                    LOG.NewLine("执行提取:4d9c23fd387846c7  c9f2b46571d22858");
+                    LOG.NewLine("执行提取:4d9c23fd387846c7 的同类分支: c9f2b46571d22858");
 
                     List<D3D11GameTypeWrapper> d3D11GameTypeWrapperList = AutoGameTypeDetect_4d9c23fd387846c7(DrawIB, d3D11GameTypeLv2, PointlistIndex, TrianglelistIndexList);
 

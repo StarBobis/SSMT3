@@ -51,7 +51,7 @@ namespace SSMT
 
 
 
-        public bool AutoSetAnalyseOptions { get; set; } = true;
+        public int AutoSetAnalyseOptionsSelectedIndex { get; set; } = 0;
 
         public string GithubPackageVersion { get; set; } = "";
 
@@ -126,14 +126,14 @@ namespace SSMT
                     this.GithubPackageVersion = GithubPackageVersion;
                 }
 
-             
 
-                //AutoSetAnalyseOptions
-                if (jobj.ContainsKey("AutoSetAnalyseOptions"))
+
+                //AutoSetAnalyseOptionsSelectedIndex
+                if (jobj.ContainsKey("AutoSetAnalyseOptionsSelectedIndex"))
                 {
 
-                    bool AutoSetAnalyseOptions = (bool)jobj["AutoSetAnalyseOptions"];
-                    this.AutoSetAnalyseOptions = AutoSetAnalyseOptions;
+                    int AutoSetAnalyseOptionsSelectedIndex = (int)jobj["AutoSetAnalyseOptionsSelectedIndex"];
+                    this.AutoSetAnalyseOptionsSelectedIndex = AutoSetAnalyseOptionsSelectedIndex;
                 }
 
                 
@@ -219,7 +219,7 @@ namespace SSMT
             jobj["LogicName"] = this.LogicName;
             jobj["GameTypeName"] = this.GameTypeName;
 
-            jobj["AutoSetAnalyseOptions"] = this.AutoSetAnalyseOptions;
+            jobj["AutoSetAnalyseOptionsSelectedIndex"] = this.AutoSetAnalyseOptionsSelectedIndex;
             jobj["GithubPackageVersion"] = this.GithubPackageVersion;
 
             jobj["DllInitializationDelay"] = this.DllInitializationDelay;

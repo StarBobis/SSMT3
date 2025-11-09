@@ -58,7 +58,7 @@ namespace SSMT
                     analyse_options = analyse_options + " symlink";
                 }
 
-                if (ToggleSwitch_AutoSetAnalyseOptions.IsOn)
+                if (ComboBox_AutoSetAnalyseOptions.SelectedIndex == 0)
                 {
                     D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[hunting]", "analyse_options", analyse_options);
                 }
@@ -112,7 +112,7 @@ namespace SSMT
 
                     if (gameConfig.LaunchPath == "" || !File.Exists(gameConfig.LaunchPath))
                     {
-                        _ = SSMTMessageHelper.Show("您当前并未正确设置启动路径，或启动路径文件并不存在，请前往设置页面检查。");
+                        _ = SSMTMessageHelper.Show("您当前并未正确设置启动路径，或启动路径文件并不存在，请重新设置。");
                         return;
                     }
 

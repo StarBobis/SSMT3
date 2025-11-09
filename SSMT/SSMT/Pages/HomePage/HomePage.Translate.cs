@@ -69,8 +69,11 @@ namespace SSMT
                 ToggleSwitch_Symlink.OnContent = "当前开启Symlink特性";
                 ToggleSwitch_Symlink.OffContent = "当前关闭Symlink特性";
 
-                ToggleSwitch_AutoSetAnalyseOptions.OnContent = "analyse_options：自动重置";
-                ToggleSwitch_AutoSetAnalyseOptions.OffContent = "analyse_options：不自动重置";
+                SettingsCard_AutoSetAnalyseOptions.Header = "自动设置AnalyseOptions";
+                SettingsCard_AutoSetAnalyseOptions.Description = "在启动3Dmigoto之前，自动设置d3dx.ini中的analyse_options为deferred_ctx_immediate dump_rt dump_cb dump_vb dump_ib buf txt dds dump_tex dds";
+
+                ComboboxItem_AutoSetAnalyseOptions_AutoSet.Content = "自动重置";
+                ComboboxItem_AutoSetAnalyseOptions_DontSet.Content = "不进行重置";
 
                 ToggleSwitch_ShowWarning.OnContent = "当前隐藏左上角红字报错显示";
                 ToggleSwitch_ShowWarning.OffContent = "当前显示左上角红字报错";
@@ -83,12 +86,11 @@ namespace SSMT
                 Button_RunLaunchPath.Content = " 开始游戏";
                 ToolTipService.SetToolTip(Button_RunLaunchPath, "运行启动路径中填写的游戏进程路径");
 
+                SettingsCard_DllInitializationDelay.Header = "d3d11.dll初始化延迟";
+                SettingsCard_DllInitializationDelay.Description = "d3d11.dll初始化时的延迟，单位为毫秒，一般WWMI填200，若仍然闪退则以每次100为单位增加此值直到不闪退，鸣潮在2.4版本更新后至少需要50ms的延迟以确保启动时不会闪退。此外，如果要让Reshade和3Dmigoto一起使用，至少需要150ms的延迟";
 
-                NumberBox_DllInitializationDelay.Header = "d3d11.dll初始化延迟";
-                ToolTipService.SetToolTip(NumberBox_DllInitializationDelay,"d3d11.dll初始化时的延迟，单位为毫秒，一般WWMI填200，若仍然闪退则以每次100为单位增加此值直到不闪退\n鸣潮在2.4版本更新后至少需要50ms的延迟以确保启动时不会闪退\n此外，如果要让Reshade和3Dmigoto一起使用，至少需要150ms的延迟");
-
-                SettingsExpander_DllRelatedSettings.Header = "DLL相关设置";
-                SettingsExpander_DllRelatedSettings.Description = "与d3d11.dll相关的高级设置选项";
+                SettingsExpander_DllRelatedSettings.Header = "高级选项设置";
+                SettingsExpander_DllRelatedSettings.Description = "进阶功能选项，如非必要无需更改";
 
                 SettingsCard_DllPreProcess.Header = "DLL预处理";
                 SettingsCard_DllPreProcess.Description = "在启动3Dmigoto加载器之前对d3d11.dll进行预处理的选项";
@@ -103,13 +105,18 @@ namespace SSMT
                 ComboBoxItem_DllReplace_Play.Content = "替换为Play版本d3d11.dll";
                 ComboBoxItem_DllReplace_None.Content = "不进行任何替换";
 
-                TextBlock_ClearGICache.Text = "Mod防报错措施";
-                ToolTipService.SetToolTip(TextBlock_ClearGICache, "清理本地缓存日志，以避免由于缓存日志导致标记重点扫描从而更容易出现【与服务器的连接已断开】【15-4001】【10612-4001】的问题");
 
-                Button_CleanGICache.Content = "清理GI缓存日志";
 
-                ToolTipService.SetToolTip(Button_RunIgnoreGIError40, "开启后，使用SSMT启动游戏使用Mod将可以避免由于Mod导致的网络卡顿而出现的【与服务器的连接已断开】错误弹窗");
-                Button_RunIgnoreGIError40.Content = "启动第四代Mod防报错技术: 网络加固插件";
+             
+
+                SettingsCard_ClearGICache.Description = "清理原神反作弊的运行报错日志，以避免由于缓存日志导致标记重点扫描从而更容易出现【与服务器的连接已断开】【15-4001】【10612-4001】的问题";
+                SettingsCard_ClearGICache.Header = "清理原神Mod报错日志";
+                Button_CleanGICache.Content = "清理原神缓存日志";
+
+                SettingsCard_RunIgnoreGIError40.Description = "开启后，使用SSMT启动游戏使用Mod将可以避免由于Mod导致的网络卡顿而出现的【与服务器的连接已断开】【15-4001】【10612-4001】错误弹窗";
+                SettingsCard_RunIgnoreGIError40.Header = "第四代Mod防报错插件: 网络加固插件";
+
+                Button_RunIgnoreGIError40.Content = "启动网络加固插件";
 
             }
             else
@@ -153,8 +160,12 @@ namespace SSMT
                 ToggleSwitch_Symlink.OnContent = "Current Open And Use Symlink Feature";
                 ToggleSwitch_Symlink.OffContent = "Current Close And Not Use Symlink Feature";
 
-                ToggleSwitch_AutoSetAnalyseOptions.OnContent = "Auto Reset analyse_options";
-                ToggleSwitch_AutoSetAnalyseOptions.OffContent = "Not Auto Reset analyse_options";
+                SettingsCard_AutoSetAnalyseOptions.Header = "Auto Set analyse_options";
+                SettingsCard_AutoSetAnalyseOptions.Description = "Auto Reset d3dx.ini's analyse_options to: deferred_ctx_immediate dump_rt dump_cb dump_vb dump_ib buf txt dds dump_tex dds";
+
+
+                ComboboxItem_AutoSetAnalyseOptions_AutoSet.Content = "Auto Reset analyse_options";
+                ComboboxItem_AutoSetAnalyseOptions_DontSet.Content = "Not Reset analyse_options";
 
                 ToggleSwitch_ShowWarning.OnContent = "Current Hide Top Left Red Warnings";
                 ToggleSwitch_ShowWarning.OffContent = "Current Show Top Left Red Warnings";
@@ -163,12 +174,12 @@ namespace SSMT
                 Button_Run3DmigotoLoader.Content = " Start 3Dmigoto";
                 Button_RunLaunchPath.Content = " Start Game";
 
-                NumberBox_DllInitializationDelay.Header = "d3d11.dll Initialization Delay";
-                ToolTipService.SetToolTip(NumberBox_DllInitializationDelay, "Delay in milliseconds for DLL initialization. We'll go with 200ms for WWMI:\nWuthering Waves requires at least 50ms delay since 2.4 update to not crash on startup.\nAlso, to inject Reshade along with 3dmigoto, 150ms delay is required.");
+                SettingsCard_DllInitializationDelay.Header = "d3d11.dll Initialization Delay";
+                SettingsCard_DllInitializationDelay.Description = "Delay in milliseconds for DLL initialization. We'll go with 200ms for WWMI:\nWuthering Waves requires at least 50ms delay since 2.4 update to not crash on startup.\nAlso, to inject Reshade along with 3dmigoto, 150ms delay is required.";
 
 
-                SettingsExpander_DllRelatedSettings.Header = "Dll Related Settings";
-                SettingsExpander_DllRelatedSettings.Description = "Various High Level Settings For d3d11.dll";
+                SettingsExpander_DllRelatedSettings.Header = "High Level Settings";
+                SettingsExpander_DllRelatedSettings.Description = "Various High Level Settings,Don't Modifiy if you don't know how they work";
 
                 SettingsCard_DllPreProcess.Header = "DLL Pre-Process";
                 SettingsCard_DllPreProcess.Description = "Do something for d3d11.dll before inject";
@@ -183,11 +194,18 @@ namespace SSMT
                 ComboBoxItem_DllReplace_Play.Content = "Replace with Play version d3d11.dll";
                 ComboBoxItem_DllReplace_None.Content = "Not Replace";
 
-                TextBlock_ClearGICache.Text = "Ignore Error Code";
 
-                Button_CleanGICache.Content = "Clean GI Log Cache Files";
 
                 Button_RunIgnoreGIError40.Content = "Run GoodWorkGI.exe";
+
+                SettingsCard_ClearGICache.Description = "Clear Error Log Files To Prevent Forever No-Condition Error";
+                SettingsCard_ClearGICache.Header = "Clear GI Mod Error Log";
+                Button_CleanGICache.Content = "Clean GI Log Cache Files";
+
+                SettingsCard_RunIgnoreGIError40.Description = "The 4th Generation Mod Network Protect Technique";
+                SettingsCard_RunIgnoreGIError40.Header = "Network Protect Plugin";
+
+
             }
         }
 

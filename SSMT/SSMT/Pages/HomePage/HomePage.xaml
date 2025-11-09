@@ -342,11 +342,7 @@ The following sets the maximum # of items to show before wrapping.-->
                                     x:Name="ToggleSwitch_Symlink" 
                                     Toggled="ToggleSwitch_Symlink_Toggled"/>
 
-                                <ToggleSwitch
-                                    Margin="5"
-                                    x:Name="ToggleSwitch_AutoSetAnalyseOptions"  
-                                    Toggled="ToggleSwitch_AutoSetAnalyseOptions_Toggled"
-                                    />
+                              
 
                             </StackPanel>
 
@@ -363,15 +359,7 @@ The following sets the maximum # of items to show before wrapping.-->
 
                             </StackPanel>
 
-                            <NumberBox 
-                                HorizontalAlignment="Left"
-                                Width="200"
-                                Margin="5"
-                                SmallChange="10"
-                                LargeChange="100"
-                                x:Name="NumberBox_DllInitializationDelay"
-                                LostFocus="NumberBox_DllInitializationDelay_LostFocus"
-                                ></NumberBox>
+                            
 
                             
 
@@ -426,32 +414,67 @@ The following sets the maximum # of items to show before wrapping.-->
 
                             </controls:SettingsCard>
 
-                        </controls:SettingsExpander.Items>
-                    </controls:SettingsExpander>
+                            <controls:SettingsCard x:Name="SettingsCard_DllInitializationDelay">
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xe964;"     
+                                        FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
 
 
-                    <StackPanel
-                        x:Name="StackPanel_GIError"
-                        Orientation="Vertical"
-                        >
-                        <Expander
-                            HorizontalContentAlignment="Stretch"
-                            HorizontalAlignment="Stretch"
-                            IsExpanded="True">
-                            <Expander.Header>
-                                <StackPanel Margin="10">
-                                    <TextBlock 
-                                        x:Name="TextBlock_ClearGICache"
-                                        FontSize="14" 
-                                        FontWeight="Bold" />
-                                </StackPanel>
-                            </Expander.Header>
+                                <NumberBox 
+                                    Margin="5"
+                                    SmallChange="10"
+                                    LargeChange="100"
+                                    x:Name="NumberBox_DllInitializationDelay"
+                                    LostFocus="NumberBox_DllInitializationDelay_LostFocus"/>
 
-                            <StackPanel Orientation="Horizontal">
+                            </controls:SettingsCard>
+
+                            <controls:SettingsCard x:Name="SettingsCard_AutoSetAnalyseOptions">
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xE745;"     
+                                        FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
+
+                                <ComboBox 
+                                    SelectionChanged="ComboBox_AutoSetAnalyseOptions_SelectionChanged"
+                                    SelectedIndex="0"
+                                    x:Name="ComboBox_AutoSetAnalyseOptions">
+                                    <ComboBoxItem x:Name="ComboboxItem_AutoSetAnalyseOptions_AutoSet"></ComboBoxItem>
+                                    <ComboBoxItem x:Name="ComboboxItem_AutoSetAnalyseOptions_DontSet"></ComboBoxItem>
+                                </ComboBox>
+
+
+                            </controls:SettingsCard>
+
+
+                            <controls:SettingsCard 
+                                x:Name="SettingsCard_ClearGICache">
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xed62;"     
+                                    FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
                                 <Button
-                                   Click="Button_CleanGICache_Click"
-                                   x:Name="Button_CleanGICache"
-                                   Margin="5"/>
+                                    Click="Button_CleanGICache_Click"
+                                    x:Name="Button_CleanGICache"
+                                    Margin="5"/>
+
+                            </controls:SettingsCard>
+
+                            <controls:SettingsCard 
+                                x:Name="SettingsCard_RunIgnoreGIError40">
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xea0d;"     
+                                        FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
+
 
                                 <Button
                                     Click="Button_RunIgnoreGIError40_Click"
@@ -459,12 +482,12 @@ The following sets the maximum # of items to show before wrapping.-->
                                     Margin="5"
                                     ></Button>
 
-                                
-                            </StackPanel>
-                            
-                        </Expander>
+                            </controls:SettingsCard>
 
-                    </StackPanel>
+                        </controls:SettingsExpander.Items>
+                    </controls:SettingsExpander>
+
+                    
                    
                 </StackPanel>
             </ScrollViewer>
@@ -502,12 +525,7 @@ The following sets the maximum # of items to show before wrapping.-->
                                 >
 
                                 <Grid>
-                                    <!-- Glow 层 -->
-                                    <canvas:CanvasControl x:Name="GlowCanvas"
-                                        Width="200" MinHeight="50"
-                                        ClearColor="Transparent"
-                                        CreateResources="GlowCanvas_CreateResources"
-                                        Draw="GlowCanvas_Draw"/>
+                                    
                                     <Button 
                                         BorderThickness="0"
                                         x:Name="Button_Run3DmigotoLoader" 
@@ -515,8 +533,6 @@ The following sets the maximum # of items to show before wrapping.-->
                                         MinHeight="50"
                                         FontSize="21"
                                         FontWeight="Bold"
-                                        PointerExited="GlowButton_PointerExited"
-                                        PointerEntered="GlowButton_PointerEntered"
                                         Click="Open3DmigotoLoaderExe"/>
                                 </Grid>
 

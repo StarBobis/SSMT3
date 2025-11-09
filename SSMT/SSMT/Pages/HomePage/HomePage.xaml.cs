@@ -39,8 +39,6 @@ namespace SSMT
         private bool IsLoading = false;
 
 
-        private float glowIntensity = 0f; // 光晕强度
-        private CanvasRadialGradientBrush glowBrush;
 
 
         public HomePage()
@@ -50,65 +48,8 @@ namespace SSMT
 
             
         }
-        private void GlowCanvas_CreateResources(CanvasControl sender, Microsoft.Graphics.Canvas.UI.CanvasCreateResourcesEventArgs args)
-        {
-            var center = new Vector2((float)sender.ActualWidth / 2, (float)sender.ActualHeight / 2);
-            glowBrush = new CanvasRadialGradientBrush(sender, Colors.Cyan, Colors.Transparent)
-            {
-                Center = center,
-                RadiusX = 200,
-                RadiusY = 0
-            };
-        }
+       
 
-        private void GlowCanvas_Draw(CanvasControl sender, CanvasDrawEventArgs args)
-        {
-            var session = args.DrawingSession;
-            var center = new Vector2((float)sender.ActualWidth / 2, (float)sender.ActualHeight / 2);
-
-            byte alpha = (byte)(glowIntensity * 255);
-
-            // 获取系统强调色
-            var uiSettings = new UISettings();
-            var accent = uiSettings.GetColorValue(UIColorType.Accent);
-
-            var stops = new CanvasGradientStop[]
-            {
-                new CanvasGradientStop() { Color = Color.FromArgb(alpha, accent.R, accent.G, accent.B), Position = 0f },
-                new CanvasGradientStop() { Color = Colors.Transparent, Position = 1f }
-            };
-
-            using var brush = new CanvasRadialGradientBrush(sender, stops)
-            {
-                Center = center,
-                RadiusX = 200,
-                RadiusY = 50
-            };
-
-            session.FillEllipse(center, 200, 50, brush);
-        }
-
-        private async void GlowButton_PointerEntered(object sender, PointerRoutedEventArgs e)
-        {
-            // 动画增加发光
-            for (float i = 0f; i <= 1f; i += 0.05f)
-            {
-                glowIntensity = i;
-                GlowCanvas.Invalidate(); // 重绘
-                await Task.Delay(16);
-            }
-        }
-
-        private async void GlowButton_PointerExited(object sender, PointerRoutedEventArgs e)
-        {
-            // 动画减少发光
-            for (float i = 1f; i >= 0f; i -= 0.05f)
-            {
-                glowIntensity = i;
-                GlowCanvas.Invalidate();
-                await Task.Delay(16);
-            }
-        }
 
         private void HomePageLoaded(object sender, RoutedEventArgs e)
         {
@@ -335,18 +276,20 @@ namespace SSMT
             NumberBox_DllInitializationDelay.Value = gameConfig.DllInitializationDelay;
             ComboBox_DllPreProcess.SelectedIndex = gameConfig.DllPreProcessSelectedIndex;
             ComboBox_DllReplace.SelectedIndex = gameConfig.DllReplaceSelectedIndex;
+            ComboBox_AutoSetAnalyseOptions.SelectedIndex = gameConfig.AutoSetAnalyseOptionsSelectedIndex;
 
-            ToggleSwitch_AutoSetAnalyseOptions.IsOn = gameConfig.AutoSetAnalyseOptions;
 
             //是否显示防报错按钮
             if (gameConfig.LogicName == LogicName.GIMI )
             {
-                StackPanel_GIError.Visibility = Visibility.Visible;
+                SettingsCard_ClearGICache.Visibility = Visibility.Visible;
+                SettingsCard_RunIgnoreGIError40.Visibility = Visibility.Visible;
             }
             else
             {
-                StackPanel_GIError.Visibility = Visibility.Collapsed;
-            }
+				SettingsCard_ClearGICache.Visibility = Visibility.Collapsed;
+				SettingsCard_RunIgnoreGIError40.Visibility = Visibility.Collapsed;
+			}
 
 
             SelectGameIconToCurrentGame();
@@ -355,10 +298,37 @@ namespace SSMT
             IsLoading = false;
 
 
-            //最后保底配置，如果真的还有没配置的，就会触发这里的从d3dx.ini读取配置
-            LoadD3DxIniConfigIfNoteConfigured();
+			//最后保底配置，如果真的还有没配置的，就会触发这里的从d3dx.ini读取配置
+			IsLoading = true;
 
-            LoadAtLeastPicture();
+			//target,launch,launch_args,show_warnings,symlink
+			string d3dxini_path = Path.Combine(TextBox_3DmigotoPath.Text, "d3dx.ini");
+			if (File.Exists(d3dxini_path))
+			{
+				//如果当前的target = 为空的话，就尝试读取
+				if (TextBox_TargetPath.Text.Trim() == "")
+				{
+					TextBox_TargetPath.Text = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxini_path, "target");
+				}
+
+				if (TextBox_LaunchPath.Text.Trim() == "")
+				{
+					LOG.Info("切换游戏后，发现LaunchPath为空，重新读取");
+					TextBox_LaunchPath.Text = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxini_path, "launch");
+				}
+
+				if (TextBox_LaunchArgsPath.Text.Trim() == "")
+				{
+					TextBox_LaunchArgsPath.Text = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxini_path, "launch_args");
+				}
+
+
+			}
+
+
+			IsLoading = false;
+
+			LoadAtLeastPicture();
 
             UpdatePackageVersionLink();
         }
@@ -728,10 +698,11 @@ namespace SSMT
             TextBox_LaunchPath.Text = "";
             TextBox_LaunchArgsPath.Text = "";
 
-            
-            ToggleSwitch_AutoSetAnalyseOptions.IsOn = false;
 
-            IsLoading = false;
+            
+
+
+			IsLoading = false;
         }
 
         private void ReadConfigsToPanel()
@@ -762,9 +733,11 @@ namespace SSMT
                 TextBox_TargetPath.Text = CurrentGameConfig.TargetPath;
             }
 
+            LOG.Info("尝试设置LaunchPath:");
             if (File.Exists(CurrentGameConfig.LaunchPath))
             {
-                TextBox_LaunchPath.Text = CurrentGameConfig.LaunchPath;
+				LOG.Info("存在保存的LaunchPath:" + CurrentGameConfig.LaunchPath + "  现在进行设置" );
+				TextBox_LaunchPath.Text = CurrentGameConfig.LaunchPath;
             }
 
             TextBox_LaunchArgsPath.Text = CurrentGameConfig.LaunchArgs;
@@ -916,7 +889,7 @@ namespace SSMT
             }
 
             GameConfig gameConfig = new GameConfig();
-            gameConfig.AutoSetAnalyseOptions = ToggleSwitch_AutoSetAnalyseOptions.IsOn;
+            gameConfig.AutoSetAnalyseOptionsSelectedIndex = ComboBox_AutoSetAnalyseOptions.SelectedIndex;
             gameConfig.SaveConfig();
         }
 
@@ -1005,5 +978,17 @@ namespace SSMT
             gameConfig.DllPreProcessSelectedIndex = ComboBox_DllPreProcess.SelectedIndex;
             gameConfig.SaveConfig();
         }
+
+        private void ComboBox_AutoSetAnalyseOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+			if (IsLoading)
+			{
+				return;
+			}
+
+			GameConfig gameConfig = new GameConfig();
+			gameConfig.AutoSetAnalyseOptionsSelectedIndex = ComboBox_AutoSetAnalyseOptions.SelectedIndex;
+			gameConfig.SaveConfig();
+		}
     }
 }

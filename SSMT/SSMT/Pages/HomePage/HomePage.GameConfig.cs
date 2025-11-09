@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using SSMT_Core;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +25,7 @@ namespace SSMT
 
         private void DoAfter3DmigotoPathChanged()
         {
+            LOG.Info("DoAfter3DmigotoPathChanged::Start");
             //如果3Dmigoto路径被改变了，就触发这个方法
             //(1)首先把改变同步到GameConfig中
             GameConfig gameConfig = new GameConfig();
@@ -31,12 +33,6 @@ namespace SSMT
             gameConfig.SaveConfig();
 
             //(2)然后更新当前的3Dmigoto下的d3dx.ini中能够提供的信息：
-            LoadD3DxIniConfigIfNoteConfigured();
-        }
-
-
-        private void LoadD3DxIniConfigIfNoteConfigured()
-        {
             IsLoading = true;
 
             //target,launch,launch_args,show_warnings,symlink
@@ -64,44 +60,52 @@ namespace SSMT
 
 
             IsLoading = false;
+            LOG.Info("DoAfter3DmigotoPathChanged::End");
 
         }
+
+
 
 
         private void SaveTargetPathToConfig()
         {
             GameConfig gameConfig = new GameConfig();
-            gameConfig.TargetPath = TextBox_TargetPath.Text;
+            gameConfig.TargetPath = TextBox_TargetPath.Text.Trim();
             gameConfig.SaveConfig();
         }
 
         private void SaveLaunchPathToConfig()
         {
             GameConfig gameConfig = new GameConfig();
-            gameConfig.LaunchPath = TextBox_LaunchPath.Text;
+            gameConfig.LaunchPath = TextBox_LaunchPath.Text.Trim();
             gameConfig.SaveConfig();
         }
 
         private void TextBox_LaunchArgsPath_LostFocus(object sender, RoutedEventArgs e)
         {
             GameConfig gameConfig = new GameConfig();
-            gameConfig.LaunchArgs = TextBox_LaunchArgsPath.Text;
+            gameConfig.LaunchArgs = TextBox_LaunchArgsPath.Text.Trim();
             gameConfig.SaveConfig();
         }
 
         private void TextBox_LaunchPath_LostFocus(object sender, RoutedEventArgs e)
         {
+            LOG.Info("TextBox_LaunchPath_LostFocus::Start");
             SaveLaunchPathToConfig();
+            LOG.Info("TextBox_LaunchPath_LostFocus::End");
+
         }
 
         private async void Button_ChooseLaunchFile_Click(object sender, RoutedEventArgs e)
         {
+            LOG.Info("Button_ChooseLaunchFile_Click::Start");
             string filepath = await SSMTCommandHelper.ChooseFileAndGetPath(".exe");
             if (filepath != "")
             {
                 TextBox_LaunchPath.Text = filepath;
                 SaveLaunchPathToConfig();
             }
+            LOG.Info("Button_ChooseLaunchFile_Click::End");
         }
 
         private async void Button_Choose3DmigotoPath_Click(object sender, RoutedEventArgs e)

@@ -53,7 +53,7 @@ namespace SSMT
                 //强制设置analyse_options 使用deferred_ctx_immediate确保IdentityV和YYSLS都能正确Dump出东西
                 string analyse_options = ConstantsManager.analyse_options;
 
-                if (ToggleSwitch_Symlink.IsOn)
+                if (ComboBox_Symlink.SelectedIndex == 0)
                 {
                     analyse_options = analyse_options + " symlink";
                 }

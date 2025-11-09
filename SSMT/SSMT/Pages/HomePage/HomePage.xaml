@@ -335,33 +335,9 @@ The following sets the maximum # of items to show before wrapping.-->
                                 x:Name="TextBox_LaunchArgsPath"/>
 
 
-                            <StackPanel Orientation="Horizontal">
-                                <ToggleSwitch 
-                                    Margin="5"
-                                    VerticalAlignment="Center" 
-                                    x:Name="ToggleSwitch_Symlink" 
-                                    Toggled="ToggleSwitch_Symlink_Toggled"/>
 
-                              
 
-                            </StackPanel>
-
-                            <StackPanel Orientation="Horizontal">
-
-                                <ToggleSwitch 
-                                    VerticalAlignment="Center" 
-                                    Margin="5" 
-                                    x:Name="ToggleSwitch_ShowWarning" 
-                                    Toggled="ToggleSwitch_ShowWarning_Toggled"
-                                    ToolTipService.ToolTip=""/>
-                                
-                                
-
-                            </StackPanel>
-
-                            
-
-                            
+                           
 
                         </StackPanel>
 
@@ -374,6 +350,41 @@ The following sets the maximum # of items to show before wrapping.-->
                         VerticalAlignment="Top">
 
                         <controls:SettingsExpander.Items>
+                            <controls:SettingsCard x:Name="SettingsCard_ShowWarnings">
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xf19d;"     
+                                        FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
+                            
+
+                                <ComboBox x:Name="ComboBox_ShowWarning" SelectionChanged="ComboBox_ShowWarning_SelectionChanged">
+                                    <ComboBoxItem x:Name="ComboBoxItem_ShowWarning_On"></ComboBoxItem>
+                                    <ComboBoxItem x:Name="ComboBoxItem_ShowWarning_Off"></ComboBoxItem>
+                                </ComboBox>
+
+
+                            </controls:SettingsCard>
+
+                            <controls:SettingsCard x:Name="SettingsCard_SymlinkFeature">
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xe71b;"     
+                                        FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
+                                
+
+                                <ComboBox 
+                                    SelectionChanged="ComboBox_Symlink_SelectionChanged"
+                                    x:Name="ComboBox_Symlink">
+                                    <ComboBoxItem x:Name="ComboBox_Symlink_On"></ComboBoxItem>
+                                    <ComboBoxItem x:Name="ComboBox_Symlink_Off"></ComboBoxItem>
+                                </ComboBox>
+
+
+                            </controls:SettingsCard>
 
                             <controls:SettingsCard 
                                 x:Name="SettingsCard_DllReplace"
@@ -434,14 +445,13 @@ The following sets the maximum # of items to show before wrapping.-->
                             <controls:SettingsCard x:Name="SettingsCard_AutoSetAnalyseOptions">
                                 <!-- 这里换成你查到的编码 -->
                                 <controls:SettingsCard.HeaderIcon>
-                                    <FontIcon Glyph="&#xE745;"     
+                                    <FontIcon Glyph="&#xe736;"     
                                         FontFamily="Segoe Fluent Icons"/>
                                 </controls:SettingsCard.HeaderIcon>
 
 
                                 <ComboBox 
                                     SelectionChanged="ComboBox_AutoSetAnalyseOptions_SelectionChanged"
-                                    SelectedIndex="0"
                                     x:Name="ComboBox_AutoSetAnalyseOptions">
                                     <ComboBoxItem x:Name="ComboboxItem_AutoSetAnalyseOptions_AutoSet"></ComboBoxItem>
                                     <ComboBoxItem x:Name="ComboboxItem_AutoSetAnalyseOptions_DontSet"></ComboBoxItem>

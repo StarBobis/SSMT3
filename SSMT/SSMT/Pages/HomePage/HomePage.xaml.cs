@@ -431,29 +431,29 @@ namespace SSMT
                 string ShowWarningsStr = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxiniPath, "show_warnings").Trim();
                 if (ShowWarningsStr.Trim() == "1")
                 {
-                    ToggleSwitch_ShowWarning.IsOn = false;
+                    ComboBox_ShowWarning.SelectedIndex = 0;
                 }
                 else if (ShowWarningsStr.Trim() == "0")
                 {
-                    ToggleSwitch_ShowWarning.IsOn = true;
-                }
+					ComboBox_ShowWarning.SelectedIndex = 1;
+				}
                 else
                 {
-                    ToggleSwitch_ShowWarning.IsOn = false;
-                }
+					ComboBox_ShowWarning.SelectedIndex = 0;
+				}
 
 
                 string AnalyseOptions = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxiniPath, "analyse_options");
                 if (AnalyseOptions.Contains("symlink"))
                 {
-                    ToggleSwitch_Symlink.IsOn = true;
+                    ComboBox_Symlink.SelectedIndex = 0;
                 }
                 else
                 {
-                    ToggleSwitch_Symlink.IsOn = false;
-                }
+					ComboBox_Symlink.SelectedIndex = 1;
+				}
 
-            }
+			}
 
 
             GameIconConfig gameIconConfig = new GameIconConfig();
@@ -567,66 +567,7 @@ namespace SSMT
 
 
 
-        private void ToggleSwitch_ShowWarning_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (IsLoading)
-            {
-                return;
-            }
 
-            if (ToggleSwitch_ShowWarning.IsOn)
-            {
-                D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI,"[Logging]", "show_warnings", "0");
-            }
-            else
-            {
-                D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[Logging]", "show_warnings", "1");
-            }
-        }
-
-
-      
-
-
-
-
-        private void ToggleSwitch_Symlink_Toggled(object sender, RoutedEventArgs e)
-        {
-            if (IsLoading)
-            {
-                return;
-            }
-
-            if (!File.Exists(PathManager.Path_D3DXINI))
-            {
-                _ = SSMTMessageHelper.Show("请先选择正确的3Dmigoto路径，确保d3dx.ini存在于当前选择的3Dmigoto路径下。");
-                return;
-            }
-
-            //设置symlink特性
-            string AnalyseOptions = D3dxIniConfig.ReadAttributeFromD3DXIni(PathManager.Path_D3DXINI, "analyse_options");
-            if (AnalyseOptions == "")
-            {
-                _ = SSMTMessageHelper.Show("当前3Dmigoto的d3dx.ini中暂未设置analyse_options，无法开启symlink特性");
-                return;
-            }
-
-            if (ToggleSwitch_Symlink.IsOn)
-            {
-                if (!AnalyseOptions.Contains("symlink"))
-                {
-                    D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[hunting]", "analyse_options", AnalyseOptions + " symlink");
-                }
-                _ = SSMTMessageHelper.Show("Symlink特性已开启，游戏中F10刷新即可生效");
-            }
-            else
-            {
-                AnalyseOptions = AnalyseOptions.Replace("symlink", " ");
-                D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[hunting]", "analyse_options", AnalyseOptions);
-                _ = SSMTMessageHelper.Show("Symlink特性已关闭，游戏中F10刷新即可生效");
-            }
-
-        }
 
 
         public void InstallBasicDllFileTo3DmigotoFolder()
@@ -989,6 +930,62 @@ namespace SSMT
 			GameConfig gameConfig = new GameConfig();
 			gameConfig.AutoSetAnalyseOptionsSelectedIndex = ComboBox_AutoSetAnalyseOptions.SelectedIndex;
 			gameConfig.SaveConfig();
+		}
+
+        private void ComboBox_Symlink_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+			if (IsLoading)
+			{
+				return;
+			}
+
+			if (!File.Exists(PathManager.Path_D3DXINI))
+			{
+				_ = SSMTMessageHelper.Show("请先选择正确的3Dmigoto路径，确保d3dx.ini存在于当前选择的3Dmigoto路径下。");
+				return;
+			}
+
+			//设置symlink特性
+			string AnalyseOptions = D3dxIniConfig.ReadAttributeFromD3DXIni(PathManager.Path_D3DXINI, "analyse_options");
+			if (AnalyseOptions == "")
+			{
+				_ = SSMTMessageHelper.Show("当前3Dmigoto的d3dx.ini中暂未设置analyse_options，无法开启symlink特性");
+				return;
+			}
+
+			if (ComboBox_Symlink.SelectedIndex == 0)
+			{
+				if (!AnalyseOptions.Contains("symlink"))
+				{
+					D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[hunting]", "analyse_options", AnalyseOptions + " symlink");
+				}
+				_ = SSMTMessageHelper.Show("Symlink特性已开启，游戏中F10刷新即可生效");
+			}
+			else
+			{
+				AnalyseOptions = AnalyseOptions.Replace("symlink", " ");
+				D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[hunting]", "analyse_options", AnalyseOptions);
+				_ = SSMTMessageHelper.Show("Symlink特性已关闭，游戏中F10刷新即可生效");
+			}
+		}
+
+        private void ComboBox_ShowWarning_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+			if (IsLoading)
+			{
+				return;
+			}
+
+			if (ComboBox_ShowWarning.SelectedIndex == 0)
+			{
+				D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[Logging]", "show_warnings", "1");
+                _ = SSMTMessageHelper.Show("启用成功，游戏中F10刷新即可生效","Enable Success, Press F10 in game to reload.");
+			}
+			else
+			{
+				D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[Logging]", "show_warnings", "0");
+				_ = SSMTMessageHelper.Show("关闭成功，游戏中F10刷新即可生效", "Disable Success, Press F10 in game to reload.");
+			}
 		}
     }
 }

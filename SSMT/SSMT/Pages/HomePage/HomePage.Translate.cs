@@ -65,18 +65,24 @@ namespace SSMT
 
                 TextBox_LaunchArgsPath.Header = "启动参数";
 
+                SettingsCard_SymlinkFeature.Header = "Symlink特性";
+                SettingsCard_SymlinkFeature.Description = "开启Symlink特性后，可以显著减少F8 Dump文件总大小，显著提升Dump速度，非特殊情况建议保持开启";
 
-                ToggleSwitch_Symlink.OnContent = "当前开启Symlink特性";
-                ToggleSwitch_Symlink.OffContent = "当前关闭Symlink特性";
+                ComboBox_Symlink_On.Content = "开启";
+                ComboBox_Symlink_Off.Content = "关闭";
 
-                SettingsCard_AutoSetAnalyseOptions.Header = "自动设置AnalyseOptions";
+
+                SettingsCard_AutoSetAnalyseOptions.Header = "自动设置analyse_options";
                 SettingsCard_AutoSetAnalyseOptions.Description = "在启动3Dmigoto之前，自动设置d3dx.ini中的analyse_options为deferred_ctx_immediate dump_rt dump_cb dump_vb dump_ib buf txt dds dump_tex dds";
 
                 ComboboxItem_AutoSetAnalyseOptions_AutoSet.Content = "自动重置";
                 ComboboxItem_AutoSetAnalyseOptions_DontSet.Content = "不进行重置";
 
-                ToggleSwitch_ShowWarning.OnContent = "当前隐藏左上角红字报错显示";
-                ToggleSwitch_ShowWarning.OffContent = "当前显示左上角红字报错";
+                SettingsCard_ShowWarnings.Header = "左上角红字报错显示";
+                SettingsCard_ShowWarnings.Description = "开启后将在游戏左上角显示3Dmigoto的红色报错信息，方便Mod作者调试和排查问题，仅使用Mod的Mod玩家用户推荐关闭";
+
+                ComboBoxItem_ShowWarning_On.Content = "启用";
+                ComboBoxItem_ShowWarning_Off.Content = "关闭";
 
 
 
@@ -156,9 +162,11 @@ namespace SSMT
 
                 TextBox_LaunchArgsPath.Header = "Launch Arguments";
 
+                SettingsCard_SymlinkFeature.Header = "Symlink Feature";
+                SettingsCard_SymlinkFeature.Description = "Open Symlink feature can make your F8 dump faster and total dump file size smaller";
 
-                ToggleSwitch_Symlink.OnContent = "Current Open And Use Symlink Feature";
-                ToggleSwitch_Symlink.OffContent = "Current Close And Not Use Symlink Feature";
+                ComboBox_Symlink_On.Content = "Enable";
+                ComboBox_Symlink_Off.Content = "Disable";
 
                 SettingsCard_AutoSetAnalyseOptions.Header = "Auto Set analyse_options";
                 SettingsCard_AutoSetAnalyseOptions.Description = "Auto Reset d3dx.ini's analyse_options to: deferred_ctx_immediate dump_rt dump_cb dump_vb dump_ib buf txt dds dump_tex dds";
@@ -167,8 +175,12 @@ namespace SSMT
                 ComboboxItem_AutoSetAnalyseOptions_AutoSet.Content = "Auto Reset analyse_options";
                 ComboboxItem_AutoSetAnalyseOptions_DontSet.Content = "Not Reset analyse_options";
 
-                ToggleSwitch_ShowWarning.OnContent = "Current Hide Top Left Red Warnings";
-                ToggleSwitch_ShowWarning.OffContent = "Current Show Top Left Red Warnings";
+                SettingsCard_ShowWarnings.Header = "Show Warnings";
+                SettingsCard_ShowWarnings.Description = "If Open, Top left conor will show mod's error info which can be used by mod author to fix mod, mod player does not need to open this";
+
+                ComboBoxItem_ShowWarning_On.Content = "Enable";
+                ComboBoxItem_ShowWarning_Off.Content = "Disable";
+
 
 
                 Button_Run3DmigotoLoader.Content = " Start 3Dmigoto";

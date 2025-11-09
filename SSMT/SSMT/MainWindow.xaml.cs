@@ -65,8 +65,6 @@ namespace SSMT
             //SSMT首先是一个生产力工具，其次才是一个炫酷的工具。
             //this.ExtendsContentIntoTitleBar = true;
 
-            //MainWindowImageBrushW = MainWindowImageBrush;
-
 
             // 1. 把窗口变成可以挂系统背景的目标
             var target = this.As<ICompositionSupportsSystemBackdrop>();
@@ -303,7 +301,21 @@ namespace SSMT
             GlobalConfig.WindowWidth = App.m_window.AppWindow.Size.Width;
             GlobalConfig.WindowHeight = App.m_window.AppWindow.Size.Height;
             GlobalConfig.SaveConfig();
-        }
+
+            //不释放资源就会出现那个0x0000005的内存访问异常
+            //但是没有任何文档对此有所说明
+            //可恶的WinUI3
+			try
+			{
+				_controller?.RemoveAllSystemBackdropTargets();
+				_controller?.Dispose();
+				_controller = null;
+			}
+			catch (Exception ex)
+			{
+				System.Diagnostics.Debug.WriteLine($"Backdrop cleanup failed: {ex}");
+			}
+		}
 
 
         private void nvSample_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)

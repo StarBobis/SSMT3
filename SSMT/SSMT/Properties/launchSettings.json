@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SSMT": {
+      "commandName": "Project",
+      "nativeDebugging": false
+    }
+  }
+}

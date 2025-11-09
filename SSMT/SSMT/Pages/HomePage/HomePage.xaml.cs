@@ -700,7 +700,6 @@ namespace SSMT
             {
                 if (!File.Exists(MigotoTarget46Dll)) {
 					File.Copy(MigotoSource46Dll, MigotoTarget46Dll, true);
-
 				}
 			}
         }

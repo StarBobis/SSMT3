@@ -75,7 +75,7 @@ namespace SSMT
 
                 
 
-				D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "target", gameConfig.TargetPath);
+				D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "target", target_path);
 
                 D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "launch", "");
                 //D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "launch_args", gameConfig.LaunchArgs);

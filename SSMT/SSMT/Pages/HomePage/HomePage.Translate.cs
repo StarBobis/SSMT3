@@ -65,8 +65,8 @@ namespace SSMT
 
                 TextBox_LaunchArgsPath.Header = "启动参数";
 
-                SettingsCard_SymlinkFeature.Header = "Symlink特性";
-                SettingsCard_SymlinkFeature.Description = "开启Symlink特性后，可以显著减少F8 Dump文件总大小，显著提升Dump速度，非特殊情况建议保持开启";
+                SettingsCard_SymlinkFeature.Header = "符号链接选项";
+                SettingsCard_SymlinkFeature.Description = "开启该选项后，可以显著减少F8得到的帧分析转储文件总大小，显著提升转储速度，非特殊情况建议保持开启。不过需要注意此时帧分析文件根目录 .\\FrameAnalysis 下的文件基本均为符号链接，指向去重文件目录 .\\FrameAnalysis\\Deduped 下的真正文件。";
 
                 ComboBox_Symlink_On.Content = "开启";
                 ComboBox_Symlink_Off.Content = "关闭";

@@ -1,6 +1,9 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using SharpCompress.Common;
+using SSMT_Core;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,17 +16,82 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using Windows.System;
 using WinRT.Interop;
-using Microsoft.UI.Xaml;
-using SSMT_Core;
 
 namespace SSMT
 {
     public class SSMTCommandHelper
     {
-      
 
-       
 
+        public static async Task LaunchSequentiallyAsync(List<string> programPaths)
+        {
+            if (programPaths == null || programPaths.Count == 0)
+                throw new ArgumentException("程序路径列表不能为空。", nameof(programPaths));
+
+            foreach (var path in programPaths)
+            {
+                bool started = false;
+                string processName = Path.GetFileNameWithoutExtension(path);
+                LOG.Info("Try Start: " + processName);
+                while (!started)
+                {
+                    try
+                    {
+                        var psi = new ProcessStartInfo
+                        {
+                            FileName = path,
+                            WorkingDirectory = Path.GetDirectoryName(path),
+                            UseShellExecute = true,
+                            Verb = "runas" // 触发 UAC 提权
+                        };
+
+                        // 尝试启动（会触发 UAC）
+                        Process.Start(psi);
+
+                        // 轮询检测程序是否真的启动
+                        for (int i = 0; i < 60; i++) // 最长等待约30秒
+                        {
+                            var running = Process.GetProcessesByName(processName);
+                            if (running.Any())
+                            {
+                                started = true;
+                                Debug.WriteLine($"✅ 检测到程序已启动: {path}");
+                                break;
+                            }
+
+                            await Task.Delay(500);
+                        }
+
+                        if (!started)
+                        {
+                            Debug.WriteLine($"⚠️ 启动超时或被取消: {path}");
+                            started = true; // 跳过继续下一个
+                        }
+
+                        await Task.Delay(1000); // 小延迟，避免并发启动
+                    }
+                    catch (System.ComponentModel.Win32Exception ex)
+                    {
+                        if (ex.NativeErrorCode == 1223)
+                        {
+                            // 用户拒绝 UAC
+                            Debug.WriteLine($"❌ 用户拒绝启动: {path}");
+                            started = true; // 跳过
+                        }
+                        else
+                        {
+                            Debug.WriteLine($"启动失败: {ex.Message}");
+                            await Task.Delay(1000);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"启动 {path} 失败: {ex}");
+                        await Task.Delay(1000);
+                    }
+                }
+            }
+        }
 
         public static void RunUPX(string arguments, bool ShowRunResultWindow = true, bool ShellExecute = false)
         {

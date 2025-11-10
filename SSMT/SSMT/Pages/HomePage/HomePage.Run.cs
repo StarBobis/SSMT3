@@ -89,6 +89,18 @@ namespace SSMT
 
                 await SSMTCommandHelper.ProcessRunFile(MigotoLoaderExePath);
 
+                //别动下面的代码，我还没写完，先去睡觉了，明天早上再写。
+                //List<string> RunFilePathList = new List<string>();
+
+                //RunFilePathList.Add(MigotoLoaderExePath);
+
+                //if (File.Exists(gameConfig.LaunchPath.Trim()))
+                //{
+                //    LOG.Info(gameConfig.LaunchPath + " 添加到启动列表");
+                //    RunFilePathList.Add(gameConfig.LaunchPath.Trim());
+                //}
+
+                //await SSMTCommandHelper.LaunchSequentiallyAsync(RunFilePathList);
 
             }
             catch (Exception ex)

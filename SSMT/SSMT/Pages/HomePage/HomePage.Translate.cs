@@ -86,11 +86,9 @@ namespace SSMT
 
 
 
-                Button_Run3DmigotoLoader.Content = " 启动3Dmigoto";
-                ToolTipService.SetToolTip(Button_Run3DmigotoLoader, "执行高级启动设置并运行3Dmigoto加载器");
 
                 Button_RunLaunchPath.Content = " 开始游戏";
-                ToolTipService.SetToolTip(Button_RunLaunchPath, "运行启动路径中填写的游戏进程路径");
+                ToolTipService.SetToolTip(Button_RunLaunchPath, "先进行一系列配置工作，然后运行3Dmigoto Loader，然后运行启动路径中填写的程序");
 
                 SettingsCard_DllInitializationDelay.Header = "d3d11.dll初始化延迟";
                 SettingsCard_DllInitializationDelay.Description = "d3d11.dll初始化时的延迟，单位为毫秒，一般WWMI填200，若仍然闪退则以每次100为单位增加此值直到不闪退，鸣潮在2.4版本更新后至少需要50ms的延迟以确保启动时不会闪退。此外，如果要让Reshade和3Dmigoto一起使用，至少需要150ms的延迟";
@@ -181,8 +179,6 @@ namespace SSMT
 
 
 
-                Button_Run3DmigotoLoader.Content = " Start 3Dmigoto";
-                Button_RunLaunchPath.Content = " Start Game";
 
                 SettingsCard_DllInitializationDelay.Header = "d3d11.dll Initialization Delay";
                 SettingsCard_DllInitializationDelay.Description = "Delay in milliseconds for DLL initialization. We'll go with 200ms for WWMI:\nWuthering Waves requires at least 50ms delay since 2.4 update to not crash on startup.\nAlso, to inject Reshade along with 3dmigoto, 150ms delay is required.";

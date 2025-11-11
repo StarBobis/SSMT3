@@ -530,67 +530,33 @@ The following sets the maximum # of items to show before wrapping.-->
                 Orientation="Vertical">
 
                 <StackPanel Orientation="Horizontal">
-
-                    <StackPanel Orientation="Vertical">
-                        <Grid>
-                            
-
-                            <Border
-                                CornerRadius="25"
-                                Width="Auto"
-                                Margin="5"
-                                BorderThickness="2"
-                                BorderBrush="White"
-                                >
-
-                                <Grid>
-                                    
-                                    <Button 
-                                        BorderThickness="0"
-                                        x:Name="Button_Run3DmigotoLoader" 
-                                        Width="200"
-                                        MinHeight="50"
-                                        FontSize="21"
-                                        FontWeight="Bold"
-                                        Click="Open3DmigotoLoaderExe"/>
-                                </Grid>
-
-                                
-                            </Border>
-                        </Grid>
-                        
-                        <Border
-                            CornerRadius="25"
-                            Width="Auto"
-                            Margin="5"
-                            BorderThickness="2"
-                            BorderBrush="White"
-                            >
-                            <Button 
-                                BorderThickness="0"
-                                x:Name="Button_RunLaunchPath" 
-                                Width="200"
-                                MinHeight="50"
-                                FontSize="21"
-                                FontWeight="Bold"
-                                Click="Button_RunLaunchPath_Click"
-                                HorizontalContentAlignment="Center"
-                                VerticalContentAlignment="Center"/>
-                        </Border>
-
-
-
-                    </StackPanel>
-
+                    <Border
+                        CornerRadius="25"
+                        Width="Auto"
+                        Margin="5"
+                        BorderThickness="2"
+                        BorderBrush="White"
+                        >
+                        <Button 
+                            BorderThickness="0"
+                            x:Name="Button_RunLaunchPath" 
+                            Width="200"
+                            MinHeight="50"
+                            FontSize="21"
+                            FontWeight="Bold"
+                            Click="Button_RunLaunchPath_Click"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"/>
+                    </Border>
 
                     <Button 
-                        VerticalAlignment="Bottom"
+                        VerticalAlignment="Center"
                             Margin="5"
                             x:Name="Button_ShowSetting"
                             Click="Button_ShowSetting_Click"
-                            CornerRadius="25,25,25,25"
-                            Width="45" 
-                            Height="45">
+                            CornerRadius="25"
+                            Width="50" 
+                            Height="50">
                         <SymbolIcon Symbol="Setting"/>
                     </Button>
 

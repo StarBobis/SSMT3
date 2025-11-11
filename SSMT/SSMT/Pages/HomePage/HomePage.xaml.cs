@@ -265,8 +265,7 @@ namespace SSMT
             }
 
 
-
-                InitializeToggleConfig();
+            InitializeToggleConfig();
 
             IsLoading = true;
 

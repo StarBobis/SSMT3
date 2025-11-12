@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using SharpCompress.Common;
 using SSMT_Core;
+using SSMT_Core.InfoClass;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,7 +22,94 @@ namespace SSMT
 {
     public class SSMTCommandHelper
     {
+        /// <summary>
+        /// V2版本使用RunInfo包裹运行参数
+        /// </summary>
+        /// <param name="programPaths"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        public static async Task LaunchSequentiallyAsyncV2(List<RunInfo> RunInfoList)
+        {
+            if (RunInfoList.Count == 0)
+            {
+                //因为必定会启动3Dmigoto，所以这里几乎不会被触发，但是嘛万一以后用来干别的呢，加个保险
+                return;
+            }
 
+                
+
+            foreach (RunInfo runInfo in RunInfoList)
+            {
+                bool started = false;
+                string processName = Path.GetFileNameWithoutExtension(runInfo.RunPath);
+                LOG.Info("Try Start: " + processName);
+
+                string StartDirectory = runInfo.RunLocation;
+                if (StartDirectory == "")
+                {
+                    StartDirectory = Path.GetDirectoryName(runInfo.RunPath);
+                }
+                
+
+                while (!started)
+                {
+                    try
+                    {
+                        var psi = new ProcessStartInfo
+                        {
+                            FileName = runInfo.RunPath,
+                            WorkingDirectory = StartDirectory,
+                            UseShellExecute = runInfo.UseShell,
+                            Verb = "runas" // 触发 UAC 提权
+                        };
+
+                        // 尝试启动（会触发 UAC）
+                        Process.Start(psi);
+
+                        // 轮询检测程序是否真的启动
+                        for (int i = 0; i < 60; i++) // 最长等待约30秒
+                        {
+                            var running = Process.GetProcessesByName(processName);
+                            if (running.Any())
+                            {
+                                started = true;
+                                Debug.WriteLine($"✅ 检测到程序已启动: {runInfo.RunPath}");
+                                break;
+                            }
+
+                            await Task.Delay(500);
+                        }
+
+                        if (!started)
+                        {
+                            Debug.WriteLine($"⚠️ 启动超时或被取消: {runInfo.RunPath}");
+                            started = true; // 跳过继续下一个
+                        }
+
+                        await Task.Delay(1000); // 小延迟，避免并发启动
+                    }
+                    catch (System.ComponentModel.Win32Exception ex)
+                    {
+                        if (ex.NativeErrorCode == 1223)
+                        {
+                            // 用户拒绝 UAC
+                            Debug.WriteLine($"❌ 用户拒绝启动: {runInfo.RunPath}");
+                            started = true; // 跳过
+                        }
+                        else
+                        {
+                            Debug.WriteLine($"启动失败: {ex.Message}");
+                            await Task.Delay(1000);
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine($"启动 {runInfo.RunPath} 失败: {ex}");
+                        await Task.Delay(1000);
+                    }
+                }
+            }
+        }
 
         public static async Task LaunchSequentiallyAsync(List<string> programPaths)
         {

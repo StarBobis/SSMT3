@@ -1,6 +1,7 @@
 ﻿using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using SSMT_Core;
+using SSMT_Core.InfoClass;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -98,18 +99,22 @@ namespace SSMT
 
                     //await SSMTCommandHelper.ProcessRunFile(MigotoLoaderExePath);
 
-                    List<string> RunFilePathList = new List<string>();
+                    List<RunInfo> RunFilePathList = new List<RunInfo>();
 
-                    RunFilePathList.Add(MigotoLoaderExePath);
+                    RunFilePathList.Add(new RunInfo { RunPath = MigotoLoaderExePath});
 
                     if (File.Exists(gameConfig.LaunchPath.Trim()))
                     {
                         LOG.Info(gameConfig.LaunchPath + " 添加到启动列表");
-                        RunFilePathList.Add(gameConfig.LaunchPath.Trim());
+                        RunFilePathList.Add(new RunInfo
+                        {
+                            RunPath = gameConfig.LaunchPath,
+                            RunWithArguments = gameConfig.LaunchArgs,
+                            UseShell = true
+                        });
                     }
 
-                    await SSMTCommandHelper.LaunchSequentiallyAsync(RunFilePathList);
-
+                    await SSMTCommandHelper.LaunchSequentiallyAsyncV2(RunFilePathList);
 
                     // 等待1秒后重新启用
                     await Task.Delay(3000);

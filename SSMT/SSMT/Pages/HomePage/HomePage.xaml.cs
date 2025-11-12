@@ -40,14 +40,10 @@ namespace SSMT
         private bool IsLoading = false;
 
 
-
-
         public HomePage()
         {
             this.InitializeComponent();
             this.Loaded += HomePageLoaded;
-
-            
         }
        
 

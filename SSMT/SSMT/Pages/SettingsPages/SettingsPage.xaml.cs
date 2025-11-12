@@ -73,6 +73,7 @@ namespace SSMT
                 GlobalConfig.ShowGameTypePage = ToggleSwitch_ShowGameTypePage.IsOn;
                 GlobalConfig.ShowModManagePage = ToggleSwitch_ShowModManagePage.IsOn;
                 GlobalConfig.ShowTextureToolBoxPage = ToggleSwitch_ShowTextureToolBoxPage.IsOn;
+                GlobalConfig.ComboBoxUseGithubTokenSelectedIndex = ComboBox_UseGithubToken.SelectedIndex;
 
                 GlobalConfig.SaveConfig();
             }
@@ -101,6 +102,7 @@ namespace SSMT
             ToggleSwitch_ShowGameTypePage.IsOn = GlobalConfig.ShowGameTypePage;
             ToggleSwitch_ShowModManagePage.IsOn = GlobalConfig.ShowModManagePage;
             ToggleSwitch_ShowTextureToolBoxPage.IsOn = GlobalConfig.ShowTextureToolBoxPage;
+            ComboBox_UseGithubToken.SelectedIndex = GlobalConfig.ComboBoxUseGithubTokenSelectedIndex;
 
             ReadOver = true;
         }
@@ -282,8 +284,13 @@ namespace SSMT
             if (ReadOver)
             {
                 SaveSettingsToConfig();
-                //Frame.Navigate(typeof(SettingsPage));
-                TranslatePage();
+
+                //这里必须触发重新访问，因为仅仅调用翻译的话，对于部分组件是有BUG的
+                //例如ComboBox的选项就不会被翻译，不信可以自己解开试试
+                //WinUI3基本上全是这种大大小小的坑
+                Frame.Navigate(typeof(SettingsPage));
+
+                //TranslatePage();
             }
         }
 
@@ -339,6 +346,17 @@ namespace SSMT
                 SaveSettingsToConfig();
 
                 MainWindow.CurrentWindow.SetTextureToolBoxPageVisibility(ToggleSwitch_ShowTextureToolBoxPage.IsOn);
+            }
+        }
+
+        private void ComboBox_UseGithubToken_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ReadOver)
+            {
+                SaveSettingsToConfig();
+
+                //然后让Token填写框显示出来
+
             }
         }
     }

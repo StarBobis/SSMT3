@@ -44,7 +44,9 @@ namespace SSMT
         /// </summary>
         public static bool ShowTextureToolBoxPage { get; set; } = false;
 
-     
+
+        //默认选中关闭，因为大部分人都不用Github Token，此选项只服务于少数需要用到的用户
+        public static int ComboBoxUseGithubTokenSelectedIndex { get; set; } = 1;
 
 
 
@@ -128,8 +130,14 @@ namespace SSMT
                     {
                         ShowTextureToolBoxPage = (bool)SettingsJsonObject["ShowTextureToolBoxPage"];
                     }
+
+                    //ComboBoxUseGithubTokenSelectedIndex
+                    if (SettingsJsonObject.ContainsKey("ComboBoxUseGithubTokenSelectedIndex"))
+                    {
+                        ComboBoxUseGithubTokenSelectedIndex = (int)SettingsJsonObject["ComboBoxUseGithubTokenSelectedIndex"];
+                    }
                 }
-                
+
 
             }
             catch (Exception ex) {
@@ -162,6 +170,7 @@ namespace SSMT
                 SettingsJsonObject["ShowGameTypePage"] = ShowGameTypePage;
                 SettingsJsonObject["ShowModManagePage"] = ShowModManagePage;
                 SettingsJsonObject["ShowTextureToolBoxPage"] = ShowTextureToolBoxPage;
+                SettingsJsonObject["ComboBoxUseGithubTokenSelectedIndex"] = ComboBoxUseGithubTokenSelectedIndex;
 
                 //写出内容
                 string WirteStirng = SettingsJsonObject.ToString();

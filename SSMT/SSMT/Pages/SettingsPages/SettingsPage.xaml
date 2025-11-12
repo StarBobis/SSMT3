@@ -170,6 +170,23 @@
 
 
                 </controls:SettingsCard>
+                
+                <!--这里先来一个普通的SettingsCard用来控制是否显示Github Token设置项-->
+                <controls:SettingsCard x:Name="SettingsCard_UseGithubToken">
+                    <!-- 这里换成你查到的编码 -->
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xf78d;" FontFamily="Segoe Fluent Icons"/>
+                    </controls:SettingsCard.HeaderIcon>
+
+                    <ComboBox x:Name="ComboBox_UseGithubToken" SelectionChanged="ComboBox_UseGithubToken_SelectionChanged">
+                        <ComboBoxItem x:Name="ComboBoxItem_UseGithubToken_Enable"></ComboBoxItem>
+                        <ComboBoxItem x:Name="ComboBoxItem_UseGithubToken_Disable"></ComboBoxItem>
+                    </ComboBox>
+                    
+
+                </controls:SettingsCard>
+
+
 
             </StackPanel>
         </ScrollViewer>

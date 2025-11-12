@@ -87,6 +87,12 @@ namespace SSMT
                 SettingsCard_Theme.Header = "主题颜色设置";
                 SettingsCard_Theme.Description = "设置SSMT的界面主题颜色，支持晨曦白和曜石黑两种主题颜色，推荐使用晨曦白";
 
+                SettingsCard_UseGithubToken.Header = "使用Github Token";
+                SettingsCard_UseGithubToken.Description = "在自动下载更新3Dmigoto包以及自动更新时，使用Github Token来访问Github以避免出现443、连接超时、目标计算机积极拒绝访问等问题";
+
+                ComboBoxItem_UseGithubToken_Enable.Content = "开启";
+                ComboBoxItem_UseGithubToken_Disable.Content = "关闭";
+            
             }
             else
             {
@@ -153,6 +159,11 @@ namespace SSMT
 
                 SettingsCard_LuminosityOpacity.Header = "Window Opacity Setting";
                 SettingsCard_LuminosityOpacity.Description = "The smaller the value, the more transparent the window looks cool; the larger the value, the more opaque the window looks heavy";
+
+                SettingsCard_UseGithubToken.Header = "Use Github Token";
+                SettingsCard_UseGithubToken.Description = "Use Github Token When Try To Download 3Dmigoto Package or Auto Update SSMT Version To Avoid Network Error";
+                ComboBoxItem_UseGithubToken_Enable.Content = "Enable";
+                ComboBoxItem_UseGithubToken_Disable.Content = "Disable";
 
             }
 

@@ -11,6 +11,7 @@ using Microsoft.UI.Xaml.Media.Imaging;
 using Newtonsoft.Json.Linq;
 using SSMT.SSMTHelper;
 using SSMT_Core;
+using SSMT_Core.InfoItemClass;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -35,8 +36,19 @@ namespace SSMT
     /// </summary>
     public sealed partial class HomePage : Page
     {
+        /// <summary>
+        /// 游戏图标列表
+        /// </summary>
         private ObservableCollection<GameIconItem> GameIconItemList = new ObservableCollection<GameIconItem>();
+
+        /// <summary>
+        /// 视觉效果组件
+        /// </summary>
         private Visual imageVisual;
+
+        /// <summary>
+        /// 用于控制当前状态是否处于读取配置过程中，以此防止内容改变时触发方法然后递归的改变。
+        /// </summary>
         private bool IsLoading = false;
 
 
@@ -66,158 +78,73 @@ namespace SSMT
 
             InitializeGameNameList();
 
-
-            
-
             GameNameChanged(GlobalConfig.CurrentGameName);
 
         }
 
-
-
-        private void InitializeGameIconItemList()
+        private void InitializeBackground()
         {
-            IsLoading = true;
-            //初始化图标列表
-            if (!Directory.Exists(PathManager.Path_GamesFolder))
-            {
-                return;
-            }
-
-            string[] GamesFolderList = Directory.GetDirectories(PathManager.Path_GamesFolder);
-
-            GameIconItemList.Clear();
-
-            foreach (string GameFolderPath in GamesFolderList)
-            {
-                string GameFolderName = Path.GetFileName(GameFolderPath);
-
-                GameIconConfig gameIconConfig = new GameIconConfig();
-
-                if (!gameIconConfig.GameName_Show_Dict.ContainsKey(GameFolderName))
-                {
-                    continue;
-                }
-
-                if (!gameIconConfig.GameName_Show_Dict[GameFolderName])
-                {
-                    continue;
-                }
-
-                GameIconItem gameIconItem = new GameIconItem();
-                gameIconItem.GameName = GameFolderName;
-                gameIconItem.GameIconImage = Path.Combine(PathManager.Path_GamesFolder, GameFolderName + "\\Icon.png");
-                GameIconItemList.Add(gameIconItem);
-            }
-
-            IsLoading = false;
-        }
-
-        private void InitializeGameTypeFolderList()
-        {
-            IsLoading = true;
-
-            ComboBox_GameTypeFolder.Items.Clear();
-
-            string[] GameTypeFolderPathList = Directory.GetDirectories (PathManager.Path_GameTypeConfigsFolder);
-
-            foreach (string GameTypeFolderPath in GameTypeFolderPathList)
-            {
-                string GameTypeFolderName = Path.GetFileName(GameTypeFolderPath);
-                ComboBox_GameTypeFolder.Items.Add(GameTypeFolderName);
-            }
-
-            IsLoading = false;
-        }
-
-
-        private void InitializeLogicNameList()
-        {
-            IsLoading = true;
-
-            ComboBox_LogicName.Items.Clear();
-
-            ComboBox_LogicName.Items.Add(LogicName.GIMI);
-            ComboBox_LogicName.Items.Add(LogicName.HIMI);
-            ComboBox_LogicName.Items.Add(LogicName.SRMI);
-            ComboBox_LogicName.Items.Add(LogicName.ZZMI);
-            ComboBox_LogicName.Items.Add(LogicName.WWMI);
-            ComboBox_LogicName.Items.Add(LogicName.UnityCPU);
-            ComboBox_LogicName.Items.Add(LogicName.CTXMC);
-            ComboBox_LogicName.Items.Add(LogicName.IdentityV2);
-            ComboBox_LogicName.Items.Add(LogicName.YYSLS);
-            ComboBox_LogicName.Items.Add(LogicName.AILIMIT);
-            ComboBox_LogicName.Items.Add(LogicName.UnityVS);
-            ComboBox_LogicName.Items.Add(LogicName.UnityCS);
-            ComboBox_LogicName.Items.Add(LogicName.SnowBreak);
-            ComboBox_LogicName.Items.Add(LogicName.HOK);
-            ComboBox_LogicName.Items.Add(LogicName.NierR);
-
-            IsLoading = false;
-        }
-
-     
-
-        private void GameNameChanged(string ChangeToGameName)
-        {
-			NotificationQueue.Clear();
-
-			GlobalConfig.CurrentGameName = ChangeToGameName;
-            GlobalConfig.SaveConfig();
-
-            string folder = PathManager.Path_CurrentGamesFolder;
-            string BackgroundWebpPath = Path.Combine(folder, "Background.webp");
-            string BackgroundPngPath = Path.Combine(folder, "Background.png");
-            string BackgroundMp4Path = Path.Combine(folder, "Background.mp4");
 
             // 默认：隐藏视频，清空图片
             if (BackgroundVideo != null)
             {
-                BackgroundVideo.Visibility = Visibility.Collapsed;
                 BackgroundVideo.SetMediaPlayer(null);
+                BackgroundVideo.Visibility = Visibility.Collapsed;
             }
+
+            //清空图片内容并且设置为不显示，防止上一个游戏切换过来时，
+            //由于缓存导致新切换到的游戏没有背景图时显示上一个游戏的背景图残留
             MainWindowImageBrush.Source = null;
+            MainWindowImageBrush.Visibility = Visibility.Collapsed;
 
-            // 优先级：mp4 > webp > png
-            if (File.Exists(BackgroundMp4Path))
+            //来一个支持的后缀名列表，然后依次判断
+            List<BackgroundSuffixItem> SuffixList = new List<BackgroundSuffixItem>();
+            SuffixList.Add(new BackgroundSuffixItem { Suffix = ".webm", IsVideo = true});
+            SuffixList.Add(new BackgroundSuffixItem { Suffix = ".mp4", IsVideo = true });
+            SuffixList.Add(new BackgroundSuffixItem { Suffix = ".webp", IsPicture = true });
+            SuffixList.Add(new BackgroundSuffixItem { Suffix = ".png", IsPicture = true });
+
+            //这里轮着试一遍所有的背景图类型，如果有的话就设置上了
+            //如果没有的话就保持刚开始初始化完那种没有的状态了
+            foreach (BackgroundSuffixItem SuffixItem in SuffixList)
             {
-                MainWindowImageBrush.Visibility = Visibility.Collapsed;
-                BackgroundVideo.Visibility = Visibility.Visible;
+                string BackgroundFilePath = Path.Combine(PathManager.Path_CurrentGamesFolder, "Background" + SuffixItem.Suffix);
 
-                var player = new MediaPlayer
+                if (!File.Exists(BackgroundFilePath))
                 {
-                    Source = MediaSource.CreateFromUri(new Uri(BackgroundMp4Path)),
-                    IsLoopingEnabled = true
-                };
-                BackgroundVideo.SetMediaPlayer(player);
-                player.Play();
+                    continue;
+                }
 
-                VisualHelper.CreateFadeAnimation(BackgroundVideo);
-            }
-            else if (File.Exists(BackgroundWebpPath))
-            {
-                BackgroundVideo.Visibility = Visibility.Collapsed;
-                MainWindowImageBrush.Visibility = Visibility.Visible;
+                if (SuffixItem.IsVideo)
+                {
+                    ShowBackgroundVideo(BackgroundFilePath);
+                    break;
+                }
+                else if (SuffixItem.IsPicture)
+                {
+                    ShowBackgroundPicture(BackgroundFilePath);
+                    break;
+                }
 
-                VisualHelper.CreateScaleAnimation(MainWindowImageBrush);
-                VisualHelper.CreateFadeAnimation(MainWindowImageBrush);
-                MainWindowImageBrush.Source = new BitmapImage(new Uri(BackgroundWebpPath));
             }
-            else if (File.Exists(BackgroundPngPath))
-            {
-                BackgroundVideo.Visibility = Visibility.Collapsed;
-                MainWindowImageBrush.Visibility = Visibility.Visible;
 
-                VisualHelper.CreateScaleAnimation(MainWindowImageBrush);
-                VisualHelper.CreateFadeAnimation(MainWindowImageBrush);
-                MainWindowImageBrush.Source = new BitmapImage(new Uri(BackgroundPngPath));
-            }
-            else
-            {
-                // 没有任何背景文件时
-                BackgroundVideo.Visibility = Visibility.Collapsed;
-                MainWindowImageBrush.Source = null;
-            }
+
+            
+        }
+
+
+
+        private void GameNameChanged(string ChangeToGameName)
+        {
+            //清楚顶部InfoBar内容
+			NotificationQueue.Clear();
+
+            //游戏名称改到目标游戏名称，然后保存配置，这样Blender插件就能实时同步知道游戏发生了变化
+			GlobalConfig.CurrentGameName = ChangeToGameName;
+            GlobalConfig.SaveConfig();
+
+            //根据当前游戏，初始化背景图或者背景视频
+            InitializeBackground();
 
 
             InitializePanel();
@@ -493,36 +420,7 @@ namespace SSMT
 
 
 
-        private void InitializeGameNameList()
-        {
-            if (!Directory.Exists(PathManager.Path_GamesFolder))
-            {
-                return;
-            }
-
-            string[] GamesFolderList = Directory.GetDirectories(PathManager.Path_GamesFolder);
-
-            ComboBox_GameName.Items.Clear();
-
-            foreach (string GameFolderPath in GamesFolderList)
-            {
-                string GameFolderName = Path.GetFileName(GameFolderPath);
-
-                ComboBox_GameName.Items.Add(GameFolderName);
-            }
-
-            if (ComboBox_GameName.Items.Contains(GlobalConfig.CurrentGameName))
-            {
-                ComboBox_GameName.SelectedItem = GlobalConfig.CurrentGameName;
-            }
-            else
-            {
-                if (ComboBox_GameName.Items.Count > 0)
-                {
-                    ComboBox_GameName.SelectedIndex = 0;
-                }
-            }
-        }
+        
 
 
 

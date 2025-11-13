@@ -145,7 +145,7 @@ The following sets the maximum # of items to show before wrapping.-->
             Grid.ColumnSpan="2"
             VerticalAlignment="Top"
             HorizontalAlignment="Center"
-            Margin="5"
+            Margin="50"
             >
             <interactivity:Interaction.Behaviors>
                 <behaviors:StackedNotificationsBehavior x:Name="NotificationQueue" />

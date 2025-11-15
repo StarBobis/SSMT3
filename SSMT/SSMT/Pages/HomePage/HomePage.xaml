@@ -591,6 +591,25 @@ The following sets the maximum # of items to show before wrapping.-->
                         >
                         <Button 
                             BorderThickness="0"
+                            x:Name="Button_RunLaunchPath_Without3DM" 
+                            Width="200"
+                            MinHeight="50"
+                            FontSize="21"
+                            FontWeight="Bold"
+                            Click="Button_RunLaunchPath_Without3DM_Click"
+                            HorizontalContentAlignment="Center"
+                            VerticalContentAlignment="Center"/>
+                    </Border>
+
+                    <Border
+                        CornerRadius="25"
+                        Width="Auto"
+                        Margin="5"
+                        BorderThickness="2"
+                        BorderBrush="White"
+                        >
+                        <Button 
+                            BorderThickness="0"
                             x:Name="Button_RunLaunchPath" 
                             Width="200"
                             MinHeight="50"

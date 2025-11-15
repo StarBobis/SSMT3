@@ -23,8 +23,8 @@
 
         <!-- 顶部菜单 -->
         <MenuBar Grid.Row="0"
-                Grid.Column="0"
-                Margin="10,5,0,0">
+                 Grid.Column="0"
+                 Margin="10,5,0,0">
             <MenuBarItem
                 x:Name="Menu_File">
                 <!--<MenuFlyoutItem 
@@ -65,29 +65,30 @@
                         </Grid.ColumnDefinitions>
 
                         <Image Grid.Row="0"
-                                Grid.Column="0"
-                                Source="{Binding ImageSource}"
-                                Stretch="UniformToFill"
-                                Height="125"
-                                Width="125"/>
+                               Grid.Column="0"
+                               Source="{Binding ImageSource}"
+                               Stretch="UniformToFill"
+                               Height="125"
+                               Width="125"/>
 
                         <StackPanel Grid.Row="0"
-                                Grid.Column="1"
-                                Orientation="Vertical">
+                                    Grid.Column="1"
+                                    Orientation="Vertical">
                             <TextBlock Text="{Binding FileName}"
-                                    VerticalAlignment="Center"
-                                    Margin="10,10,0,0"/>
+                                       VerticalAlignment="Center"
+                                       Margin="10,10,0,0"/>
                             <TextBlock Text="{Binding InfoBar}"
-                                    VerticalAlignment="Center"
-                                    Margin="10,10,0,0"/>
+                                       VerticalAlignment="Center"
+                                       Margin="10,10,0,0"/>
                             <TextBlock VerticalAlignment="Center"
-                                    Margin="10,10,0,0">
+                                       Margin="10,10,0,0">
                                 <Run Text="MarkName:"/>
                                 <Run Text="{Binding MarkName}"/>
                             </TextBlock>
                             <TextBlock VerticalAlignment="Center"
-                                    Margin="10,10,0,0">
-                                <Run Text="AutoTexture Style:"/>
+                                       Margin="10,10,0,0">
+                                <Run
+                                    x:Name="AutoTexture_Style"/>
                                 <Run Text="{Binding MarkStyle}"/>
                             </TextBlock>
                         </StackPanel>
@@ -107,23 +108,23 @@
                 Orientation="Vertical">
 
                 <ComboBox CornerRadius="15,15,15,15"
-                        x:Name="ComboBoxDrawIB"
-                        Header="DrawIB"
-                        Width="200"
-                        Margin="5"
-                        SelectionChanged="ComboBoxDrawIB_SelectionChanged"/>
+                          x:Name="ComboBoxDrawIB"
+                          Header="DrawIB"
+                          Width="200"
+                          Margin="5"
+                          SelectionChanged="ComboBoxDrawIB_SelectionChanged"/>
                 <ComboBox CornerRadius="15,15,15,15"
-                        x:Name="ComboBoxComponent"
-                        Header="Component"
-                        Width="200"
-                        Margin="5"
-                        SelectionChanged="ComboBoxComponent_SelectionChanged"/>
+                          x:Name="ComboBoxComponent"
+                          Header="Component"
+                          Width="200"
+                          Margin="5"
+                          SelectionChanged="ComboBoxComponent_SelectionChanged"/>
                 <ComboBox CornerRadius="15,15,15,15"
-                        x:Name="ComboBoxDrawCall"
-                        Header="DrawCall"
-                        Width="200"
-                        Margin="5"
-                        SelectionChanged="ComboBoxDrawCall_SelectionChanged"/>
+                          x:Name="ComboBoxDrawCall"
+                          Header="DrawCall"
+                          Width="200"
+                          Margin="5"
+                          SelectionChanged="ComboBoxDrawCall_SelectionChanged"/>
 
                 <MenuFlyoutSeparator></MenuFlyoutSeparator>
 
@@ -135,8 +136,9 @@
                             Visibility="Collapsed">
                 </ComboBox>
 
-                <StackPanel Orientation="Vertical" Margin="5">
-                    <TextBlock x:Name ="Text_Block_MarkName" 
+                <StackPanel Orientation="Vertical"
+                        Margin="5">
+                    <TextBlock x:Name="Text_Block_MarkName"
                                Margin="0,0,0,8"
                                Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
                     <Border Background="Transparent"
@@ -146,10 +148,10 @@
                             Padding="1">
 
                         <StackPanel>
-                            <ListBox x:Name="ZZMI_MenuListBox" 
-                                 Background="Transparent"
-                                 ItemContainerStyle="{StaticResource NoSelectionListBoxItemStyle}"
-                                 Tapped="OnMenuTapped">
+                            <ListBox x:Name="ZZMI_MenuListBox"
+                                     Background="Transparent"
+                                     ItemContainerStyle="{StaticResource NoSelectionListBoxItemStyle}"
+                                     Tapped="OnMenuTapped">
                                 <ListBoxItem Tag="DiffuseMap">
                                     <TextBlock Text="DiffuseMap"/>
                                 </ListBoxItem>
@@ -167,10 +169,10 @@
                                 </ListBoxItem>
                             </ListBox>
 
-                            <ListBox x:Name="Default_MenuListBox" 
-                                 Background="Transparent"
-                                 ItemContainerStyle="{StaticResource NoSelectionListBoxItemStyle}"
-                                 Tapped="OnMenuTapped">
+                            <ListBox x:Name="Default_MenuListBox"
+                                     Background="Transparent"
+                                     ItemContainerStyle="{StaticResource NoSelectionListBoxItemStyle}"
+                                     Tapped="OnMenuTapped">
                                 <ListBoxItem Tag="DiffuseMap">
                                     <TextBlock Text="DiffuseMap"/>
                                 </ListBoxItem>

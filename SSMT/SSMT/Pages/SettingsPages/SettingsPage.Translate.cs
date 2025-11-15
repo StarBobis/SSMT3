@@ -117,7 +117,7 @@ namespace SSMT
                 ToggleSwitch_Chinese.OffContent = "English(en-US)";
 
 
-               
+
 
                 TextBlock_About.Text = "About";
 

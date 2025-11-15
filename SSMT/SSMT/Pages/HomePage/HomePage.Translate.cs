@@ -84,8 +84,8 @@ namespace SSMT
 
                 TextBox_LaunchArgsPath.Header = "启动参数";
 
-                SettingsCard_SymlinkFeature.Header = "Symlink特性";
-                SettingsCard_SymlinkFeature.Description = "开启Symlink特性后，可以显著减少F8 Dump文件总大小，显著提升Dump速度，非特殊情况建议保持开启";
+                SettingsCard_SymlinkFeature.Header = "符号链接选项";
+                SettingsCard_SymlinkFeature.Description = "开启该选项后，可以显著减少F8得到的帧分析转储文件总大小，显著提升转储速度，非特殊情况建议保持开启。不过需要注意此时帧分析文件根目录 .\\FrameAnalysis 下的文件基本均为符号链接，指向去重文件目录 .\\FrameAnalysis\\Deduped 下的真正文件。";
 
                 ComboBox_Symlink_On.Content = "开启";
                 ComboBox_Symlink_Off.Content = "关闭";
@@ -108,6 +108,10 @@ namespace SSMT
 
                 Button_RunLaunchPath.Content = " 开始游戏";
                 ToolTipService.SetToolTip(Button_RunLaunchPath, "先进行一系列配置工作，然后运行3Dmigoto Loader，然后运行启动路径中填写的程序");
+
+                Button_RunLaunchPath_Without3DM.Content = "仅启动游戏";
+                ToolTipService.SetToolTip(Button_RunLaunchPath_Without3DM, "直接运行启动路径中填写的程序, 不启动3DMigoto Loader");
+
 
                 SettingsCard_DllInitializationDelay.Header = "d3d11.dll初始化延迟";
                 SettingsCard_DllInitializationDelay.Description = "d3d11.dll初始化时的延迟，单位为毫秒，一般WWMI填200，若仍然闪退则以每次100为单位增加此值直到不闪退，鸣潮在2.4版本更新后至少需要50ms的延迟以确保启动时不会闪退。此外，如果要让Reshade和3Dmigoto一起使用，至少需要150ms的延迟";
@@ -247,6 +251,9 @@ namespace SSMT
                 SettingsCard_RunIgnoreGIError40.Header = "Network Protect Plugin";
 
                 Button_RunLaunchPath.Content = " Start Game";
+
+                Button_RunLaunchPath_Without3DM.Content = "Only Start Game";
+                ToolTipService.SetToolTip(Button_RunLaunchPath_Without3DM, "Only Launch Program wroten in Launch Path, without Launching 3DMigoto Loader");
 
             }
         }

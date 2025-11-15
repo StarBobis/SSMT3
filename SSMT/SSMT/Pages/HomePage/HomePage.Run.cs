@@ -15,7 +15,7 @@ namespace SSMT
     public partial class HomePage
     {
 
-        
+
 
         private async void Button_RunLaunchPath_Click(object sender, RoutedEventArgs e)
         {
@@ -101,7 +101,7 @@ namespace SSMT
 
                     List<RunInfo> RunFilePathList = new List<RunInfo>();
 
-                    RunFilePathList.Add(new RunInfo { RunPath = MigotoLoaderExePath});
+                    RunFilePathList.Add(new RunInfo { RunPath = MigotoLoaderExePath });
 
                     if (File.Exists(gameConfig.LaunchPath.Trim()))
                     {
@@ -132,9 +132,66 @@ namespace SSMT
                 }
             }
 
-            
-            
+
+
         }
+
+        private async void Button_RunLaunchPath_Without3DM_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is Button button)
+            {
+                try
+                {
+                    // 禁用按钮，防止重复点击
+                    button.IsEnabled = false;
+
+                    GameConfig gameConfig = new GameConfig();
+
+                    string launchPath = gameConfig.LaunchPath;
+
+                    if (string.IsNullOrWhiteSpace(launchPath))
+                    {
+                        _ = SSMTMessageHelper.Show("请先填写启动路径", "Please set your target path before start");
+                        return;
+                    }
+
+                    if (!File.Exists(launchPath))
+                    {
+                        _ = SSMTMessageHelper.Show("启动路径指向的文件不存在");
+                        return;
+                    }
+
+                    // 准备启动信息
+                    List<RunInfo> runList = new List<RunInfo>();
+
+                    runList.Add(new RunInfo
+                    {
+                        RunPath = launchPath,
+                        RunWithArguments = gameConfig.LaunchArgs,
+                        UseShell = true
+                    });
+
+                    LOG.Info(launchPath + " (仅启动游戏模式) 添加到启动列表");
+
+                    // 启动（这里使用和上面一样的统一流程）
+                    await SSMTCommandHelper.LaunchSequentiallyAsyncV2(runList);
+
+                    // 等待一会再启用按钮
+                    await Task.Delay(3000);
+                }
+                catch (Exception ex)
+                {
+                    button.IsEnabled = true;
+                    _ = SSMTMessageHelper.Show(ex.ToString());
+                }
+                finally
+                {
+                    // 确保按钮恢复
+                    button.IsEnabled = true;
+                }
+            }
+        }
+
 
     }
 }

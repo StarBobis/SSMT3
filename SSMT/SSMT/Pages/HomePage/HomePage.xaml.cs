@@ -433,16 +433,16 @@ namespace SSMT
             }
             
         }
-   
-
-    
 
 
 
 
 
 
-        public void InstallBasicDllFileTo3DmigotoFolder()
+
+
+
+        public async void InstallBasicDllFileTo3DmigotoFolder()
         {
             //默认路径
             string MigotoFolder = Path.Combine(GlobalConfig.SSMTCacheFolderPath, "3Dmigoto\\");
@@ -468,27 +468,61 @@ namespace SSMT
 
             string MigotoSource47Dll = Path.Combine(PathManager.Path_AssetsFolder, "d3dcompiler_47.dll");
             string MigotoTarget47Dll = Path.Combine(CurrentGame3DmigotoFolder, "d3dcompiler_47.dll");
-			string MigotoSource46Dll = Path.Combine(PathManager.Path_AssetsFolder, "d3dcompiler_46.dll");
-			string MigotoTarget46Dll = Path.Combine(CurrentGame3DmigotoFolder, "d3dcompiler_46.dll");
+            string MigotoSource46Dll = Path.Combine(PathManager.Path_AssetsFolder, "d3dcompiler_46.dll");
+            string MigotoTarget46Dll = Path.Combine(CurrentGame3DmigotoFolder, "d3dcompiler_46.dll");
 
-			//文件不存在时才复制过去，不然他娘滴这个文件经常被占用，然后SSMT就会复制失败闪退
-			if (File.Exists(MigotoSource47Dll) )
+            try
             {
-                if (!File.Exists(MigotoTarget47Dll)) {
-                    File.Copy(MigotoSource47Dll, MigotoTarget47Dll, true);
-				}
+                string targetDll = File.Exists(MigotoSource47Dll) ? MigotoTarget47Dll : MigotoTarget46Dll;
+                string sourceDll = File.Exists(MigotoSource47Dll) ? MigotoSource47Dll : MigotoSource46Dll;
 
-			}
-            else if(File.Exists(MigotoSource46Dll))
+                // 检查文件是否被占用
+                if (File.Exists(targetDll))
+                {
+                    var lockingProcesses = FileLockHelper.GetLockingProcesses(targetDll);
+                    if (lockingProcesses.Count > 0)
+                    {
+                        string list = string.Join("\r\n", lockingProcesses.ConvertAll(p => $"{p.ProcessName} (PID: {p.Id})"));
+                        bool kill = await SSMTMessageHelper.ShowConfirm(
+                            $"检测到以下进程正在占用 {Path.GetFileName(targetDll)}：\r\n\r\n{list}\r\n\r\n是否结束这些进程并重试？");
+
+                        if (kill)
+                        {
+                            foreach (var p in lockingProcesses)
+                            {
+                                try
+                                {
+                                    if (p.Id != Process.GetCurrentProcess().Id)
+                                        p.Kill();
+                                }
+                                catch { /* 忽略无权限或系统进程 */ }
+                            }
+
+                            await Task.Delay(1500); // 等待释放句柄
+                        }
+                        else
+                        {
+                            _ = SSMTMessageHelper.Show("用户取消了更新操作，未替换被占用的文件。");
+                            return;
+                        }
+                    }
+                }
+
+                // 文件不存在或已解锁后执行复制
+                if (!File.Exists(targetDll) || new FileInfo(sourceDll).Length != new FileInfo(targetDll).Length)
+                {
+                    File.Copy(sourceDll, targetDll, true);
+                }
+            }
+            catch (Exception ex)
             {
-                if (!File.Exists(MigotoTarget46Dll)) {
-					File.Copy(MigotoSource46Dll, MigotoTarget46Dll, true);
-				}
-			}
+                _ = SSMTMessageHelper.Show($"复制 3Dmigoto 运行库时出错：\r\n{ex}");
+            }
         }
 
 
-    
+
+
         private void Button_ShowSetting_Click(object sender, RoutedEventArgs e)
         {
             if (Border_GameConfig.Visibility == Visibility.Collapsed)
@@ -848,5 +882,7 @@ namespace SSMT
 				_ = SSMTMessageHelper.Show("关闭成功，游戏中F10刷新即可生效", "Disable Success, Press F10 in game to reload.");
 			}
 		}
+
+        
     }
 }

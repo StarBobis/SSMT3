@@ -74,7 +74,7 @@ namespace SSMT
 
 
                 //主要内容
-                TextBlock_DrawIBList.Text = "DrawIB列表";
+                TextBlock_DrawIBList.Text = "绘制IB hash列表";
                 ToolTipService.SetToolTip(TextBlock_DrawIBList, "SSMT使用IB提取模型，DrawIB顾名思义就是当前帧用于绘制指定内容的IndexBuffer，一般为Hunting界面小键盘7和8选择隐藏的部位，小键盘9复制出来的IndexBuffer的Hash值");
 
                 Menu_DeleteDrawIBLine.Text = "删除选中行";
@@ -88,7 +88,7 @@ namespace SSMT
                 Button_AutoDetectGameTypeDrawIBList.Content = "检测选定数据类型的DrawIB列表";
                 ToolTipService.SetToolTip(Button_AutoDetectGameTypeDrawIBList, "目前仅ZZZ可用，一般用于那些频繁走动的NPC很难找DrawIB的情况。");
 
-                TextBlock_SkipIBList.Text = "SkipIB列表";
+                TextBlock_SkipIBList.Text = "跳过IB hash列表";
                 ToolTipService.SetToolTip(TextBlock_SkipIBList, "一般用于生成指定IB的handling = skip，方便快速查看指定IB隐藏后的效果");
                 Menu_DeleteSkipIBLine.Text = "删除选中行";
                 DataGridTextColumn_SkipIBList_SkipIB.Header = "隐藏IB值";
@@ -103,7 +103,7 @@ namespace SSMT
 
                 Menu_DeleteVSCheckLine.Text = "删除选中行";
                 DataGridCheckBoxColumn_VSCheckList_Enable.Header = "启用";
-                DataGridTextColumn_VSCheckList_VSHash.Header = "顶点Shader Hash值";
+                DataGridTextColumn_VSCheckList_VSHash.Header = "顶点着色器 Hash值";
 
                 Button_ClearVSCheckList.Content = "清空当前VSCheck列表内容";
                 Button_UpdateVSCheckList.Content = "更新VSCheck列表";

@@ -107,7 +107,7 @@ namespace SSMT
 
 
                 Button_RunLaunchPath.Content = " 开始游戏";
-                ToolTipService.SetToolTip(Button_RunLaunchPath, "先进行一系列配置工作，然后运行3Dmigoto Loader，然后运行启动路径中填写的程序");
+                ToolTipService.SetToolTip(Button_RunLaunchPath, "先进行一系列配置工作，然后运行3Dmigoto Loader，然后运行启动路径中填写的程序\n注入失败？请检查：设置→隐私和安全性→Windows 安全中心→应用和浏览器控制→基于声誉的保护设置");
 
                 //Button_RunLaunchPath_Without3DM.Content = "仅启动游戏";
                 //ToolTipService.SetToolTip(Button_RunLaunchPath_Without3DM, "直接运行启动路径中填写的程序, 不启动3DMigoto Loader");

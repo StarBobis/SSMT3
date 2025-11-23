@@ -368,28 +368,6 @@ namespace SSMT
         }
         
 
-        private void Button_MarkTexture_Click(object sender, RoutedEventArgs e)
-        {
-            // 获取选中的项
-            int selectedIndex = ImageListView.SelectedIndex;
-
-            if (selectedIndex < 0)
-            {
-                _ = SSMTMessageHelper.Show("请先选中要标记的贴图","Please select a texture");
-                return;
-            }
-
-            ImageItem selected_item = imageCollection[selectedIndex];
-
-            selected_item.MarkName = ComboBox_MarkName.SelectedItem.ToString();
-
-            imageCollection[selectedIndex] = selected_item;
-
-            ImageListView.SelectedIndex = selectedIndex;
-
-            //每次标记完自动保存配置
-            SaveCurrentTextureConfig();
-        }
 
         private void Button_CancelMarkTexture_Click(object sender, RoutedEventArgs e)
         {
@@ -414,28 +392,20 @@ namespace SSMT
 
         }
 
-        private void Button_ApplyToAutoTexture_Click(object sender, RoutedEventArgs e)
+        private void ApplyToAutoTexture()
         {
-
             SaveCurrentTextureConfig();
 
             //获取DrawIB 和 ComponentName
             string DrawIB = ComboBoxDrawIB.SelectedItem.ToString();
             string ComponentName = ComboBoxComponent.SelectedItem.ToString();
-            
+
             string TextureConfigName = GetCurrentPSValue();
-            if (TextureConfigName.Trim() == "")
-            {
-                _ = SSMTMessageHelper.Show("请至少选择一个贴图配置");
-                return;
-            }
 
             try
             {
-
                 //应用标记的贴图
                 TextureConfig.ApplyTextureConfig(imageCollection.ToList(), DrawIB, ComponentName);
-
             }
             catch (Exception ex)
             {
@@ -443,9 +413,10 @@ namespace SSMT
             }
 
 
-            _ = SSMTMessageHelper.Show("应用成功","Apply Texture Success!");
+            _ = SSMTMessageHelper.Show("应用成功", "Apply Texture Success!");
         }
 
+    
         private void Menu_OpenCurrentWorkSpaceFolder_Click(object sender, RoutedEventArgs e)
         {
             SSMTCommandHelper.ShellOpenFolder(PathManager.Path_CurrentWorkSpaceFolder);
@@ -557,6 +528,11 @@ namespace SSMT
             ImageListView.SelectedIndex = selectedIndex;
 
             SaveCurrentTextureConfig();
+
+            if (selected_item.MarkName != "")
+            {
+                ApplyToAutoTexture();
+            }
         }
 
         private void Button_MarkAutoTextureSlotStyle_Click(object sender, RoutedEventArgs e)
@@ -579,6 +555,11 @@ namespace SSMT
             ImageListView.SelectedIndex = selectedIndex;
 
             SaveCurrentTextureConfig();
+
+            if (selected_item.MarkName != "")
+            {
+                ApplyToAutoTexture();
+            }
         }
 
         private async void Menu_SeeDDSInfo_Click(object sender, RoutedEventArgs e)
@@ -632,6 +613,11 @@ namespace SSMT
 
             //每次标记完自动保存配置
             SaveCurrentTextureConfig();
+
+            if (selected_item.MarkName != "")
+            {
+                ApplyToAutoTexture();
+            }
         }
 
    
@@ -682,7 +668,10 @@ namespace SSMT
             ImageListView.SelectedIndex = selectedIndex;
 
             //每次标记完自动保存配置
-            SaveCurrentTextureConfig();
+            //应用到自动贴图会自动调用，无需重复调用
+            //SaveCurrentTextureConfig();
+
+            ApplyToAutoTexture();
         }
     }
 }

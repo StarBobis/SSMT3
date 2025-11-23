@@ -201,13 +201,7 @@
                         </StackPanel>
                     </Border>
                 </StackPanel>
-                <Button
-                    Style="{StaticResource AccentButtonStyle}"
-                    x:Name="Button_MarkTexture"
-                    Margin="5"
-                    Click="Button_MarkTexture_Click"
-                    Visibility="Collapsed">
-                </Button>
+               
 
                 <TextBox
                     HorizontalAlignment="Left"
@@ -233,12 +227,7 @@
                     x:Name="Button_MarkAutoTextureHashStyle"
                     Margin="5"
                     Click="Button_MarkAutoTextureHashStyle_Click"></Button>
-                <Button
-                    Style="{StaticResource AccentButtonStyle}"
-                    x:Name="Button_ApplyToAutoTexture"
-                    Margin="5"
-                    Click="Button_ApplyToAutoTexture_Click">
-                </Button>
+          
                 <Button
                     x:Name="Button_CancelAutoTextureForCurrentDrawIB"
                     Margin="5"

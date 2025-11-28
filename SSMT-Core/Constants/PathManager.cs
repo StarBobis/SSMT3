@@ -1,4 +1,4 @@
-﻿using SSMT;
+using SSMT;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -381,6 +381,9 @@ namespace SSMT_Core
             }
         }
 
-
+        public static string Path_TextToolBoxConfig
+        {
+            get { return Path.Combine(Path_SSMT3GlobalConfigsFolder, "TextToolBoxConfig.json"); }
+        }
     }
 }

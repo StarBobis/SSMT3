@@ -1,13 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Page
-    x:Class="SSMT.TextureToolBoxPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:SSMT"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="Transparent">
+ x:Class="SSMT.TextureToolBoxPage"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ xmlns:local="using:SSMT"
+ xmlns:behaviorsLocal="using:SSMT.Behaviors"
+ xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+ xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+ mc:Ignorable="d"
+ Background="Transparent">
 
     <ScrollViewer>
 
@@ -25,52 +26,72 @@
 
                 <StackPanel Orientation="Vertical">
 
-                    <TextBox 
+                    <TextBox
                         Margin="5"
                         x:Name="TextBox_OriginalTextureFile"
                         Header="原始贴图文件"
-                        ></TextBox>
+                        AllowDrop="True"
+                        Text="{Binding SelectedTextureFilePath, Mode=TwoWay}"
+                        behaviorsLocal:DragDropBehavior.DropCommand="{Binding TextureFileDroppedCommand}"
+                        behaviorsLocal:DragDropBehavior.FileExtensions=".dds" />
 
-                    <Button 
+                    <Button
                         Margin="5"
-                        x:Name="Button_ChooseOriginalTextureFile" 
-                        Content="选择贴图文件"/>
+                        x:Name="Button_ChooseOriginalTextureFile"
+                        Command="{Binding ChooseOriginalTextureFileCommand}"
+                        Content="选择贴图文件" />
 
+                    <TextBox
+ Margin="5"
+ x:Name="TextBox_VideoFile"
+ Header="视频文件"
+ AllowDrop="True"
+ Text="{Binding SelectedVideoFilePath, Mode=TwoWay}"
+ behaviorsLocal:DragDropBehavior.DropCommand="{Binding VideoFileDroppedCommand}"
+ behaviorsLocal:DragDropBehavior.FileExtensions=".mp4,.avi,.mov,.mkv,.flv,.webm,.wmv,.gif" />
 
-                    <TextBox 
-                        Margin="5"
-                        x:Name="TextBox_VideoFile"
-                        Header="视频文件"
-                        ></TextBox>
+                    <Button
+ Margin="5"
+ x:Name="Button_ChooseVideoFile"
+ Command="{Binding ChooseVideoFileCommand}"
+ Content="选择视频文件" />
 
-                    <Button 
-                        Margin="5"
-                        x:Name="Button_ChooseVideoFile" 
-                        Content="选择视频文件"/>
+                    <TextBox
+ Margin="5"
+ x:Name="TextBox_DynamicTextureModGenerateFolder"
+ Header="动态贴图Mod生成的文件夹位置"
+ Text="{Binding DynamicTextureModGenerateFolderPath, Mode=TwoWay}" />
 
-                    <TextBox 
-                        Margin="5"
-                        x:Name="TextBox_DynamicTextureModGenerateFolder"
-                        Header="动态贴图Mod生成的文件夹位置"
-                        ></TextBox>
+                    <Button
+ Margin="5"
+ x:Name="Button_ChooseDynamicTextureModGenerateFolder"
+ Command="{Binding ChooseDynamicTextureModGenerateFolderCommand}"
+ Content="选择文件夹" />
 
-                    <Button 
-                        Margin="5"
-                        x:Name="Button_ChooseDynamicTextureModGenerateFolder" 
-                        Content="选择文件夹"/>
+                    <ComboBox
+ Margin="5"
+ x:Name="ComboBox_FpsOption"
+ Header="选择FPS选项"
+ ItemsSource="{Binding FpsOptions}"
+ SelectedItem="{Binding SelectedFpsOption, Mode=TwoWay}">
+ <ComboBox.ItemTemplate>
+ <DataTemplate>
+ <TextBlock Text="{Binding Converter={StaticResource FpsOptionToTextConverter}}" />
+ </DataTemplate>
+ </ComboBox.ItemTemplate>
+ </ComboBox>
 
-                    <Button 
-                        Margin="5"
-                        Style="{StaticResource AccentButtonStyle}"
-                        x:Name="Button_GenerateDynamicTextureMod" 
-                        Content="生成动态贴图Mod"></Button>
-
-                    
+                    <Button
+ Margin="5"
+ Style="{StaticResource AccentButtonStyle}"
+ x:Name="Button_GenerateDynamicTextureMod"
+ Command="{Binding GenerateDynamicTextureModCommand}"
+ Content="生成动态贴图Mod" />
 
                 </StackPanel>
             </Expander>
-            
+
         </StackPanel>
     </ScrollViewer>
-   
+
 </Page>

@@ -1,0 +1,46 @@
+root = true
+
+# General
+[*]
+charset = utf-8
+end_of_line = crlf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 4
+tab_width = 4
+
+# C# files
+[*.cs]
+dotnet_sort_system_directives_first = true
+csharp_indent_case_contents = true
+csharp_indent_switch_labels = true
+csharp_new_line_before_open_brace = all
+csharp_preserve_single_line_blocks = false
+
+# XAML: use 4 spaces for XAML
+[*.xaml]
+indent_style = space
+indent_size = 4
+trim_trailing_whitespace = false
+
+# XML files (e.g. csproj)
+[*.{xml,csproj,props,targets}]
+indent_style = space
+indent_size = 2
+
+# JSON
+[*.json]
+indent_style = space
+indent_size = 2
+
+# C / C++
+[*.{c,cpp,h,hpp,cc}]
+indent_style = space
+indent_size = 4
+
+# Markdown
+[*.md]
+trim_trailing_whitespace = false
+indent_style = space
+indent_size = 2

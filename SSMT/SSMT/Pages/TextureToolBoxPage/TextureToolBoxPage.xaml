@@ -19,198 +19,53 @@
                 IsExpanded="True">
                 <Expander.Header>
                     <StackPanel Margin="10">
-                        <TextBlock Text="动态贴图Mod制作" FontSize="14" FontWeight="Bold" ToolTipService.ToolTip="通过PR将视频转为一个包含png图片的文件夹，使用下面的功能制作为动态贴图Mod" />
+                        <TextBlock Text="动态贴图Mod制作" FontSize="14" FontWeight="Bold" />
                     </StackPanel>
                 </Expander.Header>
 
                 <StackPanel Orientation="Vertical">
-                    <!-- 第1行：动态贴图文件夹 -->
-                    <StackPanel  Orientation="Horizontal" Margin="10,10,10,10">
-                        <TextBlock x:Name="TextBlock_DynamicTextureFolderPath" Text="动态贴图文件夹:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <TextBox x:Name="TextBox_DynamicTextureFolderPath" Width="500"/>
-
-                        <Button VerticalAlignment="Center" HorizontalAlignment="Right"  Margin="10,0,0,0" 
-x:Name="Button_ChooseDynamicTextureFolderPath" Click="Button_ChooseDynamicTextureFolderPath_Click">
-                            <StackPanel Orientation="Horizontal">
-                                <SymbolIcon Symbol="OpenLocal" />
-                                <TextBlock x:Name="TextBlock_ChooseDynamicTextureFolder" Text=" 选择文件夹" VerticalAlignment="Center"  />
-                            </StackPanel>
-                        </Button>
-
-                    </StackPanel>
-
-                    <!-- 第2行：按钮 -->
-
-                    <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                        <TextBlock x:Name="TextBlock_DynamicTextureName" Text="贴图文件名前缀:" VerticalAlignment="Center" Margin="0,0,10,0"/>
-                        <TextBox x:Name="TextBox_DynamicTextureName" Width="200"/>
-
-                        <TextBlock x:Name="TextBlock_DynamicTextureHash" Text="贴图Hash值:" VerticalAlignment="Center" Margin="20,0,10,0"/>
-                        <TextBox x:Name="TextBox_DynamicTextureHash" Width="120"/>
-
-                        <TextBlock x:Name="TextBlock_DynamicTextureSuffix" Text="贴图文件名后缀" VerticalAlignment="Center" Margin="20,0,10,0">
-                        </TextBlock>
-                        <TextBox x:Name="TextBox_DynamicTextureSuffix" Text=".png" Width="120"/>
-
-                    </StackPanel>
-
-                    <StackPanel 
-                        Orientation="Horizontal" 
-                        Margin="10,10,10,10">
-                        <Button 
-                            x:Name="Button_GenerateDynamicTextureMod" 
-                            Content="生成动态贴图Mod" 
-                            Click="Button_GenerateDynamicTextureMod_Click"
-                            VerticalAlignment="Center" 
-                            HorizontalAlignment="Right"  
-                            Margin="0,0,10,10"/>
-                    </StackPanel>
-                </StackPanel>
-            </Expander>
-            
-            <!--转换贴图为.dds格式-->
-            <Expander
-                HorizontalContentAlignment="Stretch"
-                HorizontalAlignment="Stretch"
-                IsExpanded="True">
-                <Expander.Header>
-                    <StackPanel Margin="10">
-                        <TextBlock 
-                            Text="批量转换贴图格式为.dds贴图" 
-                            FontSize="14" 
-                            FontWeight="Bold" />
-                    </StackPanel>
-                </Expander.Header>
-
-                <StackPanel Orientation="Vertical">
-                    <TextBox 
-                        Margin="5"
-                        HorizontalAlignment="Stretch"
-                        Header="源文件夹"
-                        x:Name="TextBox_SourcePictureFolderPath"/>
-
-                    <StackPanel Orientation="Horizontal">
-                        <Button 
-                            x:Name="Button_ChososeSourcePictureFolderPath"
-                            Margin="5"
-                            Style="{StaticResource AccentButtonStyle}"
-                            Content="选择源文件夹"></Button>
-                        <Button 
-                            x:Name="Button_OpenSourcePictureFolderPath"
-                            Margin="5"
-                            Content="打开源文件夹"></Button>
-                    </StackPanel>
-                    
 
                     <TextBox 
                         Margin="5"
-                        Header="目标文件夹"
-                        x:Name="TextBox_TargetPictureFolderPath"/>
+                        x:Name="TextBox_OriginalTextureFile"
+                        Header="原始贴图文件"
+                        ></TextBox>
 
-                    <StackPanel Orientation="Horizontal">
-                        <Button 
-                            Style="{StaticResource AccentButtonStyle}"
-                            x:Name="Button_ChososeTargetPictureFolderPath"
-                            Margin="5"
-                            Content="选择目标文件夹"></Button>
-                        
-                        <Button 
-                            x:Name="Button_OpenTargetPictureFolderPath"
-                            Margin="5"
-                            Content="打开目标文件夹"></Button>
-                        
-                        <Button 
-                            x:Name="Button_CleanTargetPictureFolderPath"
-                            Margin="5"
-                            Content="清空目标文件夹"></Button>
-                    </StackPanel>
-
-                    <ComboBox
-                        Margin="5"
-                        HorizontalAlignment="Stretch"
-                        Header="源贴图文件格式"
-                        x:Name="ComboBox_SourcePictureFileFormat"
-                        >
-                   
-                    </ComboBox>
-
-
-                    <ComboBox 
-                        Margin="5"
-                        HorizontalAlignment="Stretch"
-                        Header="目标.dds具体格式"
-                        x:Name="FormatComboBox" 
-                        SelectedIndex="0"/>
-
-
-                    <ComboBox 
-                        Header="Mipmap选项"
-                        HorizontalAlignment="Stretch"
-                        Margin="5"
-                        x:Name="MipmapComboBox" SelectedIndex="1">
-                        <ComboBoxItem Content="无Mipmap"/>
-                        <ComboBoxItem Content="生成Mipmap"/>
-                        <ComboBoxItem Content="自定义Mipmap数量"/>
-                    </ComboBox>
-
-                    
-                      
-                    <NumberBox 
-                        HorizontalAlignment="Stretch"
-                        Header="Mipmap数量"
-                        x:Name="NumberBox_MipCount" 
-                        Value="10" 
-                        Minimum="1" 
-                        Maximum="20" 
-                        Margin="5" 
-                        />
-                    
-                                
-                         
-
-                    <ComboBox 
-                        Margin="5"
-                        HorizontalAlignment="Stretch"
-                        Header="Alpha模式"
-                        x:Name="AlphaModeComboBox" SelectedIndex="0">
-                        <ComboBoxItem Content="自动检测"/>
-                        <ComboBoxItem Content="Straight Alpha"/>
-                        <ComboBoxItem Content="Premultiplied Alpha"/>
-                        <ComboBoxItem Content="不透明"/>
-                    </ComboBox>
-
-                    <CheckBox 
-                        x:Name="FastCheckBox" 
-                        Content="快速编码" 
-                        Margin="5" 
-                        ToolTipService.ToolTip="降低质量以提高编码速度"/>
-                    <CheckBox 
-                        x:Name="SeamlessCubemapCheckBox" 
-                        Content="无缝立方体贴图" 
-                        Margin="5"/>
-                    <CheckBox 
-                        x:Name="WicCheckBox" 
-                        Content="使用WIC" 
-                        Margin="5" 
-                        ToolTipService.ToolTip="使用Windows图像组件"/>
-                    <CheckBox 
-                        x:Name="Dx10HeaderCheckBox" 
-                        Content="使用DX10头部" 
-                        Margin="5" 
-                        IsChecked="True"/>
-                    <CheckBox 
-                        Margin="5"
-                        x:Name="SrgbCheckBox" 
-                        Content="sRGB颜色空间" />
-
-
-                    <!-- 转换按钮 -->
                     <Button 
+                        Margin="5"
+                        x:Name="Button_ChooseOriginalTextureFile" 
+                        Content="选择贴图文件"/>
+
+
+                    <TextBox 
+                        Margin="5"
+                        x:Name="TextBox_VideoFile"
+                        Header="视频文件"
+                        ></TextBox>
+
+                    <Button 
+                        Margin="5"
+                        x:Name="Button_ChooseVideoFile" 
+                        Content="选择视频文件"/>
+
+                    <TextBox 
+                        Margin="5"
+                        x:Name="TextBox_DynamicTextureModGenerateFolder"
+                        Header="动态贴图Mod生成的文件夹位置"
+                        ></TextBox>
+
+                    <Button 
+                        Margin="5"
+                        x:Name="Button_ChooseDynamicTextureModGenerateFolder" 
+                        Content="选择文件夹"/>
+
+                    <Button 
+                        Margin="5"
                         Style="{StaticResource AccentButtonStyle}"
-                        x:Name="ConvertBtn" 
-                        Content="开始转换" 
-                        FontWeight="Bold" 
-                        Margin="5"/>
+                        x:Name="Button_GenerateDynamicTextureMod" 
+                        Content="生成动态贴图Mod"></Button>
+
+                    
 
                 </StackPanel>
             </Expander>

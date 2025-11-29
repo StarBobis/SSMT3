@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.WinUI.Animations;
+using CommunityToolkit.WinUI.Animations;
 using DirectXTexNet;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -413,7 +413,7 @@ namespace SSMT
             }
 
 
-            _ = SSMTMessageHelper.Show("应用成功", "Apply Texture Success!");
+            //_ = SSMTMessageHelper.Show("应用成功", "Apply Texture Success!");
         }
 
     

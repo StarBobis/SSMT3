@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="SSMT.HomePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -37,33 +37,6 @@
             <ColumnDefinition Width="0.7*"/>
             <ColumnDefinition Width="0.3*"/>
         </Grid.ColumnDefinitions>
-
-        <!-- 背景视频 --><!--
-        <MediaPlayerElement 
-            x:Name="BackgroundVideo"
-            Grid.ColumnSpan="2"
-            Grid.RowSpan="2"
-            AreTransportControlsEnabled="False"
-            AutoPlay="False"
-            IsHitTestVisible="False"
-            Stretch="UniformToFill"
-            Visibility="Collapsed" />
-
-        --><!-- 背景图片 --><!--
-        <Image 
-            HorizontalAlignment="Right"
-            RenderTransformOrigin="0.5,0.5"
-            Grid.ColumnSpan="2"
-            Grid.RowSpan="2"
-            x:Name="MainWindowImageBrush"  
-            Stretch="UniformToFill" >
-            <Image.RenderTransform>
-                <ScaleTransform />
-            </Image.RenderTransform>
-        </Image>-->
-
-      
-
 
 
         <!--游戏图标列表-->
@@ -272,12 +245,6 @@ The following sets the maximum # of items to show before wrapping.-->
                         </StackPanel>
                     </Expander>
 
-
-
-                    
-
-                   
-                   
                     <Expander
                         HorizontalContentAlignment="Stretch"
                         HorizontalAlignment="Stretch"
@@ -318,6 +285,13 @@ The following sets the maximum # of items to show before wrapping.-->
                             
                             
                             <StackPanel Orientation="Horizontal">
+                                <ComboBox 
+                                    Margin="5"
+                                    SelectionChanged="ComboBox_MigotoPackage_SelectionChanged"
+                                    x:Name="ComboBox_MigotoPackage">
+                                </ComboBox>
+                                
+                                
                                 <Button 
                                     Margin="5"
                                     Style="{StaticResource AccentButtonStyle}"

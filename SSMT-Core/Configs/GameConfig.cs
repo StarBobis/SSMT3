@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,6 +10,18 @@ using SSMT_Core;
 
 namespace SSMT
 {
+
+    public class MigotoPackageName
+    {
+        public static string GIMIPackage { get; set; } = "GIMI-Package";
+        public static string HIMIPackage { get; set; } = "HIMI-Package";
+        public static string SRMIPackage { get; set; } = "SRMI-Package";
+        public static string ZZMIPackage { get; set; } = "ZZMI-Package";
+        public static string WWMIPackage { get; set; } = "WWMI-Package";
+        public static string MinBasePackage { get; set; } = "MinBase-Package";
+        public static string NBPPackage { get; set; } = "NBP-Package";
+    }
+
     public class LogicName
     {
         public static string UnityVS { get; set; } = "UnityVS";
@@ -48,6 +60,7 @@ namespace SSMT
         public string LogicName { get; set; } = "GIMI";
 
         public string GameTypeName { get; set; } = "GIMI";
+        public string MigotoPackage { get; set; } = "GIMI-Package";
 
 
 
@@ -89,6 +102,13 @@ namespace SSMT
 
                     string LaunchArgs = jobj["LaunchArgs"]?.ToString() ?? "";
                     this.LaunchArgs = LaunchArgs;
+                }
+
+                //MigotoPackage
+                if (jobj.ContainsKey("MigotoPackage"))
+                {
+                    string MigotoPackage = jobj["MigotoPackage"]?.ToString() ?? "";
+                    this.MigotoPackage = MigotoPackage;
                 }
 
                 //TargetPath
@@ -223,6 +243,7 @@ namespace SSMT
             jobj["LaunchPath"] = this.LaunchPath;
             jobj["LaunchArgs"] = this.LaunchArgs;
             jobj["WorkSpace"] = this.WorkSpace;
+            jobj["MigotoPackage"] = this.MigotoPackage;
 
             jobj["LogicName"] = this.LogicName;
             jobj["GameTypeName"] = this.GameTypeName;

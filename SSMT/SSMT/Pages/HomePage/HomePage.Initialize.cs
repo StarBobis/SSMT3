@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using SSMT_Core;
 using SSMT_Core.InfoItemClass;
 using System;
@@ -142,9 +142,24 @@ namespace SSMT
             }
         }
 
-        
 
 
+        private void InitializeMigotoPackageList()
+        {
+
+            IsLoading = true;
+            ComboBox_MigotoPackage.Items.Clear();
+
+            ComboBox_MigotoPackage.Items.Add(MigotoPackageName.GIMIPackage);
+            ComboBox_MigotoPackage.Items.Add(MigotoPackageName.HIMIPackage);
+            ComboBox_MigotoPackage.Items.Add(MigotoPackageName.SRMIPackage);
+            ComboBox_MigotoPackage.Items.Add(MigotoPackageName.ZZMIPackage);
+            ComboBox_MigotoPackage.Items.Add(MigotoPackageName.MinBasePackage);
+            ComboBox_MigotoPackage.Items.Add(MigotoPackageName.NBPPackage);
+
+            ComboBox_MigotoPackage.SelectedIndex = 0;
+            IsLoading = false;
+        }
 
 
 

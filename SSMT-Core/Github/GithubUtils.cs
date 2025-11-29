@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -32,37 +32,35 @@ namespace SSMT
         {
 
             RepositoryInfo repositoryInfo = new RepositoryInfo();
+            repositoryInfo.RepositoryName = PackageName;
 
-            if (PackageName == LogicName.UnityVS || PackageName == LogicName.GIMI || PackageName == LogicName.UnityCPU)
+            if (PackageName == MigotoPackageName.GIMIPackage)
             {
                 repositoryInfo.OwnerName = "SilentNightSound";
-                repositoryInfo.RepositoryName = "GIMI-Package";
             }
-            else if (PackageName == LogicName.SRMI)
+            else if (PackageName == MigotoPackageName.SRMIPackage)
             {
                 repositoryInfo.OwnerName = "SpectrumQT";
-                repositoryInfo.RepositoryName = "SRMI-Package";
             }
-            else if (PackageName == LogicName.ZZMI)
+            else if (PackageName == MigotoPackageName.ZZMIPackage)
             {
                 repositoryInfo.OwnerName = "leotorrez";
-                repositoryInfo.RepositoryName = "ZZMI-Package";
             }
-            else if (PackageName == LogicName.HIMI)
+            else if (PackageName == MigotoPackageName.HIMIPackage)
             {
                 repositoryInfo.OwnerName = "leotorrez";
-                repositoryInfo.RepositoryName = "HIMI-Package";
             }
-            else if (PackageName == LogicName.WWMI)
+            else if (PackageName == MigotoPackageName.WWMIPackage)
             {
                 repositoryInfo.OwnerName = "SpectrumQT";
-                repositoryInfo.RepositoryName = "WWMI-Package";
             }
-            else
+            else if (PackageName == MigotoPackageName.NBPPackage)
             {
-                //如果没有提前预设的话，就提供默认的MinBase-Package
                 repositoryInfo.OwnerName = "StarBobis";
-                repositoryInfo.RepositoryName = "MinBase-Package";
+            }
+            else if (PackageName == MigotoPackageName.MinBasePackage)
+            {
+                repositoryInfo.OwnerName = "StarBobis";
             }
 
             return repositoryInfo;

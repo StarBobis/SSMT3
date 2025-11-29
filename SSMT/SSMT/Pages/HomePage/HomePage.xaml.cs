@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.WinUI.Behaviors;
+using CommunityToolkit.WinUI.Behaviors;
 using Microsoft.Graphics.Canvas.Brushes;
 using Microsoft.Graphics.Canvas.UI.Xaml;
 using Microsoft.UI;
@@ -73,10 +73,13 @@ namespace SSMT
 
             InitializeGameNameList();
 
+            InitializeMigotoPackageList();
+
             GameNameChanged(GlobalConfig.CurrentGameName);
         }
 
-   
+       
+
 
         private async void GameNameChanged(string ChangeToGameName)
         {
@@ -165,6 +168,7 @@ namespace SSMT
             ComboBox_DllPreProcess.SelectedIndex = gameConfig.DllPreProcessSelectedIndex;
             ComboBox_DllReplace.SelectedIndex = gameConfig.DllReplaceSelectedIndex;
             ComboBox_AutoSetAnalyseOptions.SelectedIndex = gameConfig.AutoSetAnalyseOptionsSelectedIndex;
+            ComboBox_MigotoPackage.SelectedItem = gameConfig.MigotoPackage;
 
 
             //是否显示防报错按钮
@@ -232,7 +236,7 @@ namespace SSMT
         {
             GameConfig gameConfig = new GameConfig();
             //设置左上角Package版本
-            string PackageName = ComboBox_LogicName.SelectedItem.ToString();
+            string PackageName = ComboBox_MigotoPackage.SelectedItem.ToString();
             RepositoryInfo repositoryInfo = GithubUtils.GetCurrentRepositoryInfo(PackageName);
             HyperlinkButton_MigotoPackageVersion.Content = repositoryInfo.RepositoryName + " " + gameConfig.GithubPackageVersion;
             var url = $"https://github.com/{repositoryInfo.OwnerName}/{repositoryInfo.RepositoryName}/releases/latest";
@@ -810,5 +814,21 @@ namespace SSMT
             gameConfig.PureGameMode = ToggleSwitch_PureGameMode.IsOn;
             gameConfig.SaveConfig();
         }
+
+        private void ComboBox_MigotoPackage_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsLoading)
+            {
+                return;
+            }
+
+            GameConfig gameConfig = new GameConfig();
+            gameConfig.MigotoPackage = ComboBox_MigotoPackage.SelectedItem.ToString();
+            gameConfig.SaveConfig();
+        }
+
+
+
+
     }
 }

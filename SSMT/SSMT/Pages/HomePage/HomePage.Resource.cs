@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media.Imaging;
 using SSMT_Core;
 using SSMT_Core.Utils;
@@ -32,7 +32,7 @@ namespace SSMT
 
                 ProgressRing_PackageUpdateRing.IsActive = true;
 
-                string PackageName = ComboBox_LogicName.SelectedItem.ToString();
+                string PackageName = ComboBox_MigotoPackage.SelectedItem.ToString();
                 RepositoryInfo repositoryInfo = GithubUtils.GetCurrentRepositoryInfo(PackageName);
 
                 if (repositoryInfo.OwnerName == "")

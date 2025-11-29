@@ -154,6 +154,7 @@ namespace SSMT
             ComboBox_MigotoPackage.Items.Add(MigotoPackageName.HIMIPackage);
             ComboBox_MigotoPackage.Items.Add(MigotoPackageName.SRMIPackage);
             ComboBox_MigotoPackage.Items.Add(MigotoPackageName.ZZMIPackage);
+            ComboBox_MigotoPackage.Items.Add(MigotoPackageName.WWMIPackage);
             ComboBox_MigotoPackage.Items.Add(MigotoPackageName.MinBasePackage);
             ComboBox_MigotoPackage.Items.Add(MigotoPackageName.NBPPackage);
 

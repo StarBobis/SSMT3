@@ -43,26 +43,6 @@ namespace SSMT
 
             GameConfig gameConfig = new GameConfig();
 
-            //if (gameConfig.LogicName == LogicName.ZZMI)
-            //{
-            //    ComboBox_MarkName.Items.Add("DiffuseMap");
-            //    ComboBox_MarkName.Items.Add("NormalMap");
-            //    ComboBox_MarkName.Items.Add("MaterialMap");
-            //    ComboBox_MarkName.Items.Add("LightMap");
-            //    ComboBox_MarkName.Items.Add("StockingMap");
-            //}
-            //else
-            //{
-            //    ComboBox_MarkName.Items.Add("DiffuseMap");
-            //    ComboBox_MarkName.Items.Add("NormalMap");
-            //    ComboBox_MarkName.Items.Add("LightMap");
-            //    ComboBox_MarkName.Items.Add("HighLightMap");
-            //    ComboBox_MarkName.Items.Add("RampMap");
-            //    ComboBox_MarkName.Items.Add("MaterialMap");
-            //    ComboBox_MarkName.Items.Add("StockingMap");
-            //    ComboBox_MarkName.Items.Add("NightSoulMap");
-
-            //}
 
             if (gameConfig.LogicName == LogicName.ZZMI)
             {

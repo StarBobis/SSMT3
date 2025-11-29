@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="SSMT.TexturePage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -158,11 +158,11 @@
                                 <ListBoxItem Tag="NormalMap">
                                     <TextBlock Text="NormalMap"/>
                                 </ListBoxItem>
-                                <ListBoxItem Tag="MaterialMap">
-                                    <TextBlock Text="MaterialMap"/>
-                                </ListBoxItem>
                                 <ListBoxItem Tag="LightMap">
                                     <TextBlock Text="LightMap"/>
+                                </ListBoxItem>
+                                <ListBoxItem Tag="MaterialMap">
+                                    <TextBlock Text="MaterialMap"/>
                                 </ListBoxItem>
                                 <ListBoxItem Tag="StockingMap">
                                     <TextBlock Text="StockingMap"/>

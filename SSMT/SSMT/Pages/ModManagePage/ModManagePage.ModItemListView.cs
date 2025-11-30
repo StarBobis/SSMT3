@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.UI.Xaml.Media.Imaging;
@@ -701,9 +701,27 @@ namespace SSMT
                 }
 
 
-                List<string> imageFiles = Directory.GetFiles(imageFolderPath)
-                    .Where(file => DBMTStringUtils.IsImageFilePath(file))
-                    .ToList();
+                List<string> imageFiles = new List<string>();
+                try
+                {
+                    //递归获取所有子目录中的图片文件，防止遗漏
+                    imageFiles = Directory.GetFiles(imageFolderPath, "*.*", SearchOption.AllDirectories)
+                        .Where(file => DBMTStringUtils.IsImageFilePath(file))
+                        .ToList();
+                }
+                catch (UnauthorizedAccessException)
+                {
+                    // 跳过无法访问的目录
+                    LOG.Info("LoadDirectoryPicturesToFlipView: skipped directories due to access restrictions.");
+                }
+                catch (PathTooLongException)
+                {
+                    LOG.Info("LoadDirectoryPicturesToFlipView: skipped files due to path too long.");
+                }
+                catch (Exception ex)
+                {
+                    LOG.Info("LoadDirectoryPicturesToFlipView error: " + ex.Message);
+                }
 
                 // 创建 BitmapImage 列表
                 var imageSources = new List<BitmapImage>();

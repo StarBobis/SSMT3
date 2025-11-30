@@ -10,7 +10,7 @@ namespace SSMT_Core
     {
         public static string analyse_options = "deferred_ctx_immediate dump_rt dump_cb dump_vb dump_ib buf txt dds dump_tex dds";
 
-        public static string SSMT_Version = "V3.1.4";
+        public static string SSMT_Version = "V3.1.6";
 
         public static string SSMT_Title = "SSMT " + SSMT_Version;
         

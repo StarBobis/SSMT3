@@ -242,6 +242,20 @@ The following sets the maximum # of items to show before wrapping.-->
                             </controls:SettingsCard>
 
 
+
+                            <controls:SettingsCard  x:Name="SettingsCard_PureGameMode">
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xe790;" FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
+                                <ToggleSwitch x:Name="ToggleSwitch_PureGameMode" Toggled="ToggleSwitch_PureGameMode_Toggled"></ToggleSwitch>
+
+
+                            </controls:SettingsCard>
+
+
+
                         </StackPanel>
                     </Expander>
 
@@ -568,17 +582,6 @@ The following sets the maximum # of items to show before wrapping.-->
 
 
 
-                            <controls:SettingsCard  x:Name="SettingsCard_PureGameMode">
-                                <!-- 这里换成你查到的编码 -->
-                                <controls:SettingsCard.HeaderIcon>
-                                    <FontIcon Glyph="&#xe790;" FontFamily="Segoe Fluent Icons"/>
-                                </controls:SettingsCard.HeaderIcon>
-
-                                <ToggleSwitch x:Name="ToggleSwitch_PureGameMode" Toggled="ToggleSwitch_PureGameMode_Toggled"></ToggleSwitch>
-
-
-                            </controls:SettingsCard>
-                            
                             
                         </StackPanel>
                     </Expander>

@@ -209,7 +209,7 @@ namespace SSMT_Core
 
         public static string Path_GamesFolder
         {
-            get { return Path.Combine(GlobalConfig.SSMTCacheFolderPath, "Games\\"); }
+            get { return Path.Combine(PathManager.Path_SSMT3GlobalConfigsFolder, "Games\\"); }
         }
 
         public static string Path_CurrentGamesFolder

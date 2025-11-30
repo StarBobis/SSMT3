@@ -603,11 +603,6 @@ namespace SSMT
 
    
 
-        private void ColorListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
         private void OnMenuTapped(object sender, TappedRoutedEventArgs e)
         {
             if (sender is ListBox listBox && listBox.SelectedItem is ListBoxItem selectedItem)
@@ -653,6 +648,60 @@ namespace SSMT
             //SaveCurrentTextureConfig();
 
             ApplyToAutoTexture();
+        }
+
+        private async void Menu_MarkAllHashStyle_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (imageCollection.Count ==0)
+                {
+                    _ = SSMTMessageHelper.Show("没有可标记的贴图", "No textures to mark");
+                    return;
+                }
+
+                for (int i =0; i < imageCollection.Count; i++)
+                {
+                    var item = imageCollection[i];
+                    item.MarkStyle = "Hash";
+                    imageCollection[i] = item;
+                }
+
+                SaveCurrentTextureConfig();
+                ApplyToAutoTexture();
+                _ = SSMTMessageHelper.Show("已将所有贴图标记为Hash风格", "All textures marked as Hash style");
+            }
+            catch (Exception ex)
+            {
+                _ = SSMTMessageHelper.Show(ex.ToString());
+            }
+        }
+
+        private async void Menu_MarkAllSlotStyle_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                if (imageCollection.Count ==0)
+                {
+                    _ = SSMTMessageHelper.Show("没有可标记的贴图", "No textures to mark");
+                    return;
+                }
+
+                for (int i =0; i < imageCollection.Count; i++)
+                {
+                    var item = imageCollection[i];
+                    item.MarkStyle = "Slot";
+                    imageCollection[i] = item;
+                }
+
+                SaveCurrentTextureConfig();
+                ApplyToAutoTexture();
+                _ = SSMTMessageHelper.Show("已将所有贴图标记为Slot风格", "All textures marked as Slot style");
+            }
+            catch (Exception ex)
+            {
+                _ = SSMTMessageHelper.Show(ex.ToString());
+            }
         }
     }
 }

@@ -143,6 +143,11 @@ namespace SSMT
 
             //读取LogicName
             GameConfig gameConfig = new GameConfig();
+
+            //Nico: 切换游戏时，要更新当前的工作空间，这样跳转到其他页面时才能正确加载对应工作空间内容
+            //例如切换游戏后直接跳转到贴图标记页面，如果不在这里更新工作空间的话，贴图标记页面就是空的
+            GlobalConfig.CurrentWorkSpace = gameConfig.WorkSpace;
+
             if (ComboBox_LogicName.Items.Contains(gameConfig.LogicName))
             {
                 ComboBox_LogicName.SelectedItem = gameConfig.LogicName;

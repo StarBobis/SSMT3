@@ -45,6 +45,14 @@
                     x:Name="Menu_GenerateHashStyleTextureModTemplate"
                     Click="Menu_GenerateHashStyleTextureModTemplate_Click"/>
             </MenuBarItem>
+
+            <!-- 新增：全部标记为 Hash / Slot 的菜单 -->
+            <MenuBarItem x:Name="Menu_MarkAllTextureStyle">
+                <MenuFlyoutItem x:Name="Menu_MarkAllHashStyle_Item" Click="Menu_MarkAllHashStyle_Click" />
+                <MenuFlyoutItem x:Name="Menu_MarkAllSlotStyle_Item" Click="Menu_MarkAllSlotStyle_Click" />
+
+            </MenuBarItem>
+
         </MenuBar>
 
         <ListView

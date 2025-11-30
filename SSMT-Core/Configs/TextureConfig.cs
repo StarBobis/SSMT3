@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml.Media.Imaging;
+using Microsoft.UI.Xaml.Media.Imaging;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -374,25 +374,50 @@ namespace SSMT
                         height = (int)decoder.PixelHeight;
                     }).Wait(); // 阻塞直到完成
 
+                    //Nico:
+                    //大部分游戏默认使用都是Hash风格，但是少部分游戏例如GI、ZZZ等等
+                    //在不同的Shader中贴图槽位会发生变化，或者游戏频繁更新导致贴图Hash值变化
+                    //或者存在按距离加载时，不同距离的贴图Hash不同的情况
+                    //为了解决这个问题，GI使用ORFix技术，ZZZ使用SlotFix技术
+                    //这种情况下作者使用Hash风格贴图标记反而是最优解
                     string DefaultMarkStyle = "Hash";
 
-                    if (GlobalConfig.CurrentGameName == "IdentityV")
+                    GameConfig gameConfig = new GameConfig();
+
+                    
+                    if (gameConfig.LogicName == LogicName.CTXMC)
                     {
+                        //第五人格 Neox2引擎 推荐使用Slot风格贴图标记
+                        DefaultMarkStyle = "Slot";
+                    }
+                    else if (gameConfig.LogicName == LogicName.IdentityV2)
+                    {
+                        //第五人格 Neox3引擎 推荐使用Slot风格贴图标记
+                        DefaultMarkStyle = "Slot";
+                    }
+                    else if (gameConfig.LogicName == LogicName.GIMI)
+                    {
+                        //GI 推荐使用Slot风格贴图标记
+                        DefaultMarkStyle = "Slot";
+                    }
+                    else if (gameConfig.LogicName == LogicName.ZZMI)
+                    {
+                        //ZZZ 推荐使用Slot风格贴图标记
                         DefaultMarkStyle = "Slot";
                     }
 
                     // 添加文件名和图片到集合
                     ImageList.Add(new ImageItem
-                    {
-                        FileName = item.Key,
-                        ImageSource = bitmap,
-                        InfoBar = PixelSlotStr + "    Size: " + width.ToString() + " * " + height.ToString() + "    " + DedupedInfo,
-                        PixelSlot = PixelSlot,
-                        MarkName = "",
-                        MarkStyle = DefaultMarkStyle,
-                        Render = Render,
-                        Suffix = Path.GetExtension(item.Key)
-                    }); ;
+                        {
+                            FileName = item.Key,
+                            ImageSource = bitmap,
+                            InfoBar = PixelSlotStr + "    Size: " + width.ToString() + " * " + height.ToString() + "    " + DedupedInfo,
+                            PixelSlot = PixelSlot,
+                            MarkName = "",
+                            MarkStyle = DefaultMarkStyle,
+                            Render = Render,
+                            Suffix = Path.GetExtension(item.Key)
+                        }); ;
                 }
                 catch (FileNotFoundException fnfEx)
                 {

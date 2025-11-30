@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -56,11 +56,60 @@ namespace SSMT
             {
                 GlobalConfig.ReadConfig();
 
-                //初始化游戏列表，会触发工作空间改变
-                InitializeGameNameComboBox();
+                //读取并设置当前3Dmigoto文件夹，如果没读取到则弹出对话框提醒。
+                GameConfig gameConfig = new GameConfig();
+                if (!Directory.Exists(gameConfig.MigotoPath))
+                {
+                    _ = MessageHelper.Show(this.XamlRoot, "您当前选中的游戏尚未设置3Dmigoto文件夹，请到主页进行设置。");
 
-                Debug.WriteLine("切换到工作空间页面，当前工作空间: " + GlobalConfig.CurrentWorkSpace);
-                InitializeWorkSpace(GlobalConfig.CurrentWorkSpace);
+                    Frame.Navigate(typeof(HomePage));
+                    return;
+                }
+
+                //读取当前游戏的配置，来确定当前选择的是哪个工作空间
+                string SavedWorkSpace = gameConfig.WorkSpace;
+                if (SavedWorkSpace == "")
+                {
+                    LOG.Info("上次保存的工作空间为空，初始化空的工作空间");
+                    InitializeWorkSpace();
+                }
+                else
+                {
+                    string TargetWorkSpaceFolder = Path.Combine(PathManager.Path_TotalWorkSpaceFolder, GlobalConfig.CurrentGameName + "\\" + SavedWorkSpace + "\\");
+                    if (Directory.Exists(TargetWorkSpaceFolder))
+                    {
+                        InitializeWorkSpace(SavedWorkSpace);
+                    }
+                    else
+                    {
+                        LOG.Info("不存在工作空间文件夹，初始化空的工作空间");
+                        InitializeWorkSpace();
+                    }
+                }
+
+                //切换游戏时，检测当前总工作空间目录下是否有文件夹，没有就新建
+                string[] CurrentGameWorkSpaceList = Directory.GetDirectories(PathManager.Path_CurrentGameTotalWorkSpaceFolder);
+                if (CurrentGameWorkSpaceList.Length == 0)
+                {
+                    CreateNewWorkSpace("Default");
+                }
+                else
+                {
+                    LOG.Info("当前游戏工作空间列表: " + CurrentGameWorkSpaceList.Length.ToString());
+                }
+
+                InitializeGameTypeComboBox();
+
+
+                if (gameConfig.LogicName == LogicName.ZZMI)
+                {
+                    StackPanel_GameTypeRegion.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    StackPanel_GameTypeRegion.Visibility = Visibility.Collapsed;
+                }
+
             }
             catch (Exception ex)
             {
@@ -71,112 +120,6 @@ namespace SSMT
         }
 
 
-        private void InitializeGameNameComboBox()
-        {
-            LOG.NewLine("InitializeGameNameComboBox::Start");
-            List<GameIconItem> gameIconItems = SSMTResourceUtils.GetGameIconItems();
-
-            WorkGameSelectionComboBox.Items.Clear();
-            foreach (GameIconItem gameIconItem in gameIconItems)
-            {
-                WorkGameSelectionComboBox.Items.Add(gameIconItem.GameName);
-            }
-
-            if (GlobalConfig.CurrentGameName == "")
-            {
-                WorkGameSelectionComboBox.SelectedIndex = 0;
-            }
-            else
-            {
-                WorkGameSelectionComboBox.SelectedItem = GlobalConfig.CurrentGameName;
-            }
-            LOG.NewLine("InitializeGameNameComboBox::End");
-
-        }
-
-
-
-
-
-        private async void WorkGameSelectionComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            LOG.Info("WorkGameSelectionComboBox_SelectionChanged::Start");
-            // 获取触发事件的 ComboBox 实例
-            var comboBox = sender as ComboBox;
-
-            if (comboBox == null || comboBox.SelectedItem == null)
-            {
-                return;
-            }
-
-            //获取选中的项并进行处理
-            string selectedGame = comboBox.SelectedItem.ToString();
-            GlobalConfig.CurrentGameName = selectedGame;
-
-            //读取并设置当前3Dmigoto文件夹，如果没读取到则弹出对话框提醒。
-            GameConfig gameConfig = new GameConfig();
-
-            
-
-            if (!Directory.Exists(gameConfig.MigotoPath))
-            {
-                await MessageHelper.Show(this.XamlRoot, "您当前选中的游戏尚未设置3Dmigoto文件夹，请到主页进行设置。");
-
-  
-                Frame.Navigate(typeof(HomePage));
-            }
-
-            GlobalConfig.SaveConfig();
-
-
-            //切换游戏后，要读取当前游戏的配置，来确定当前选择的是哪个工作空间
-            //如果没有就算了
-
-            string SavedWorkSpace = gameConfig.WorkSpace;
-            if (SavedWorkSpace == "")
-            {
-                LOG.Info("上次保存的工作空间为空，初始化空的工作空间");
-                InitializeWorkSpace();
-            }
-            else
-            {
-                string TargetWorkSpaceFolder = Path.Combine(PathManager.Path_TotalWorkSpaceFolder, GlobalConfig.CurrentGameName + "\\" + SavedWorkSpace + "\\");
-                if (Directory.Exists(TargetWorkSpaceFolder))
-                {
-                    InitializeWorkSpace(SavedWorkSpace);
-                }
-                else
-                {
-                    LOG.Info("不存在工作空间文件夹，初始化空的工作空间");
-                    InitializeWorkSpace();
-                }
-            }
-
-            //切换游戏时，检测当前总工作空间目录下是否有文件夹，没有就新建
-            string[] CurrentGameWorkSpaceList = Directory.GetDirectories(PathManager.Path_CurrentGameTotalWorkSpaceFolder);
-            if (CurrentGameWorkSpaceList.Length == 0)
-            {
-                CreateNewWorkSpace("Default");
-            }
-            else
-            {
-                LOG.Info("当前游戏工作空间列表: " + CurrentGameWorkSpaceList.Length.ToString());
-            }
-
-            InitializeGameTypeComboBox();
-
-            
-            if (gameConfig.LogicName == LogicName.ZZMI)
-            {
-                StackPanel_GameTypeRegion.Visibility = Visibility.Visible;
-            }
-            else
-            {
-                StackPanel_GameTypeRegion.Visibility = Visibility.Collapsed;
-            }
-            Debug.WriteLine("WorkGameSelectionComboBox_SelectionChanged::End");
-
-        }
 
         private void InitializeGameTypeComboBox()
         {

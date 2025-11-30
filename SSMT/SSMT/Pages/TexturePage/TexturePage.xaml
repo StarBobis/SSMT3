@@ -109,6 +109,7 @@
 
                 <ComboBox CornerRadius="15,15,15,15"
                           x:Name="ComboBoxDrawIB"
+                          x:Uid="ComboBoxDrawIB"
                           Header="DrawIB"
                           Width="200"
                           Margin="5"
@@ -139,6 +140,7 @@
                 <StackPanel Orientation="Vertical"
                         Margin="5">
                     <TextBlock x:Name="Text_Block_MarkName"
+                               x:Uid="Text_Block_MarkName"
                                Margin="0,0,0,8"
                                Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"/>
                     <Border Background="Transparent"
@@ -210,6 +212,7 @@
                     Margin="5"></TextBox>
                 <Button
                     x:Name="Button_DIYMarkTexture"
+                    x:Uid="Button_DIYMarkTexture"
                     Click="Button_DIYMarkTexture_Click"
                     Margin="5"/>
                 <Button

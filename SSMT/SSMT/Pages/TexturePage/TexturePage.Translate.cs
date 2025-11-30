@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -19,7 +19,8 @@ namespace SSMT
             TranslatePage();
         }
 
-        public void TranslatePage() {
+        public void TranslatePage()
+        {
             if (GlobalConfig.Chinese)
             {
                 Menu_File.Title = "文件";
@@ -43,9 +44,6 @@ namespace SSMT
                 Button_MarkAutoTextureHashStyle.Content = "标记为Hash风格";
 
                 Button_CancelAutoTextureForCurrentDrawIB.Content = "取消当前绘制IB hash的自动贴图";
-
-                
-
             }
             else
             {
@@ -70,10 +68,7 @@ namespace SSMT
                 Button_MarkAutoTextureHashStyle.Content = "Mark As Hash Style";
 
                 Button_CancelAutoTextureForCurrentDrawIB.Content = "Cancel Auto Texture";
-
             }
         }
-
-
     }
 }

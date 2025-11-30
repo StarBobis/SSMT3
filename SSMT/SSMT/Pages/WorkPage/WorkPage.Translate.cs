@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -61,7 +61,7 @@ namespace SSMT
 
 
                 //侧边栏
-                WorkGameSelectionComboBox.Header = "游戏名称";
+                //WorkGameSelectionComboBox.Header = "游戏名称";
                 ComboBoxWorkSpaceSelection.Header = "工作空间";
                 Button_CreateWorkSpace.Content = "创建工作空间";
                 Button_OpenWorkSpaceFolder.Content = "打开当前工作空间文件夹";
@@ -150,7 +150,7 @@ namespace SSMT
                 
 
                 //侧边栏
-                WorkGameSelectionComboBox.Header = "GameName";
+                //WorkGameSelectionComboBox.Header = "GameName";
                 ComboBoxWorkSpaceSelection.Header = "WorkSpace";
                 Button_CreateWorkSpace.Content = "Create WorkSpace";
                 Button_OpenWorkSpaceFolder.Content = "Open Current WorkSpace";

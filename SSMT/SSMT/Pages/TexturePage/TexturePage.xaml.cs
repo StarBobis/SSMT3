@@ -376,27 +376,28 @@ namespace SSMT
         {
             SaveCurrentTextureConfig();
 
-            //获取DrawIB 和 ComponentName
-            string DrawIB = ComboBoxDrawIB.SelectedItem.ToString();
-            string ComponentName = ComboBoxComponent.SelectedItem.ToString();
+            string DrawIB = ComboBoxDrawIB.SelectedItem?.ToString();
+            string ComponentName = ComboBoxComponent.SelectedItem?.ToString();
 
-            string TextureConfigName = GetCurrentPSValue();
+            if (DrawIB == null || ComponentName == null)
+                return;
 
             try
             {
-                //应用标记的贴图
                 TextureConfig.ApplyTextureConfig(imageCollection.ToList(), DrawIB, ComponentName);
+                // Log：应用成功但不弹窗
+                Debug.WriteLine("Apply Texture Success.");
             }
             catch (Exception ex)
             {
-                _ = SSMTMessageHelper.Show(ex.ToString());
+                Debug.WriteLine(ex);
             }
 
 
             //_ = SSMTMessageHelper.Show("应用成功", "Apply Texture Success!");
         }
 
-    
+
         private void Menu_OpenCurrentWorkSpaceFolder_Click(object sender, RoutedEventArgs e)
         {
             SSMTCommandHelper.ShellOpenFolder(PathManager.Path_CurrentWorkSpaceFolder);

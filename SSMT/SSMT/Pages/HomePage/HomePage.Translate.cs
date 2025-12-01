@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -26,6 +26,14 @@ namespace SSMT
             {
                 SettingsCard_GameName.Header = "游戏名称";
                 SettingsCard_GameName.Description = "当前配置的名称，一般以简短的字母排列来表示，例如原神是GIMI，如果你同时玩一个游戏的国际服和国服，就可以通过创建游戏名称然后进行配置的方式在SSMT中实现快速切换";
+
+                SettingsCard_GamePreset.Header = "游戏预设";
+                SettingsCard_GamePreset.Description = "选择当前游戏名称所属的具体游戏，决定了当前自定义游戏名称所属游戏的模型提取逻辑，Mod生成逻辑，提取使用的数据类型文件夹，3Dmigoto包来源，背景图更新逻辑等等";
+
+                TextBlock_DIYSettings.Text = "自定义游戏设置";
+
+                SettingsCard_MigotoPackage.Header = "3Dmigoto包来源";
+                SettingsCard_MigotoPackage.Description = "此选项决定了将从哪个Github地址来下载更新对应的3Dmigoto包";
 
                 SettingsCard_LogicName.Header = "执行逻辑";
                 SettingsCard_LogicName.Description = "执行逻辑会影响到当前游戏下载的3Dmigoto包类型和来源，以及会影响到背景图的自动更新，以及提取模型时执行的逻辑，架构设计上来说每个游戏都有专属于它的执行逻辑";
@@ -156,6 +164,14 @@ namespace SSMT
             {
                 SettingsCard_GameName.Header = "GameName";
                 SettingsCard_GameName.Description = "Current game's nick name, usually we use simplified name,like GI or GIMI for GenshinImpact";
+
+                SettingsCard_GamePreset.Header = "Game Preset";
+                SettingsCard_GamePreset.Description = "Select which game this GameName belongs to, it decides the logic of 3Dmigoto package source, data type folder, background auto update logic, etc.";
+
+                TextBlock_DIYSettings.Text = "Custom Game Settings";
+
+                SettingsCard_MigotoPackage.Header = "3Dmigoto Package Source";
+                SettingsCard_MigotoPackage.Description = "This option decides from which Github address to download and update the corresponding 3Dmigoto package";
 
                 SettingsCard_LogicName.Header = "LogicName";
                 SettingsCard_LogicName.Description = "LogicName will affect the 3Dmigoto package type and source for current game, also will affect the background auto update, and model extraction logic, in architecture design, each game has its unique LogicName";

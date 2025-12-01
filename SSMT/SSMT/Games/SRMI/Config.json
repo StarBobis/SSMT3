@@ -11,5 +11,9 @@
   "DllInitializationDelay": 100,
   "DllReplaceSelectedIndex": 0,
   "DllPreProcessSelectedIndex": 0,
-  "LaunchItems": []
+  "LaunchItems": [],
+  "MigotoPackage": "SRMI-Package",
+  "AutoSetAnalyseOptionsSelectedIndex": 0,
+  "PureGameMode": false,
+  "GamePreset": "SRMI"
 }

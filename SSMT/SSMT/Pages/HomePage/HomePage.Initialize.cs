@@ -163,7 +163,31 @@ namespace SSMT
         }
 
 
+        private void InitializeGamePresetComboBox()
+        {
+            IsLoading = true;
 
+            ComboBox_GamePreset.Items.Clear();
+            ComboBox_GamePreset.Items.Add(GamePreset.GIMI);
+            ComboBox_GamePreset.Items.Add(GamePreset.HIMI);
+            ComboBox_GamePreset.Items.Add(GamePreset.SRMI);
+            ComboBox_GamePreset.Items.Add(GamePreset.ZZMI);
+            ComboBox_GamePreset.Items.Add(GamePreset.WWMI);
+            ComboBox_GamePreset.Items.Add(GamePreset.GF2);
+            ComboBox_GamePreset.Items.Add(GamePreset.IdentityVNeoX2);
+            ComboBox_GamePreset.Items.Add(GamePreset.IdentityVNeoX3);
+            ComboBox_GamePreset.Items.Add(GamePreset.AILIMIT);
+            ComboBox_GamePreset.Items.Add(GamePreset.BloodySpell);
+            ComboBox_GamePreset.Items.Add(GamePreset.DOAV);
+            ComboBox_GamePreset.Items.Add(GamePreset.MiSide);
+            ComboBox_GamePreset.Items.Add(GamePreset.SnowBreak);
+            ComboBox_GamePreset.Items.Add(GamePreset.Strinova);
+            ComboBox_GamePreset.Items.Add(GamePreset.Nioh2);
+            ComboBox_GamePreset.Items.Add(GamePreset.YYSLS);
+            ComboBox_GamePreset.Items.Add(GamePreset.DIY);
+
+            IsLoading = false;
+        }
 
     }
 }

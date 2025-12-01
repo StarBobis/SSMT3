@@ -57,6 +57,9 @@ namespace SSMT
         /// </summary>
         public string WorkSpace { get; set; } = "";
 
+        public string GamePreset { get; set; } = "GIMI";
+
+
         public string LogicName { get; set; } = "GIMI";
 
         public string GameTypeName { get; set; } = "GIMI";
@@ -124,6 +127,13 @@ namespace SSMT
                 {
                     string WorkSpace = jobj["WorkSpace"]?.ToString() ?? "";
                     this.WorkSpace = WorkSpace;
+                }
+
+                //GamePreset
+                if (jobj.ContainsKey("GamePreset"))
+                {
+                    string GamePreset = (string)jobj["GamePreset"];
+                    this.GamePreset = GamePreset;
                 }
 
                 if (jobj.ContainsKey("LogicName"))
@@ -244,10 +254,11 @@ namespace SSMT
             jobj["LaunchPath"] = this.LaunchPath;
             jobj["LaunchArgs"] = this.LaunchArgs;
             jobj["WorkSpace"] = this.WorkSpace;
-            jobj["MigotoPackage"] = this.MigotoPackage;
 
+            jobj["GamePreset"] = this.GamePreset;
             jobj["LogicName"] = this.LogicName;
             jobj["GameTypeName"] = this.GameTypeName;
+            jobj["MigotoPackage"] = this.MigotoPackage;
 
             jobj["AutoSetAnalyseOptionsSelectedIndex"] = this.AutoSetAnalyseOptionsSelectedIndex;
             jobj["GithubPackageVersion"] = this.GithubPackageVersion;

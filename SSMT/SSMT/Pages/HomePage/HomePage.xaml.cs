@@ -64,10 +64,15 @@ namespace SSMT
 
             GameIconGridView.ItemsSource = GameIconItemList;
 
+            
+
             //初始化LogcName列表，在当前游戏改变时会自动选中对应的条目
             InitializeLogicNameList();
             //初始化GameType Folder列表，在当前游戏改变时会自动选中对应的条目
             InitializeGameTypeFolderList();
+
+            //初始化游戏预设列表，仅填充并默认选中，在后续的GameNameChanged中会读取配置进行选中
+            InitializeGamePresetComboBox();
 
             InitializeGameIconItemList();
 
@@ -78,6 +83,8 @@ namespace SSMT
             GameNameChanged(GlobalConfig.CurrentGameName);
         }
 
+
+   
        
 
 
@@ -148,24 +155,7 @@ namespace SSMT
             //例如切换游戏后直接跳转到贴图标记页面，如果不在这里更新工作空间的话，贴图标记页面就是空的
             GlobalConfig.CurrentWorkSpace = gameConfig.WorkSpace;
 
-            if (ComboBox_LogicName.Items.Contains(gameConfig.LogicName))
-            {
-                ComboBox_LogicName.SelectedItem = gameConfig.LogicName;
-            }
-            else
-            {
-                ComboBox_LogicName.SelectedIndex = 0;
-            }
-
-            //读取GameType Folder
-            if (ComboBox_GameTypeFolder.Items.Contains(gameConfig.GameTypeName))
-            {
-                ComboBox_GameTypeFolder.SelectedItem = gameConfig.GameTypeName;
-            }
-            else
-            {
-                ComboBox_GameTypeFolder.SelectedIndex = 0;
-            }
+            
 
             //读取dll初始化延迟
 
@@ -175,7 +165,7 @@ namespace SSMT
             ComboBox_AutoSetAnalyseOptions.SelectedIndex = gameConfig.AutoSetAnalyseOptionsSelectedIndex;
 
             //LOG.Info("MigotoPackage设为: " + gameConfig.MigotoPackage);
-            ComboBox_MigotoPackage.SelectedItem = gameConfig.MigotoPackage;
+
             
 
 
@@ -215,6 +205,14 @@ namespace SSMT
 			}
 
 			IsLoading = false;
+
+
+            //Nico: 设置了游戏预设就不需要设置LogicName、GameTypeFolder、MigotoPackage了
+            //因为这里会触发他们的自动设置
+            //这里必须在IsLoading之外设置，才能触发其它三个的联动设置
+
+            LOG.Info("GamePreset: " + gameConfig.GamePreset);
+            ComboBox_GamePreset.SelectedItem = gameConfig.GamePreset;
 
             //游戏切换后要把Package标识以及版本号改一下
             UpdatePackageVersionLink();
@@ -820,8 +818,139 @@ namespace SSMT
             gameConfig.SaveConfig();
         }
 
+        private void ComboBox_GamePreset_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (IsLoading)
+            {
+                return;
+            }
 
+            string CurrentGamePreset = ComboBox_GamePreset.SelectedItem.ToString();
 
+            
 
+            //根据当前预设，调整LogicName，MigotoPackage，GameTypeFolder等选项
+
+            if (CurrentGamePreset == GamePreset.GIMI)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.GIMI;
+                ComboBox_GameTypeFolder.SelectedItem = "GIMI";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.GIMIPackage;
+            }
+            else if (CurrentGamePreset == GamePreset.HIMI)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.HIMI;
+                ComboBox_GameTypeFolder.SelectedItem = "HIMI";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.HIMIPackage;
+            }
+            else if (CurrentGamePreset == GamePreset.SRMI)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.SRMI;
+                ComboBox_GameTypeFolder.SelectedItem = "SRMI";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.SRMIPackage;
+            }
+            else if (CurrentGamePreset == GamePreset.ZZMI)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.ZZMI;
+                ComboBox_GameTypeFolder.SelectedItem = "ZZMI";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.ZZMIPackage;
+            }
+            else if (CurrentGamePreset == GamePreset.WWMI)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.WWMI;
+                ComboBox_GameTypeFolder.SelectedItem = "WWMI";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.WWMIPackage;
+            }
+            else if (CurrentGamePreset == GamePreset.GF2)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.UnityCPU;
+                ComboBox_GameTypeFolder.SelectedItem = "GF2";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.GIMIPackage;
+            }
+            else if (CurrentGamePreset == GamePreset.IdentityVNeoX2)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.CTXMC;
+                ComboBox_GameTypeFolder.SelectedItem = "IdentityV";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.MinBasePackage;
+            }
+            else if (CurrentGamePreset == GamePreset.IdentityVNeoX2)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.IdentityV2;
+                ComboBox_GameTypeFolder.SelectedItem = "IdentityV2";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.MinBasePackage;
+            }
+            else if (CurrentGamePreset == GamePreset.AILIMIT)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.AILIMIT;
+                ComboBox_GameTypeFolder.SelectedItem = "AILIMIT";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.MinBasePackage;
+            }
+            else if (CurrentGamePreset == GamePreset.BloodySpell)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.GIMI;
+                ComboBox_GameTypeFolder.SelectedItem = "GIMI";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.GIMIPackage;
+            }
+            else if (CurrentGamePreset == GamePreset.DOAV)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.CTXMC;
+                ComboBox_GameTypeFolder.SelectedItem = "DOAV";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.MinBasePackage;
+            }
+            else if (CurrentGamePreset == GamePreset.MiSide)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.UnityCS;
+                ComboBox_GameTypeFolder.SelectedItem = "MiSide";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.MinBasePackage;
+            }
+            else if (CurrentGamePreset == GamePreset.SnowBreak)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.SnowBreak;
+                ComboBox_GameTypeFolder.SelectedItem = "SnowBreak";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.MinBasePackage;
+            }
+            else if (CurrentGamePreset == GamePreset.Strinova)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.SnowBreak;
+                ComboBox_GameTypeFolder.SelectedItem = "SnowBreak";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.MinBasePackage;
+            }
+            else if (CurrentGamePreset == GamePreset.Nioh2)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.CTXMC;
+                ComboBox_GameTypeFolder.SelectedItem = "Nioh2";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.MinBasePackage;
+            }
+            else if (CurrentGamePreset == GamePreset.YYSLS)
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.YYSLS;
+                ComboBox_GameTypeFolder.SelectedItem = "YYSLS";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.MinBasePackage;
+            }
+            else
+            {
+                ComboBox_LogicName.SelectedItem = LogicName.GIMI;
+                ComboBox_GameTypeFolder.SelectedItem = "GIMI";
+                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.GIMIPackage;
+            }
+
+            //如果是DIY的话，就显示自定义配置选项，否则隐藏起来不显示
+
+            if (CurrentGamePreset == GamePreset.DIY)
+            {
+                LOG.Info("设置显示自定义配置");
+                Expander_DIYSettings.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LOG.Info("设置不显示自定义配置");
+                Expander_DIYSettings.Visibility = Visibility.Collapsed;
+            }
+
+            //最后保存到配置
+            GameConfig gameConfig = new GameConfig();
+            gameConfig.GamePreset = CurrentGamePreset;
+            gameConfig.SaveConfig();
+        }
     }
 }

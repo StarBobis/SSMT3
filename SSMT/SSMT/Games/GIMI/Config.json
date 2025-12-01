@@ -11,5 +11,9 @@
   "DllInitializationDelay": 100,
   "DllReplaceSelectedIndex": 0,
   "DllPreProcessSelectedIndex": 1,
-  "LaunchItems": []
+  "LaunchItems": [],
+  "MigotoPackage": "GIMI-Package",
+  "AutoSetAnalyseOptionsSelectedIndex": 0,
+  "PureGameMode": false,
+  "GamePreset": "GIMI"
 }

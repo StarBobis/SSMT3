@@ -163,10 +163,10 @@ namespace SSMT
             ComboBox_DllPreProcess.SelectedIndex = gameConfig.DllPreProcessSelectedIndex;
             ComboBox_DllReplace.SelectedIndex = gameConfig.DllReplaceSelectedIndex;
             ComboBox_AutoSetAnalyseOptions.SelectedIndex = gameConfig.AutoSetAnalyseOptionsSelectedIndex;
-
+            ToggleSwitch_PureGameMode.IsOn = gameConfig.PureGameMode;
             //LOG.Info("MigotoPackage设为: " + gameConfig.MigotoPackage);
 
-            
+
 
 
             //是否显示防报错按钮

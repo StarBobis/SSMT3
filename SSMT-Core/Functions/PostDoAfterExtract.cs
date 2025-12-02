@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -130,9 +130,6 @@ namespace SSMT
                 //异步执行，我才懒得等它全部转换完毕才弹出文件夹
                 LOG.Info("ConvertDedupedTexturesToTargetFormat:");
                 _ = SSMTTextureHelper.ConvertDedupedTexturesToTargetFormat();
-            
-            //提取Render贴图直接异步执行算了，无所谓是否成功，反正用不上
-            _ = CoreFunctions.ExtractRenderTextures();
 
             List<string> DrawIBList = DrawIBConfig.GetDrawIBListFromConfig();
 

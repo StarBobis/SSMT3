@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +13,6 @@ namespace SSMT
         public static bool ExtractModel(List<DrawIBItem> DrawIBItemList)
         {
 
-            //提取DedupedTextures和RenderTextures方便Mod制作时使用。
             bool RunResult = false;
 
             try

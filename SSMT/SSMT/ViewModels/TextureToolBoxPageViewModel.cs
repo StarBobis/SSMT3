@@ -93,7 +93,7 @@ namespace SSMT.ViewModels
 
         public TextureToolBoxPageViewModel()
         {
-            // ¼ÓÔØÅäÖÃ
+            // åŠ è½½é…ç½®
             var config = TextToolBoxConfig.Load();
             SelectedTextureFilePath = config.SelectedTextureFilePath;
             SelectedVideoFilePath = config.SelectedVideoFilePath;
@@ -159,29 +159,29 @@ namespace SSMT.ViewModels
             {
                 LOG.Info("GenerateDynamicTextureMod: start");
 
-                // ÑéÖ¤Ô­Ê¼ÌùÍ¼ÎÄ¼ş
+                // éªŒè¯åŸå§‹è´´å›¾æ–‡ä»¶
                 if (string.IsNullOrWhiteSpace(SelectedTextureFilePath) || !File.Exists(SelectedTextureFilePath))
                 {
-                    await SSMTMessageHelper.Show("ÇëÏÈÑ¡ÔñÔ­Ê¼ÌùÍ¼ÎÄ¼ş£¨.dds£©¡£", "Please choose the original texture file (.dds) first.");
+                    await SSMTMessageHelper.Show("è¯·å…ˆé€‰æ‹©åŸå§‹è´´å›¾æ–‡ä»¶ï¼ˆ.ddsï¼‰ã€‚", "Please choose the original texture file (.dds) first.");
                     return;
                 }
                 if (!SelectedTextureFilePath.EndsWith(".dds", StringComparison.OrdinalIgnoreCase))
                 {
-                    await SSMTMessageHelper.Show("ÇëÑ¡ÔñÒ»¸ö .dds ¸ñÊ½µÄÌùÍ¼ÎÄ¼ş¡£", "Please select a .dds texture file.");
+                    await SSMTMessageHelper.Show("è¯·é€‰æ‹©ä¸€ä¸ª .dds æ ¼å¼çš„è´´å›¾æ–‡ä»¶ã€‚", "Please select a .dds texture file.");
                     return;
                 }
 
-                // ÑéÖ¤ÊÓÆµÎÄ¼ş
+                // éªŒè¯è§†é¢‘æ–‡ä»¶
                 if (string.IsNullOrWhiteSpace(SelectedVideoFilePath) || !File.Exists(SelectedVideoFilePath))
                 {
-                    await SSMTMessageHelper.Show("ÇëÏÈÑ¡ÔñÊÓÆµÎÄ¼ş¡£", "Please choose the video file.");
+                    await SSMTMessageHelper.Show("è¯·å…ˆé€‰æ‹©è§†é¢‘æ–‡ä»¶ã€‚", "Please choose the video file.");
                     return;
                 }
 
-                // ÑéÖ¤Ä¿±êÎÄ¼ş¼Ğ
+                // éªŒè¯ç›®æ ‡æ–‡ä»¶å¤¹
                 if (string.IsNullOrWhiteSpace(DynamicTextureModGenerateFolderPath))
                 {
-                    await SSMTMessageHelper.Show("ÇëÏÈÑ¡Ôñ¶¯Ì¬ÌùÍ¼ModÉú³ÉµÄÎÄ¼ş¼ĞÎ»ÖÃ¡£", "Please choose the output folder for generated dynamic texture mod.");
+                    await SSMTMessageHelper.Show("è¯·å…ˆé€‰æ‹©åŠ¨æ€è´´å›¾Modç”Ÿæˆçš„æ–‡ä»¶å¤¹ä½ç½®ã€‚", "Please choose the output folder for generated dynamic texture mod.");
                     return;
                 }
                 if (!Directory.Exists(DynamicTextureModGenerateFolderPath))
@@ -193,12 +193,12 @@ namespace SSMT.ViewModels
                     catch (Exception ex)
                     {
                         LOG.Info("GenerateDynamicTextureMod: create output folder failed: " + ex.Message);
-                        await SSMTMessageHelper.Show("ÎŞ·¨´´½¨Êä³öÎÄ¼ş¼Ğ£¬Çë¼ì²éÂ·¾¶È¨ÏŞ¡£", "Cannot create output folder, please check permissions.");
+                        await SSMTMessageHelper.Show("æ— æ³•åˆ›å»ºè¾“å‡ºæ–‡ä»¶å¤¹ï¼Œè¯·æ£€æŸ¥è·¯å¾„æƒé™ã€‚", "Cannot create output folder, please check permissions.");
                         return;
                     }
                 }
 
-                // ´´½¨DynamicTextureModÎÄ¼ş¼Ğ
+                // åˆ›å»ºDynamicTextureModæ–‡ä»¶å¤¹
                 string dynamicTextureModDir = Path.Combine(DynamicTextureModGenerateFolderPath, "DynamicTextureMod");
                 if (Directory.Exists(dynamicTextureModDir))
                 {
@@ -206,19 +206,19 @@ namespace SSMT.ViewModels
                 }
                 Directory.CreateDirectory(dynamicTextureModDir);
 
-                //1. »ñÈ¡DDSÊôĞÔ
+                //1. è·å–DDSå±æ€§
                 var (width, height, format) = GetDdsInfo(SelectedTextureFilePath);
 
-                //2. ÓÃffmpeg×ªÎªPNGĞòÁĞ²¢·­×ª
+                //2. ç”¨ffmpegè½¬ä¸ºPNGåºåˆ—å¹¶ç¿»è½¬
                 string tempPngDir = Path.Combine(Path.GetTempPath(), "SSMT_TempPngFrames");
                 if (Directory.Exists(tempPngDir)) Directory.Delete(tempPngDir, true);
                 Directory.CreateDirectory(tempPngDir);
                 ExtractAndFlipFrames(SelectedVideoFilePath, tempPngDir);
 
-                //3. PNGÅúÁ¿×ªDDS
+                //3. PNGæ‰¹é‡è½¬DDS
                 ConvertPngToDds(tempPngDir, dynamicTextureModDir, width, height, format);
 
-                //Í³¼ÆDDSÎÄ¼şÊıÁ¿
+                //ç»Ÿè®¡DDSæ–‡ä»¶æ•°é‡
                 int ddsFileCount = Directory.GetFiles(dynamicTextureModDir, "*.dds", SearchOption.TopDirectoryOnly).Length;
                 LOG.Info($"DynamicTextureMod directory contains {ddsFileCount} DDS files.");
 
@@ -228,12 +228,12 @@ namespace SSMT.ViewModels
 
                 SSMTCommandHelper.ShellOpenFolder(dynamicTextureModDir);
                 //LOG.Info("GenerateDynamicTextureMod: done");
-                //await SSMTMessageHelper.Show($"¶¯Ì¬ÌùÍ¼ModÉú³ÉÍê³É£¬¹²Éú³É {ddsFileCount} ¸öDDSÎÄ¼ş¡£", $"Dynamic texture mod generation completed. {ddsFileCount} DDS files generated.");
+                //await SSMTMessageHelper.Show($"åŠ¨æ€è´´å›¾Modç”Ÿæˆå®Œæˆï¼Œå…±ç”Ÿæˆ {ddsFileCount} ä¸ªDDSæ–‡ä»¶ã€‚", $"Dynamic texture mod generation completed. {ddsFileCount} DDS files generated.");
             }
             catch (Exception ex)
             {
                 LOG.Info("GenerateDynamicTextureMod error: " + ex.ToString());
-                await SSMTMessageHelper.Show("Éú³É¶¯Ì¬ÌùÍ¼ModÊ±·¢Éú´íÎó£º" + ex.Message, "Error occurred while generating dynamic texture mod: " + ex.Message);
+                await SSMTMessageHelper.Show("ç”ŸæˆåŠ¨æ€è´´å›¾Modæ—¶å‘ç”Ÿé”™è¯¯ï¼š" + ex.Message, "Error occurred while generating dynamic texture mod: " + ex.Message);
             }
         }
 
@@ -242,7 +242,7 @@ namespace SSMT.ViewModels
             var psi = new ProcessStartInfo
             {
                 FileName = PathManager.Path_TexconvExe,
-                Arguments = $"-l -nologo \"{ddsPath}\"", // -lÖ»¶Á£¬-nologoÈ¥³ıÍ·²¿°æÈ¨
+                Arguments = $"-l -nologo \"{ddsPath}\"", // -låªè¯»ï¼Œ-nologoå»é™¤å¤´éƒ¨ç‰ˆæƒ
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
@@ -253,7 +253,7 @@ namespace SSMT.ViewModels
             string error = proc.StandardError.ReadToEnd();
             proc.WaitForExit();
 
-            //Ö»´¦ÀíreadingĞĞ£¬ºöÂÔÆäËüËùÓĞÊä³ö
+            //åªå¤„ç†readingè¡Œï¼Œå¿½ç•¥å…¶å®ƒæ‰€æœ‰è¾“å‡º
             foreach (var line in output.Split('\n'))
             {
                 var trimmed = line.Trim();
@@ -271,7 +271,7 @@ namespace SSMT.ViewModels
                             if (wh.Length ==2 && int.TryParse(wh[0], out int width) && int.TryParse(wh[1], out int height))
                             {
                                 string format = parts[1];
-                                // Ê¹ÓÃÏîÄ¿µÄÈÕÖ¾¹¤¾ß¼ÇÂ¼½âÎöµ½µÄÊôĞÔ
+                                // ä½¿ç”¨é¡¹ç›®çš„æ—¥å¿—å·¥å…·è®°å½•è§£æåˆ°çš„å±æ€§
                                 LOG.Info($"GetDdsInfo: path={ddsPath}, width={width}, height={height}, format={format}");
                                 return (width, height, format);
                             }
@@ -280,9 +280,9 @@ namespace SSMT.ViewModels
                 }
             }
 
-            // Èç¹ûÎŞ·¨½âÎö£¬¼ÇÂ¼ÍêÕûÊä³öµ½ÈÕÖ¾£¨²»Å×³öDebugÊä³ö£©²¢Å×Òì³£
+            // å¦‚æœæ— æ³•è§£æï¼Œè®°å½•å®Œæ•´è¾“å‡ºåˆ°æ—¥å¿—ï¼ˆä¸æŠ›å‡ºDebugè¾“å‡ºï¼‰å¹¶æŠ›å¼‚å¸¸
             LOG.Info($"GetDdsInfo failed to parse. texconv stdout:\n{output}\n texconv stderr:\n{error}");
-            throw new Exception("ÎŞ·¨½âÎöDDSÊôĞÔ: " + (output + error));
+            throw new Exception("æ— æ³•è§£æDDSå±æ€§: " + (output + error));
         }
 
         private void ExtractAndFlipFrames(string videoPath, string outputDir)
@@ -303,7 +303,7 @@ namespace SSMT.ViewModels
             string error = proc.StandardError.ReadToEnd();
             proc.WaitForExit();
 
-            // ´òÓ¡Êä³öµ½ÈÕÖ¾
+            // æ‰“å°è¾“å‡ºåˆ°æ—¥å¿—
             LOG.Info($"ExtractAndFlipFrames stdout:\n{output}");
             LOG.Info($"ExtractAndFlipFrames stderr:\n{error}");
         }

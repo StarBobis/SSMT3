@@ -152,7 +152,7 @@ namespace SSMT
                 Button_RunIgnoreGIError40.Content = "启动网络加固插件";
 
                 SettingsCard_PureGameMode.Header = "纯净游戏模式";
-                SettingsCard_PureGameMode.Description = "开启纯净游戏模式后【开始游戏】按钮将不再启动3Dmigoto，仅启动游戏";
+                SettingsCard_PureGameMode.Description = "注意！开启此选项后Mod将无法生效！开启纯净游戏模式后【开始游戏】按钮将不再启动3Dmigoto，仅启动游戏";
 
                 ToggleSwitch_PureGameMode.OnContent = "开启";
                 ToggleSwitch_PureGameMode.OffContent = "关闭";

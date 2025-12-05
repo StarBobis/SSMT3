@@ -929,12 +929,13 @@ namespace SSMT
             }
             else
             {
-                ComboBox_LogicName.SelectedItem = LogicName.GIMI;
-                ComboBox_GameTypeFolder.SelectedItem = "GIMI";
-                ComboBox_MigotoPackage.SelectedItem = MigotoPackageName.GIMIPackage;
+                //没选中的话可能是DIY，此时就读取已保存的设置
+                GameConfig gameConfig2 = new GameConfig();
+                ComboBox_LogicName.SelectedItem = gameConfig2.LogicName;
+                ComboBox_GameTypeFolder.SelectedItem = gameConfig2.GameTypeName;
+                ComboBox_MigotoPackage.SelectedItem = gameConfig2.MigotoPackage;
             }
 
-            //如果是DIY的话，就显示自定义配置选项，否则隐藏起来不显示
 
             if (CurrentGamePreset == GamePreset.DIY)
             {

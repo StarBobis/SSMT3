@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,6 +18,8 @@ namespace SSMT_Core.InfoClass
         public string RunLocation { get; set; } = ""; //在哪个程序中启动
 
         public bool UseShell { get; set; } = true; //是否以Shell方式调用启动
+
+        public string Verb { get; set; } = "runas";
 
     }
 

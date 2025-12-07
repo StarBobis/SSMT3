@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -60,7 +60,7 @@ namespace SSMT
                             FileName = runInfo.RunPath,
                             WorkingDirectory = StartDirectory,
                             UseShellExecute = runInfo.UseShell,
-                            Verb = "runas" // 触发 UAC 提权
+                            Verb = runInfo.Verb // 触发 UAC 提权
                         };
 
                         // 尝试启动（会触发 UAC）

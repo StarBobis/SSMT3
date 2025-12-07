@@ -1,6 +1,6 @@
 using Microsoft.UI.Xaml.Data;
 using System;
-using SSMT.ViewModels;
+using SSMT;
 
 namespace SSMT.Converters
 {

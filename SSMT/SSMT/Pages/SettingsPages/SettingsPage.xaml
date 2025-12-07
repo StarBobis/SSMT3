@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Page
     x:Class="SSMT.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -265,7 +265,7 @@
 
                 <HyperlinkButton 
                     x:Name="HyperlinkButton_SSMTDocuments"
-                    NavigateUri="https://www.yuque.com/airde/ssmt3" ></HyperlinkButton>
+                    NavigateUri="https://starbobis.github.io/SSMT-Documents/" ></HyperlinkButton>
 
                 <HyperlinkButton 
                     x:Name="HyperlinkButton_SSMTPluginTheHerta"

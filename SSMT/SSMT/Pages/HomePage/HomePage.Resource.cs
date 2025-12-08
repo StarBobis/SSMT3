@@ -101,6 +101,8 @@ namespace SSMT
 
                 InstallBasicDllFileTo3DmigotoFolder();
 
+                NotificationQueue.Clear();
+
                 _ = SSMTMessageHelper.Show("加载器已成功更新到 " + Version);
 
                 ProgressRing_PackageUpdateRing.IsActive = false;

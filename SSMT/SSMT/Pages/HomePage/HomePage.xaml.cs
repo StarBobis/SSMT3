@@ -138,7 +138,7 @@ namespace SSMT
                     //我去，这里指定持续时间会导致报错，全是BUG啊这WinUI3
                     //暂时只能无限时间显示了。
                     NotificationQueue.Show(notification);
-
+                    
                     VisualHelper.CreateInfoBarShowAnimation(InforBar_NorificationQueue);
 				}
             }

@@ -55,7 +55,7 @@ namespace SSMT
                     TextBox_LaunchArgsPath.Text = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxini_path, "launch_args");
                 }
 
-
+                NotificationQueue.Clear();
             }
 
 

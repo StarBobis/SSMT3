@@ -1,4 +1,4 @@
-﻿// Injector.cpp : Defines the entry point for the console application.
+// Injector.cpp : Defines the entry point for the console application.
 //
 
 
@@ -296,17 +296,22 @@ int main()
 
 	launch = d3dxIniUtils.launch != L"";
 	if (launch) {
-		std::string outmsg = "3DMigoto ready, launching \"%s\"...\n" + d3dxIniUtils.ToByteString(d3dxIniUtils.launch);
-		printf(outmsg.c_str());
+        // 直接使用 d3dxIniUtils.launch（wstring）作为可执行路径
+
+        wchar_t run_path_wchar_t[MAX_PATH];
+        wcsncpy_s(run_path_wchar_t, MAX_PATH, d3dxIniUtils.launch.c_str(), _TRUNCATE); 
+
+        wchar_t run_args_wchar_t[MAX_PATH];
+        wcsncpy_s(run_args_wchar_t, MAX_PATH, d3dxIniUtils.launch_args.c_str(), _TRUNCATE);
 
 		CoInitializeEx(NULL, COINIT_APARTMENTTHREADED | COINIT_DISABLE_OLE1DDE);
 
-		if (!MultiByteToWideChar(CP_UTF8, 0, d3dxIniUtils.ToByteString(d3dxIniUtils.launch).c_str(), -1, setting_w, MAX_PATH))
-			wait_exit(EXIT_FAILURE, "Invalid launch setting\n");
+		//if (!MultiByteToWideChar(CP_UTF8, 0, d3dxIniUtils.ToByteString(d3dxIniUtils.launch).c_str(), -1, setting_w, MAX_PATH))
+		//	wait_exit(EXIT_FAILURE, "Invalid launch setting\n");
 
-		working_dir_p = deduce_working_directory(setting_w, working_dir);
+		working_dir_p = deduce_working_directory(run_path_wchar_t,working_dir);
 
-		ShellExecute(NULL, NULL, setting_w, NULL, working_dir_p, SW_SHOWNORMAL);
+		ShellExecute(NULL, NULL, run_path_wchar_t, run_args_wchar_t, working_dir_p, SW_SHOWNORMAL);
 	}
 	else {
 		printf("3DMigoto ready - Now run the game.\n");

@@ -154,6 +154,12 @@ namespace SSMT
 
                 TextBlock_OtherSettings.Text = "其它设置";
                 TextBlock_BasicSettings.Text = "基础设置";
+
+                SettingsCard_RunWithShell.Header = "使用Shell方式运行[启动路径]中的程序";
+                SettingsCard_RunWithShell.Description = "开启后一定程度规避父进程检测，目前只有GIMI需要开启此选项，其它游戏若未提到不建议开启";
+
+                ToggleSwitch_RunWithShell.OnContent = "开启";
+                ToggleSwitch_RunWithShell.OffContent = "关闭";
             }
             else
             {
@@ -277,6 +283,13 @@ namespace SSMT
 
                 TextBlock_OtherSettings.Text = "Other Settings";
                 TextBlock_BasicSettings.Text = "Basic Settings";
+
+                SettingsCard_RunWithShell.Header = "Run Launch Path Program with Shell";
+                SettingsCard_RunWithShell.Description = "Enable this to bypass parent process detection to some extent. Currently, only GIMI needs this option enabled. It's not recommended to enable this for other games unless specified.";
+
+                ToggleSwitch_RunWithShell.OnContent = "Enable";
+                ToggleSwitch_RunWithShell.OffContent = "Disable";
+
             }
         }
 

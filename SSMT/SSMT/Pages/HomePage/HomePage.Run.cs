@@ -15,16 +15,6 @@ namespace SSMT
     public partial class HomePage
     {
 
-        private void ShellRun()
-        {
-
-        }
-
-        private void MigotoRun()
-        {
-
-        }
-
 
         private async void Button_RunLaunchPath_Click(object sender, RoutedEventArgs e)
         {
@@ -118,9 +108,7 @@ namespace SSMT
 
                     D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "target", target_path);
 
-                    //这里咱们根本不填写launch和launch_args，因为咱们用的是shell启动，所以这里直接就是强制设为空，防止预料之外的行为干扰。
-                    D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "launch", "");
-                    D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "launch_args","");
+                    
 
                     int dllInitializationDelay = (int)NumberBox_DllInitializationDelay.Value;
 
@@ -131,6 +119,10 @@ namespace SSMT
                     D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[hunting]", "hunting", "2");
 
 
+                    
+
+                    //准备运行
+
                     List<RunInfo> RunFilePathList = new List<RunInfo>();
 
                     //只有不勾选纯净游戏模式时，才启用3Dmigoto
@@ -139,26 +131,44 @@ namespace SSMT
                         RunFilePathList.Add(new RunInfo { RunPath = CurrentGameMigotoLoaderExePath });
                     }
 
-                    if (File.Exists(gameConfig.LaunchPath.Trim()))
+                    if (gameConfig.RunWithShell)
                     {
-                        LOG.Info(gameConfig.LaunchPath + " 添加到启动列表");
-                        RunFilePathList.Add(new RunInfo
+                        //这里咱们根本不填写launch和launch_args，因为咱们用的是shell启动，所以这里直接就是强制设为空，防止预料之外的行为干扰。
+                        D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "launch", "");
+                        D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "launch_args", "");
+
+                        if (File.Exists(gameConfig.LaunchPath.Trim()))
                         {
-                            RunPath = gameConfig.LaunchPath,
-                            RunWithArguments = gameConfig.LaunchArgs,
-                            UseShell = true
-                        });
+                            LOG.Info(gameConfig.LaunchPath + " 添加到启动列表");
+                            RunFilePathList.Add(new RunInfo
+                            {
+                                RunPath = gameConfig.LaunchPath,
+                                RunWithArguments = gameConfig.LaunchArgs,
+                                UseShell = true
+                            });
+                        }
+
+                        if (RunFilePathList.Count == 0)
+                        {
+                            _ = SSMTMessageHelper.Show("您当前的配置没什么可以启动的，请仔细检查您的配置", "your config can't start anything, please check your config again");
+                            return;
+                        }
+
+                    }
+                    else
+                    {
+                        //Nico:不用Shell的方式启动的话，就需要把launch和launch_args写进去
+                        //这里需要注意，如果鸣潮使用Shell方式启动就会出现透明和白屏问题，所以这里不用Shell的方式启动必须存在
+
+                        D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "launch", gameConfig.LaunchPath);
+                        D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[loader]", "launch_args", gameConfig.LaunchArgs);
                     }
 
-                    if (RunFilePathList.Count == 0)
-                    {
-                        _ = SSMTMessageHelper.Show("您当前的配置没什么可以启动的，请仔细检查您的配置","your config can't start anything, please check your config again");
-                        return;
-                    }
 
                     await SSMTCommandHelper.LaunchSequentiallyAsyncV2(RunFilePathList);
 
-                    // 等待1秒后重新启用
+
+                    // 点击开始游戏按钮后，务必等待1秒后重新启用，防止误触多次点击
                     await Task.Delay(3000);
                 }
                 catch (Exception ex)

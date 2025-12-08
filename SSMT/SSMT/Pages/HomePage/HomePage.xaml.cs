@@ -165,7 +165,7 @@ namespace SSMT
             ComboBox_DllReplace.SelectedIndex = gameConfig.DllReplaceSelectedIndex;
             ComboBox_AutoSetAnalyseOptions.SelectedIndex = gameConfig.AutoSetAnalyseOptionsSelectedIndex;
             ToggleSwitch_PureGameMode.IsOn = gameConfig.PureGameMode;
-
+            ToggleSwitch_RunWithShell.IsOn = gameConfig.RunWithShell;
 
 
 
@@ -932,6 +932,18 @@ namespace SSMT
 
 
             LOG.Info("ComboBox_GamePreset_SelectionChanged::End");
+        }
+
+        private void ToggleSwitch_RunWithShell_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (IsLoading)
+            {
+                return;
+            }
+
+            GameConfig gameConfig = new GameConfig();
+            gameConfig.RunWithShell = ToggleSwitch_RunWithShell.IsOn;
+            gameConfig.SaveConfig();
         }
     }
 }

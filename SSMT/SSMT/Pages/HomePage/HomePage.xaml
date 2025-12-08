@@ -405,17 +405,25 @@ The following sets the maximum # of items to show before wrapping.-->
                                     <FontIcon Glyph="&#xf19d;"   FontFamily="Segoe Fluent Icons"/>
                                 </controls:SettingsCard.HeaderIcon>
 
-
-
                                 <ComboBox x:Name="ComboBox_ShowWarning" SelectionChanged="ComboBox_ShowWarning_SelectionChanged">
                                     <ComboBoxItem x:Name="ComboBoxItem_ShowWarning_On"></ComboBoxItem>
                                     <ComboBoxItem x:Name="ComboBoxItem_ShowWarning_Off"></ComboBoxItem>
                                 </ComboBox>
+                            </controls:SettingsCard>
 
+                            <controls:SettingsCard  x:Name="SettingsCard_RunWithShell">
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xE745;" FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
+                                <ToggleSwitch 
+                                    Toggled="ToggleSwitch_RunWithShell_Toggled"
+                                    x:Name="ToggleSwitch_RunWithShell"></ToggleSwitch>
 
                             </controls:SettingsCard>
 
-                
+
 
                             <controls:SettingsCard 
                                 x:Name="SettingsCard_DllReplace"

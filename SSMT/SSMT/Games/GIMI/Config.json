@@ -15,5 +15,6 @@
   "MigotoPackage": "GIMI-Package",
   "AutoSetAnalyseOptionsSelectedIndex": 0,
   "PureGameMode": false,
-  "GamePreset": "GIMI"
+  "GamePreset": "GIMI",
+  "RunWithShell": true
 }

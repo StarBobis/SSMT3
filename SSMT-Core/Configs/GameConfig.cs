@@ -70,7 +70,9 @@ namespace SSMT
 
         public int AutoSetAnalyseOptionsSelectedIndex { get; set; } = 0;
 
-        public bool PureGameMode = false;
+        public bool PureGameMode { get; set; } = false;
+
+        public bool RunWithShell { get; set; } = false;
 
         public string GithubPackageVersion { get; set; } = "";
 
@@ -201,6 +203,12 @@ namespace SSMT
                     this.PureGameMode = (bool)jobj["PureGameMode"];
                 }
 
+                //RunWithShell
+                if (jobj.ContainsKey("RunWithShell"))
+                {
+                    this.RunWithShell = (bool)jobj["RunWithShell"];
+                }
+
                 //LaunchItems
                 if (jobj.ContainsKey("LaunchItems"))
                 {
@@ -268,6 +276,7 @@ namespace SSMT
             jobj["DllPreProcessSelectedIndex"] = this.DllPreProcessSelectedIndex;
 
             jobj["PureGameMode"] = this.PureGameMode;
+            jobj["RunWithShell"] = this.RunWithShell;
 
             jobj["LaunchItems"] = jobjArray;
             DBMTJsonUtils.SaveJObjectToFile(jobj, PathManager.Path_CurrentGameConfigJson);

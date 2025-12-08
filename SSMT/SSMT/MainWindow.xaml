@@ -92,7 +92,7 @@
                 <NavigationViewItem 
                     x:Name="NavigationViewItem_DocumentPage" 
                     Icon="Library" 
-                    Content="文档" 
+                    Content="SSMT文档" 
                     Tag="DocumentPage" />
             </NavigationView.MenuItems>
         </NavigationView>

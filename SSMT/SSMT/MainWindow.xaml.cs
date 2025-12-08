@@ -92,15 +92,6 @@ namespace SSMT
 
         public Image MainWindowImageBrushW;
 
-        //Nico: IsLoopingEnabled有个严重的问题就是循环播放时，会卡顿一瞬间
-        //但是米哈游启动器就不卡，这个基本上就是WinUI3这个MediaPlayer实现的问题
-        //暂时先不解决，不碰底层的情况下，不是轻易能解决的。
-        //咱先解决有没有的问题，再解决好不好的问题。
-        MediaPlayer BackgroundMediaPlayer = new MediaPlayer
-        {
-            IsLoopingEnabled = true,
-        };
-
 
         public MainWindow()
         {
@@ -202,9 +193,6 @@ namespace SSMT
             this.SetModManagePageVisibility(GlobalConfig.ShowModManagePage);
             this.SetTextureToolBoxPageVisibility(GlobalConfig.ShowTextureToolBoxPage);
 
-
-            
-
             TranslatePage();
 
             ResetWindow();
@@ -230,6 +218,7 @@ namespace SSMT
                 NavigationViewItem_TextureToolBoxPage.Content = "贴图工具箱";
                 NavigationViewItem_GameTypePage.Content = "数据类型管理";
                 NavigationViewItem_ModManagePage.Content = "Mod管理";
+                NavigationViewItem_DocumentPage.Content = "SSMT文档";
             }
             else
             {
@@ -239,6 +228,8 @@ namespace SSMT
                 NavigationViewItem_TextureToolBoxPage.Content = "Texture ToolBox";
                 NavigationViewItem_GameTypePage.Content = "GameType Management";
                 NavigationViewItem_ModManagePage.Content = "Mod Management";
+                NavigationViewItem_DocumentPage.Content = "SSMT Documents";
+
             }
         }
 
@@ -405,14 +396,7 @@ namespace SSMT
 
             // 假设页面类名和 Tag 有对应关系，如 "HomePage" -> "HomePage"
             // 为了让这种方法能够很方便的生效，以后都要符合这种命名约定
-            string pageName = contentFrame.SourcePageType.Name;
-            string tag = pageName; // 或者根据需要进行转换
-
-            //if (tag != "HomePage")
-            //{
-            //    MainWindowImageBrush.Source = null;
-               
-            //}
+            string tag = contentFrame.SourcePageType.Name;
 
             nvSample.SelectedItem = nvSample.MenuItems.OfType<NavigationViewItem>()
                 .FirstOrDefault(item => item.Tag?.ToString() == tag) ?? null;

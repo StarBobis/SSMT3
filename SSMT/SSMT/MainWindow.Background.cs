@@ -73,6 +73,8 @@ namespace SSMT
                 // 使用文件名构造可访问的 URL
                 string videoUrl = $"https://assets.ssmt.local/{Uri.EscapeDataString(fileName)}?t={DateTime.Now.Ticks}";
 
+                LOG.Info("VideoUrl: " + videoUrl);
+
                 // 选择 mime type
                 string type = path.EndsWith(".webm", StringComparison.OrdinalIgnoreCase) ? "video/webm" : "video/mp4";
 
@@ -229,78 +231,81 @@ video{{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:cover;}}
 
                 string finalVideoPath = NewWebmBackgroundPath;
 
-                if (SpecificLogicName == LogicName.ZZMI)
-                {
-                    try
-                    {
-                        if (!File.Exists(PathManager.Path_Plugin_FFMPEG))
-                        {
-                            LOG.Info("ffmpeg.exe 不存在，无法进行 ZZZ 背景视频转码");
-                            throw new FileNotFoundException("ffmpeg.exe missing");
-                        }
+                //Nico: 您猜怎么着？使用webview2不需要转码也能播放.webm格式视频了
+                //下面这些代码都没用了，删掉以减少卡顿
 
-                        string mp4Output = Path.ChangeExtension(NewWebmBackgroundPath, ".mp4");
+                //if (SpecificLogicName == LogicName.ZZMI)
+                //{
+                //    try
+                //    {
+                //        if (!File.Exists(PathManager.Path_Plugin_FFMPEG))
+                //        {
+                //            LOG.Info("ffmpeg.exe 不存在，无法进行 ZZZ 背景视频转码");
+                //            throw new FileNotFoundException("ffmpeg.exe missing");
+                //        }
 
-                        if (File.Exists(mp4Output))
-                        {
-                            File.Delete(mp4Output);
-                        }
+                //        string mp4Output = Path.ChangeExtension(NewWebmBackgroundPath, ".mp4");
+
+                //        if (File.Exists(mp4Output))
+                //        {
+                //            File.Delete(mp4Output);
+                //        }
 
 
-                        var psi = new ProcessStartInfo
-                        {
-                            FileName = PathManager.Path_Plugin_FFMPEG,
-                            Arguments = $"-y -i \"{NewWebmBackgroundPath}\" -c:v libx264 -preset veryfast -pix_fmt yuv420p \"{mp4Output}\"",
-                            UseShellExecute = false,
-                            CreateNoWindow = true,
-                            RedirectStandardError = true,
-                            RedirectStandardOutput = true
-                        };
+                //        var psi = new ProcessStartInfo
+                //        {
+                //            FileName = PathManager.Path_Plugin_FFMPEG,
+                //            Arguments = $"-y -i \"{NewWebmBackgroundPath}\" -c:v libx264 -preset veryfast -pix_fmt yuv420p \"{mp4Output}\"",
+                //            UseShellExecute = false,
+                //            CreateNoWindow = true,
+                //            RedirectStandardError = true,
+                //            RedirectStandardOutput = true
+                //        };
 
-                        using (var p = new Process())
-                        {
-                            p.StartInfo = psi;
+                //        using (var p = new Process())
+                //        {
+                //            p.StartInfo = psi;
 
-                            p.OutputDataReceived += (s, e) =>
-                            {
-                                if (!string.IsNullOrEmpty(e.Data))
-                                    LOG.Info("[ffmpeg stdout] " + e.Data);
-                            };
+                //            p.OutputDataReceived += (s, e) =>
+                //            {
+                //                if (!string.IsNullOrEmpty(e.Data))
+                //                    LOG.Info("[ffmpeg stdout] " + e.Data);
+                //            };
 
-                            p.ErrorDataReceived += (s, e) =>
-                            {
-                                if (!string.IsNullOrEmpty(e.Data))
-                                    LOG.Info("[ffmpeg stderr] " + e.Data);
-                            };
+                //            p.ErrorDataReceived += (s, e) =>
+                //            {
+                //                if (!string.IsNullOrEmpty(e.Data))
+                //                    LOG.Info("[ffmpeg stderr] " + e.Data);
+                //            };
 
-                            p.Start();
+                //            p.Start();
 
-                            p.BeginOutputReadLine();
-                            p.BeginErrorReadLine();
+                //            p.BeginOutputReadLine();
+                //            p.BeginErrorReadLine();
 
-                            await p.WaitForExitAsync();
+                //            await p.WaitForExitAsync();
 
-                            if (p.ExitCode != 0 || !File.Exists(mp4Output))
-                                throw new Exception($"ffmpeg failed, exit code {p.ExitCode}");
+                //            if (p.ExitCode != 0 || !File.Exists(mp4Output))
+                //                throw new Exception($"ffmpeg failed, exit code {p.ExitCode}");
 
-                            LOG.Info("ZZZ 背景视频已成功由 webm 转为 mp4");
-                            finalVideoPath = mp4Output;
-                            try
-                            {
-                                File.Delete(NewWebmBackgroundPath);
-                            }
-                            catch (Exception delEx)
-                            {
-                                LOG.Info("删除中间 webm 文件失败: " + delEx.Message);
-                            }
+                //            LOG.Info("ZZZ 背景视频已成功由 webm 转为 mp4");
+                //            finalVideoPath = mp4Output;
+                //            try
+                //            {
+                //                File.Delete(NewWebmBackgroundPath);
+                //            }
+                //            catch (Exception delEx)
+                //            {
+                //                LOG.Info("删除中间 webm 文件失败: " + delEx.Message);
+                //            }
 
-                        }
-                    }
-                    catch (Exception innerEx)
-                    {
-                        LOG.Info("ZZZ 背景视频转码失败，fallback handler 触发: " + innerEx.Message);
-                    }
-                }
+                //        }
+                //    }
+                //    catch (Exception innerEx)
+                //    {
+                //        LOG.Info("ZZZ 背景视频转码失败，fallback handler 触发: " + innerEx.Message);
+                //    }
+                //}
 
                 ShowBackgroundVideo(finalVideoPath, TargetGame);
                 LOG.Info("设置好背景图视频了");

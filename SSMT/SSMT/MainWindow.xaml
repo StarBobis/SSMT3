@@ -48,14 +48,6 @@
             RequestedTheme="Dark"
             >
             
-            <!--Nico: 这里导航栏永远使用黑色主题，这样不管什么背景图都能看清楚-->
-            
-            <Grid>
-                <Frame 
-                    x:Name="contentFrame"
-                    Navigated="contentFrame_Navigated"/>
-            </Grid>
-            
             <NavigationView.MenuItems>
                 <NavigationViewItem 
                     x:Name="NavigationViewItem_StarterPage" 
@@ -97,7 +89,13 @@
             </NavigationView.MenuItems>
         </NavigationView>
 
-        
+        <!--Nico: 这里导航栏永远使用黑色主题，这样不管什么背景图都能看清楚-->
+
+        <Grid Margin="45,0,0,0">
+            <Frame 
+                x:Name="contentFrame"
+                Navigated="contentFrame_Navigated"/>
+        </Grid>
 
     </Grid>
 

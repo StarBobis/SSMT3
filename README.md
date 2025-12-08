@@ -39,3 +39,13 @@ GPL3.0，详情请参阅仓库中的 `LICENSE` 文件。
 
 如有问题可在 GitHub 仓库中提交 Issue，或通过项目文档页查找更多联系方式。
 
+## 同类项目 🔗
+
+- gui_collect — [Petrascyll/gui_collect](https://github.com/Petrascyll/gui_collect)
+- XXMI Launcher — [SpectrumQT/XXMI-Launcher](https://github.com/SpectrumQT/XXMI-Launcher)
+
+## 致谢 🙏
+
+SSMT 后端核心完全基于开源项目 3Dmigoto，感谢其开发者的辛勤付出！
+
+https://github.com/bo3b/3Dmigotohttps://github.com/bo3b/3Dmigoto

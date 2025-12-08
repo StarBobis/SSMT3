@@ -1,4 +1,4 @@
-﻿using Microsoft.UI;
+using Microsoft.UI;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
 using Microsoft.UI.Windowing;
@@ -24,12 +24,12 @@ using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics;
 using Windows.Graphics.Display;
-using Windows.Media.Core;
 using Windows.Media.Playback;
 using Windows.UI;
 using Windows.UI.WindowManagement;
 using WinRT;
 using WinUI3Helper;
+using Microsoft.Web.WebView2.Core;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -56,8 +56,6 @@ namespace SSMT
 
         public Image MainWindowImageBrushW;
 
-        public MediaPlayerElement MainWindowBackgroundMediaPlayer;
-
         //Nico: IsLoopingEnabled有个严重的问题就是循环播放时，会卡顿一瞬间
         //但是米哈游启动器就不卡，这个基本上就是WinUI3这个MediaPlayer实现的问题
         //暂时先不解决，不碰底层的情况下，不是轻易能解决的。
@@ -76,6 +74,7 @@ namespace SSMT
             // 初始化Composition组件
             // 获取Image控件的Visual对象
             imageVisual = ElementCompositionPreview.GetElementVisual(MainWindowImageBrush);
+            BackgroundWebView.CoreWebView2Initialized += BackgroundWebView_CoreWebView2Initialized;
 
             //全局配置文件夹不存在就创建一个
             if (!Directory.Exists(PathManager.Path_SSMT3GlobalConfigsFolder))
@@ -311,6 +310,19 @@ namespace SSMT
 				System.Diagnostics.Debug.WriteLine($"Backdrop cleanup failed: {ex}");
 			}
 		}
+
+        private void BackgroundWebView_CoreWebView2Initialized(object sender, CoreWebView2InitializedEventArgs e)
+        {
+            if (e.Exception is null)
+            {
+                // 将虚拟主机名映射到 SSMT 缓存文件夹的根目录
+                // 这样可以确保所有背景视频（无论在哪个子文件夹）都可以通过相对路径访问
+                BackgroundWebView.CoreWebView2.SetVirtualHostNameToFolderMapping(
+                    "assets.ssmt.local",
+                    GlobalConfig.SSMTCacheFolderPath,
+                    CoreWebView2HostResourceAccessKind.Allow);
+            }
+        }
 
 
         private void nvSample_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)

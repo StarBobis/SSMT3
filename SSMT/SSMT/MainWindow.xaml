@@ -44,8 +44,33 @@
             ItemInvoked="nvSample_ItemInvoked" 
             BackRequested="nvSample_BackRequested"
             IsBackEnabled="{Binding ElementName=contentFrame,Path=CanGoBack}" 
-            IsBackButtonVisible="Collapsed">
+            IsBackButtonVisible="Collapsed"
+            >
+            
+            <!--<NavigationView.Resources>
+                --><!--Nico: 因为我们有各种背景，不管在哪种背景图下，白色都是最好看的-->
+                <!-- 强制将图标和文本颜色设置为白色 --><!--
+                <SolidColorBrush x:Key="NavigationViewItemForeground" Color="White"/>
+                <SolidColorBrush x:Key="NavigationViewItemForegroundPointerOver" Color="White"/>
+                <SolidColorBrush x:Key="NavigationViewItemForegroundPressed" Color="White"/>
 
+                --><!-- 选中项的颜色 --><!--
+                <SolidColorBrush x:Key="NavigationViewItemForegroundSelected" Color="White"/>
+                <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPointerOver" Color="White"/>
+                <SolidColorBrush x:Key="NavigationViewItemForegroundSelectedPressed" Color="White"/>
+
+                --><!-- 图标颜色 --><!--
+                <SolidColorBrush x:Key="NavigationViewItemIconForeground" Color="White"/>
+                <SolidColorBrush x:Key="NavigationViewItemIconForegroundPointerOver" Color="White"/>
+                <SolidColorBrush x:Key="NavigationViewItemIconForegroundPressed" Color="White"/>
+
+                --><!-- 选中项的图标颜色 --><!--
+                <SolidColorBrush x:Key="NavigationViewItemIconForegroundSelected" Color="White"/>
+                <SolidColorBrush x:Key="NavigationViewItemIconForegroundSelectedPointerOver" Color="White"/>
+                <SolidColorBrush x:Key="NavigationViewItemIconForegroundSelectedPressed" Color="White"/>
+
+            </NavigationView.Resources>-->
+            
             <Grid>
                 <Frame 
                     x:Name="contentFrame"

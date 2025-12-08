@@ -20,13 +20,13 @@ namespace SSMT
 
         private void ResetBackground()
         {
-            try
-            {
-                // 停止播放并清空媒体
-                BackgroundWebView.CoreWebView2?.Navigate("about:blank");
+            //try
+            //{
+            //    // 停止播放并清空媒体
+            //    BackgroundWebView.CoreWebView2?.Navigate("about:blank");
 
-            }
-            catch { }
+            //}
+            //catch { }
 
             // 隐藏视频
             BackgroundWebView.Visibility = Visibility.Collapsed;

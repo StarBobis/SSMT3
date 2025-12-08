@@ -1,3 +1,12 @@
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Microsoft.UI;
 using Microsoft.UI.Composition;
 using Microsoft.UI.Composition.SystemBackdrops;
@@ -8,18 +17,12 @@ using Microsoft.UI.Xaml.Hosting;
 using Microsoft.UI.Xaml.Media.Imaging;
 using Microsoft.UI.Xaml.Navigation;
 using Microsoft.UI.Xaml.Shapes;
+using Microsoft.Web.WebView2.Core;
 using Newtonsoft.Json.Linq;
+using SSMT.Pages;
 using SSMT.SSMTHelper;
 using SSMT_Core;
 using SSMT_Core.InfoItemClass;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using System.Net.Http;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Threading.Tasks;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Graphics;
@@ -28,8 +31,8 @@ using Windows.Media.Playback;
 using Windows.UI;
 using Windows.UI.WindowManagement;
 using WinRT;
+using WinRT.Interop;
 using WinUI3Helper;
-using Microsoft.Web.WebView2.Core;
 
 // To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
@@ -41,6 +44,38 @@ namespace SSMT
     /// </summary>
     public sealed partial class MainWindow : Window
     {
+        [DllImport("user32.dll", SetLastError = true)]
+        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
+
+        private const int SW_MAXIMIZE = 3;
+        private const int SW_RESTORE = 9;
+
+        /// <summary>
+        /// 使用原生 Win32 最大化窗口（保留右上角按钮）。
+        /// </summary>
+        public void NativeMaximize()
+        {
+            try
+            {
+                var hwnd = WindowNative.GetWindowHandle(this);
+                ShowWindow(hwnd, SW_MAXIMIZE);
+            }
+            catch { }
+        }
+
+        /// <summary>
+        /// 使用原生 Win32 恢复窗口（取消最大化）。
+        /// </summary>
+        public void NativeRestore()
+        {
+            try
+            {
+                var hwnd = WindowNative.GetWindowHandle(this);
+                ShowWindow(hwnd, SW_RESTORE);
+            }
+            catch { }
+        }
+
         //public Image MainWindowImageBrushW;
         /// <summary>
         /// 视觉效果组件
@@ -234,6 +269,10 @@ namespace SSMT
                 contentFrame.Navigate(typeof(SettingsPage));
 
                 ResetBackground();
+
+                // 取消最大化（恢复到普通窗口）
+                NativeRestore();
+
             }
             else if (args.InvokedItemContainer is NavigationViewItem item)
             {
@@ -263,9 +302,28 @@ namespace SSMT
                     case "ModManagePage":
                         pageType = typeof(ModManagePage);
                         break;
+                    case "DocumentPage":
+                        pageType = typeof(DocumentPage);
+                        
+                        break;
                 }
 
-                if (pageType != null) {
+                if (pageType == typeof(DocumentPage))
+                {
+                    // 最大化窗口
+                    //AppWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
+
+                    NativeMaximize();
+                }
+                else
+                {
+                    //AppWindow.SetPresenter(AppWindowPresenterKind.Overlapped);
+                    NativeRestore();
+                }
+
+
+                if (pageType != null)
+                {
 
                     if (pageType != typeof(HomePage))
                     {

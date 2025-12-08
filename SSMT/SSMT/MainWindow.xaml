@@ -85,6 +85,11 @@
                     Icon="Manage" 
                     Content="Mod管理" 
                     Tag="ModManagePage" />
+                <NavigationViewItem 
+                    x:Name="NavigationViewItem_DocumentPage" 
+                    Icon="Library" 
+                    Content="文档" 
+                    Tag="DocumentPage" />
             </NavigationView.MenuItems>
         </NavigationView>
 

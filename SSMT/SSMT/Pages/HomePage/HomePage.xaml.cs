@@ -90,6 +90,7 @@ namespace SSMT
 
         private async void GameNameChanged(string ChangeToGameName)
         {
+            LOG.Info("GameNameChanged:: " + ChangeToGameName);
             //清楚顶部InfoBar内容
 			NotificationQueue.Clear();
 
@@ -164,7 +165,7 @@ namespace SSMT
             ComboBox_DllReplace.SelectedIndex = gameConfig.DllReplaceSelectedIndex;
             ComboBox_AutoSetAnalyseOptions.SelectedIndex = gameConfig.AutoSetAnalyseOptionsSelectedIndex;
             ToggleSwitch_PureGameMode.IsOn = gameConfig.PureGameMode;
-            //LOG.Info("MigotoPackage设为: " + gameConfig.MigotoPackage);
+
 
 
 
@@ -214,6 +215,11 @@ namespace SSMT
             LOG.Info("GamePreset: " + gameConfig.GamePreset);
             ComboBox_GamePreset.SelectedItem = gameConfig.GamePreset;
 
+
+
+            LOG.Info("MigotoPackage设为: " + gameConfig.MigotoPackage);
+
+
             //游戏切换后要把Package标识以及版本号改一下
             UpdatePackageVersionLink();
 
@@ -226,15 +232,18 @@ namespace SSMT
 
         private void UpdatePackageVersionLink()
         {
+            LOG.Info("UpdatePackageVersionLink::Start");
             GameConfig gameConfig = new GameConfig();
             //设置左上角Package版本
             RepositoryInfo repositoryInfo = GithubUtils.GetCurrentRepositoryInfo(gameConfig.MigotoPackage);
             HyperlinkButton_MigotoPackageVersion.Content = repositoryInfo.RepositoryName + " " + gameConfig.GithubPackageVersion;
             var url = $"https://github.com/{repositoryInfo.OwnerName}/{repositoryInfo.RepositoryName}/releases/latest";
             HyperlinkButton_MigotoPackageVersion.NavigateUri = new Uri(url);
+
+            LOG.Info("UpdatePackageVersionLink::End");
         }
 
-      
+
         private void SelectGameIconToCurrentGame()
         {
             int i = 0;
@@ -776,10 +785,16 @@ namespace SSMT
 
         private void ComboBox_GamePreset_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            LOG.Info("ComboBox_GamePreset_SelectionChanged::Start");
+
+
             if (IsLoading)
             {
+                LOG.Info("ComboBox_GamePreset_SelectionChanged::End");
+
                 return;
             }
+
 
             string CurrentGamePreset = ComboBox_GamePreset.SelectedItem.ToString();
 
@@ -904,10 +919,19 @@ namespace SSMT
                 Expander_DIYSettings.Visibility = Visibility.Collapsed;
             }
 
+
+
             //最后保存到配置
             GameConfig gameConfig = new GameConfig();
             gameConfig.GamePreset = CurrentGamePreset;
             gameConfig.SaveConfig();
+
+            LOG.Info("LogicName: " + gameConfig.LogicName);
+            LOG.Info("MigotoPackage: " + gameConfig.MigotoPackage);
+            LOG.Info("GameTypeName: " + gameConfig.GameTypeName);
+
+
+            LOG.Info("ComboBox_GamePreset_SelectionChanged::End");
         }
     }
 }

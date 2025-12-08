@@ -32,7 +32,11 @@ namespace SSMT
 
                 ProgressRing_PackageUpdateRing.IsActive = true;
 
-                string PackageName = ComboBox_MigotoPackage.SelectedItem.ToString();
+                GameConfig ReadGameConfig = new GameConfig();
+
+                string PackageName = ReadGameConfig.MigotoPackage;
+                LOG.Info("PackageName: " + PackageName);
+
                 RepositoryInfo repositoryInfo = GithubUtils.GetCurrentRepositoryInfo(PackageName);
 
                 if (repositoryInfo.OwnerName == "")

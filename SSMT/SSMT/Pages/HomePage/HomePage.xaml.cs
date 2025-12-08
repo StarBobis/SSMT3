@@ -166,6 +166,7 @@ namespace SSMT
             ComboBox_AutoSetAnalyseOptions.SelectedIndex = gameConfig.AutoSetAnalyseOptionsSelectedIndex;
             ToggleSwitch_PureGameMode.IsOn = gameConfig.PureGameMode;
             ToggleSwitch_RunWithShell.IsOn = gameConfig.RunWithShell;
+            ToggleSwitch_AutoRunIgnoreErrorGIPlugin.IsOn = gameConfig.AutoRunIgnoreErrorGIPlugin;
 
 
 
@@ -175,11 +176,13 @@ namespace SSMT
             {
                 SettingsCard_ClearGICache.Visibility = Visibility.Visible;
                 SettingsCard_RunIgnoreGIError40.Visibility = Visibility.Visible;
+                SettingsCard_AutoRunIgnoreErrorGIPlugin.Visibility = Visibility.Visible;
             }
             else
             {
 				SettingsCard_ClearGICache.Visibility = Visibility.Collapsed;
 				SettingsCard_RunIgnoreGIError40.Visibility = Visibility.Collapsed;
+                SettingsCard_AutoRunIgnoreErrorGIPlugin.Visibility = Visibility.Collapsed;
 			}
 
 
@@ -943,6 +946,19 @@ namespace SSMT
 
             GameConfig gameConfig = new GameConfig();
             gameConfig.RunWithShell = ToggleSwitch_RunWithShell.IsOn;
+            gameConfig.SaveConfig();
+        }
+
+        private void ToggleSwitch_AutoRunIgnoreErrorGIPlugin_Toggled(object sender, RoutedEventArgs e)
+        {
+            //AutoRunIgnoreErrorGIPlugin
+            if (IsLoading)
+            {
+                return;
+            }
+
+            GameConfig gameConfig = new GameConfig();
+            gameConfig.AutoRunIgnoreErrorGIPlugin = ToggleSwitch_AutoRunIgnoreErrorGIPlugin.IsOn;
             gameConfig.SaveConfig();
         }
     }

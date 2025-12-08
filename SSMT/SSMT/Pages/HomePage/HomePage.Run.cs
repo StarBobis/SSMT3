@@ -125,6 +125,16 @@ namespace SSMT
 
                     List<RunInfo> RunFilePathList = new List<RunInfo>();
 
+                    if (gameConfig.AutoRunIgnoreErrorGIPlugin)
+                    {
+                        string IgnoreGIErrorExePath = Path.Combine(PathManager.Path_PluginsFolder, PathManager.Name_Plugin_GoodWorkGI);
+                        if (File.Exists(IgnoreGIErrorExePath))
+                        {
+                            RunFilePathList.Add(new RunInfo { RunPath = IgnoreGIErrorExePath });
+                        }
+
+                    }
+
                     //只有不勾选纯净游戏模式时，才启用3Dmigoto
                     if (!gameConfig.PureGameMode)
                     {

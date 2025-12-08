@@ -545,7 +545,21 @@ The following sets the maximum # of items to show before wrapping.-->
                                     ></Button>
 
                             </controls:SettingsCard>
-                            
+
+                            <controls:SettingsCard  x:Name="SettingsCard_AutoRunIgnoreErrorGIPlugin">
+                                <!-- 这里换成你查到的编码 -->
+                                <controls:SettingsCard.HeaderIcon>
+                                    <FontIcon Glyph="&#xe709;" FontFamily="Segoe Fluent Icons"/>
+                                </controls:SettingsCard.HeaderIcon>
+
+                                <ToggleSwitch
+                                    Toggled="ToggleSwitch_AutoRunIgnoreErrorGIPlugin_Toggled"
+                                    x:Name="ToggleSwitch_AutoRunIgnoreErrorGIPlugin"
+                                    ></ToggleSwitch>
+        
+
+                            </controls:SettingsCard>
+
                             <controls:SettingsCard  x:Name="SettingsCard_AutoUpdateBackground">
                                 <!-- 这里换成你查到的编码 -->
                                 <controls:SettingsCard.HeaderIcon>

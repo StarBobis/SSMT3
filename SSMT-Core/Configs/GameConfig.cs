@@ -73,6 +73,7 @@ namespace SSMT
         public bool PureGameMode { get; set; } = false;
 
         public bool RunWithShell { get; set; } = false;
+        public bool AutoRunIgnoreErrorGIPlugin { get; set; } = false;
 
         public string GithubPackageVersion { get; set; } = "";
 
@@ -209,6 +210,12 @@ namespace SSMT
                     this.RunWithShell = (bool)jobj["RunWithShell"];
                 }
 
+                //AutoRunIgnoreErrorGIPlugin
+                if (jobj.ContainsKey("AutoRunIgnoreErrorGIPlugin"))
+                {
+                    this.AutoRunIgnoreErrorGIPlugin = (bool)jobj["AutoRunIgnoreErrorGIPlugin"];
+                }
+
                 //LaunchItems
                 if (jobj.ContainsKey("LaunchItems"))
                 {
@@ -277,6 +284,7 @@ namespace SSMT
 
             jobj["PureGameMode"] = this.PureGameMode;
             jobj["RunWithShell"] = this.RunWithShell;
+            jobj["AutoRunIgnoreErrorGIPlugin"] = this.AutoRunIgnoreErrorGIPlugin;
 
             jobj["LaunchItems"] = jobjArray;
             DBMTJsonUtils.SaveJObjectToFile(jobj, PathManager.Path_CurrentGameConfigJson);

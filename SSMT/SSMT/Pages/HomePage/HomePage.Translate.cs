@@ -160,6 +160,13 @@ namespace SSMT
 
                 ToggleSwitch_RunWithShell.OnContent = "开启";
                 ToggleSwitch_RunWithShell.OffContent = "关闭";
+
+                SettingsCard_AutoRunIgnoreErrorGIPlugin.Header = "自动运行网络加固插件";
+                SettingsCard_AutoRunIgnoreErrorGIPlugin.Description = "开启后每次点击【开始游戏】按钮时将自动运行网络加固插件，无需手动点击运行，节省时间提高效率";
+
+                ToggleSwitch_AutoRunIgnoreErrorGIPlugin.OnContent = "开启";
+                ToggleSwitch_AutoRunIgnoreErrorGIPlugin.OffContent = "关闭";
+
             }
             else
             {
@@ -289,6 +296,13 @@ namespace SSMT
 
                 ToggleSwitch_RunWithShell.OnContent = "Enable";
                 ToggleSwitch_RunWithShell.OffContent = "Disable";
+
+
+                SettingsCard_AutoRunIgnoreErrorGIPlugin.Header = "Auto Run Network Protect Plugin";
+                SettingsCard_AutoRunIgnoreErrorGIPlugin.Description = "Enable this to automatically run the Network Protect Plugin every time you click the [Start Game] button, saving time and improving efficiency.";
+
+                ToggleSwitch_AutoRunIgnoreErrorGIPlugin.OnContent = "Enable";
+                ToggleSwitch_AutoRunIgnoreErrorGIPlugin.OffContent = "Disable";
 
             }
         }

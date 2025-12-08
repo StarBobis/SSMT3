@@ -299,15 +299,6 @@ namespace SSMT
 				}
 
 
-                string AnalyseOptions = D3dxIniConfig.ReadAttributeFromD3DXIni(d3dxiniPath, "analyse_options");
-                if (AnalyseOptions.Contains("symlink"))
-                {
-                    ComboBox_Symlink.SelectedIndex = 0;
-                }
-                else
-                {
-					ComboBox_Symlink.SelectedIndex = 1;
-				}
 
 			}
 
@@ -738,42 +729,7 @@ namespace SSMT
 			gameConfig.SaveConfig();
 		}
 
-        private void ComboBox_Symlink_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-			if (IsLoading)
-			{
-				return;
-			}
-
-			if (!File.Exists(PathManager.Path_D3DXINI))
-			{
-				_ = SSMTMessageHelper.Show("请先选择正确的3Dmigoto路径，确保d3dx.ini存在于当前选择的3Dmigoto路径下。");
-				return;
-			}
-
-			//设置symlink特性
-			string AnalyseOptions = D3dxIniConfig.ReadAttributeFromD3DXIni(PathManager.Path_D3DXINI, "analyse_options");
-			if (AnalyseOptions == "")
-			{
-				_ = SSMTMessageHelper.Show("当前3Dmigoto的d3dx.ini中暂未设置analyse_options，无法开启symlink特性");
-				return;
-			}
-
-			if (ComboBox_Symlink.SelectedIndex == 0)
-			{
-				if (!AnalyseOptions.Contains("symlink"))
-				{
-					D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[hunting]", "analyse_options", AnalyseOptions + " symlink");
-				}
-				_ = SSMTMessageHelper.Show("Symlink特性已开启，游戏中F10刷新即可生效");
-			}
-			else
-			{
-				AnalyseOptions = AnalyseOptions.Replace("symlink", " ");
-				D3dxIniConfig.SaveAttributeToD3DXIni(PathManager.Path_D3DXINI, "[hunting]", "analyse_options", AnalyseOptions);
-				_ = SSMTMessageHelper.Show("Symlink特性已关闭，游戏中F10刷新即可生效");
-			}
-		}
+ 
 
         private void ComboBox_ShowWarning_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

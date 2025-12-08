@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Navigation;
 using System;
 using System.Collections.Generic;
@@ -102,6 +102,14 @@ namespace SSMT
 
                 ToggleSwitch_UseTitleBar.OnContent = "开启";
                 ToggleSwitch_UseTitleBar.OffContent = "关闭";
+
+
+                SettingsCard_SymlinkFeature.Header = "自动设置使用Symlink特性";
+                SettingsCard_SymlinkFeature.Description = "开启该选项后，启动游戏时自动设置Symlink特性到d3dx.ini，可以显著减少F8得到的帧分析转储文件总大小，显著提升转储速度，非特殊情况建议保持开启。不过需要注意此时帧分析文件根目录 .\\FrameAnalysis 下的文件基本均为符号链接，指向去重文件目录 .\\FrameAnalysis\\Deduped 下的真正文件。";
+
+                ToggleSwitch_UseSymlinkFeature.OnContent = "开启";
+                ToggleSwitch_UseSymlinkFeature.OffContent = "关闭";
+
             }
             else
             {
@@ -184,6 +192,12 @@ namespace SSMT
 
                 ToggleSwitch_UseTitleBar.OnContent = "Enable";
                 ToggleSwitch_UseTitleBar.OffContent = "Disable";
+
+                SettingsCard_SymlinkFeature.Header = "Auto Set Use Symlink Feature";
+                SettingsCard_SymlinkFeature.Description = "Enabling this option will automatically set the Symlink feature in d3dx.ini when launching the game, which can significantly reduce the total size of frame analysis dump files obtained by F8 and greatly improve dump speed. It is recommended to keep it enabled unless under special circumstances. However, please note that the files in the root directory .\\FrameAnalysis of the frame analysis files are basically symbolic links pointing to the actual files in the deduplicated file directory .\\FrameAnalysis\\Deduped.";
+
+                ToggleSwitch_UseSymlinkFeature.OnContent = "Enable";
+                ToggleSwitch_UseSymlinkFeature.OffContent = "Disable";
 
             }
 

@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Controls.Primitives;
 using Microsoft.UI.Xaml.Data;
@@ -77,6 +77,8 @@ namespace SSMT
                 GlobalConfig.UseTitleBar = ToggleSwitch_UseTitleBar.IsOn;
 
                 GlobalConfig.GithubToken = TextBox_GithubToken.Text;
+                GlobalConfig.UseSymlinkFeature = ToggleSwitch_UseSymlinkFeature.IsOn;
+
 
                 GlobalConfig.SaveConfig();
             }
@@ -119,6 +121,8 @@ namespace SSMT
             {
                 Expander_GithubToken.Visibility = Visibility.Collapsed;
             }
+
+            ToggleSwitch_UseSymlinkFeature.IsOn = GlobalConfig.UseSymlinkFeature;
 
             ReadOver = true;
         }
@@ -408,6 +412,14 @@ namespace SSMT
                 {
                     Expander_GithubToken.Visibility = Visibility.Collapsed;
                 }
+            }
+        }
+
+        private void ToggleSwitch_UseSymlinkFeature_Toggled(object sender, RoutedEventArgs e)
+        {
+            if (ReadOver)
+            {
+                SaveSettingsToConfig();
             }
         }
     }

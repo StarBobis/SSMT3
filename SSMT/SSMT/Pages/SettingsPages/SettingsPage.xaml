@@ -216,9 +216,22 @@
 
 
                 </controls:SettingsCard>
-                
 
 
+                <controls:SettingsCard x:Name="SettingsCard_SymlinkFeature">
+                    <!-- 这里换成你查到的编码 -->
+                    <controls:SettingsCard.HeaderIcon>
+                        <FontIcon Glyph="&#xe71b;"   FontFamily="Segoe Fluent Icons"/>
+                    </controls:SettingsCard.HeaderIcon>
+
+
+                    <ToggleSwitch
+                        x:Name="ToggleSwitch_UseSymlinkFeature"
+                        Toggled="ToggleSwitch_UseSymlinkFeature_Toggled"
+                        >
+                    </ToggleSwitch>
+
+                </controls:SettingsCard>
 
 
 

@@ -92,11 +92,6 @@ namespace SSMT
 
                 TextBox_LaunchArgsPath.Header = "启动参数";
 
-                SettingsCard_SymlinkFeature.Header = "符号链接选项";
-                SettingsCard_SymlinkFeature.Description = "开启该选项后，可以显著减少F8得到的帧分析转储文件总大小，显著提升转储速度，非特殊情况建议保持开启。不过需要注意此时帧分析文件根目录 .\\FrameAnalysis 下的文件基本均为符号链接，指向去重文件目录 .\\FrameAnalysis\\Deduped 下的真正文件。";
-
-                ComboBox_Symlink_On.Content = "开启";
-                ComboBox_Symlink_Off.Content = "关闭";
 
 
                 SettingsCard_AutoSetAnalyseOptions.Header = "自动设置analyse_options";
@@ -225,12 +220,7 @@ namespace SSMT
 
                 TextBox_LaunchArgsPath.Header = "Launch Arguments";
 
-                SettingsCard_SymlinkFeature.Header = "Symlink Feature";
-                SettingsCard_SymlinkFeature.Description = "Open Symlink feature can make your F8 dump faster and total dump file size smaller";
-
-                ComboBox_Symlink_On.Content = "Enable";
-                ComboBox_Symlink_Off.Content = "Disable";
-
+        
                 SettingsCard_AutoSetAnalyseOptions.Header = "Auto Set analyse_options";
                 SettingsCard_AutoSetAnalyseOptions.Description = "Auto Reset d3dx.ini's analyse_options to: deferred_ctx_immediate dump_rt dump_cb dump_vb dump_ib buf txt dds dump_tex dds";
 

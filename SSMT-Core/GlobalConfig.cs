@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +15,6 @@ namespace SSMT
     
     public static class GlobalConfig
     {
-  
         public static string CurrentGameName { get; set; } = "ZZZ";
         public static string CurrentWorkSpace { get; set; } = "";
         public static string SSMTCacheFolderPath { get; set; } = "";
@@ -27,8 +26,6 @@ namespace SSMT
         public static double WindowWidth { get; set; } = 1280;
         public static double WindowHeight { get; set; } = 720;
         public static double WindowLuminosityOpacity { get; set; } = 0.65f;
-
-
 
         /// <summary>
         /// 是否显示数据类型管理页面
@@ -46,6 +43,14 @@ namespace SSMT
         public static bool ShowTextureToolBoxPage { get; set; } = false;
         public static bool UseTitleBar { get; set; } = false;
         public static bool UseGithubToken { get; set; } = false;
+
+
+        /// <summary>
+        /// 开启后减少Dump文件总大小，提高Dump速度
+        /// 99%的磁盘格式都支持，但是1%的磁盘格式Dump下来天生文件损坏
+        /// 所以默认是关闭状态的，作者有需要可以手动开启
+        /// </summary>
+        public static bool UseSymlinkFeature { get; set; } = false;
 
 
 
@@ -150,7 +155,13 @@ namespace SSMT
                         UseGithubToken = (bool)SettingsJsonObject["UseGithubToken"];
                     }
 
-                  
+                    //UseSymlinkFeature
+                    if (SettingsJsonObject.ContainsKey("UseSymlinkFeature"))
+                    {
+                        UseSymlinkFeature = (bool)SettingsJsonObject["UseSymlinkFeature"];
+                    }
+
+
                 }
 
 
@@ -188,6 +199,7 @@ namespace SSMT
                 SettingsJsonObject["ShowTextureToolBoxPage"] = ShowTextureToolBoxPage;
                 SettingsJsonObject["UseTitleBar"] = UseTitleBar;
                 SettingsJsonObject["UseGithubToken"] = UseGithubToken;
+                SettingsJsonObject["UseSymlinkFeature"] = UseSymlinkFeature;
 
                 //写出内容
                 string WirteStirng = SettingsJsonObject.ToString();
@@ -202,9 +214,6 @@ namespace SSMT
                 ex.ToString();
             }
         }
-
-
-  
 
 
     }

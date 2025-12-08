@@ -15,6 +15,15 @@ namespace SSMT
     public partial class HomePage
     {
 
+        private void ShellRun()
+        {
+
+        }
+
+        private void MigotoRun()
+        {
+
+        }
 
 
         private async void Button_RunLaunchPath_Click(object sender, RoutedEventArgs e)
@@ -84,7 +93,7 @@ namespace SSMT
                     //强制设置analyse_options 使用deferred_ctx_immediate确保IdentityV和YYSLS都能正确Dump出东西
                     string analyse_options = ConstantsManager.analyse_options;
 
-                    if (ComboBox_Symlink.SelectedIndex == 0)
+                    if (GlobalConfig.UseSymlinkFeature)
                     {
                         analyse_options = analyse_options + " symlink";
                     }

@@ -346,6 +346,8 @@ namespace SSMT
 
         private void Window_Closed(object sender, WindowEventArgs args)
         {
+            NativeRestore();
+
             //退出程序时，保存窗口大小
             //用户反馈蓝屏的时候，全局配置文件会损坏导致SSMT无法启动，启动后闪退。
             //所以不管是保存还是读取配置都应该有TryCatch，

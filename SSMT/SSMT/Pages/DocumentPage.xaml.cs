@@ -32,6 +32,87 @@ namespace SSMT.Pages
             // Cache this page instance to avoid re-creating and reloading the WebView each navigation
             NavigationCacheMode = NavigationCacheMode.Required;
             Loaded += DocumentPage_Loaded;
+
+
+        }
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            // 导航到此页面时取消静音（允许播放声音）
+            TryUnmuteWebView();
+        }
+        private void DocumentPage_Unloaded(object sender, RoutedEventArgs e)
+        {
+            // 页面卸载时静音
+            TryMuteWebView();
+        }
+
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            // 导航离开页面时静音
+            TryMuteWebView();
+        }
+
+        private void TryMuteWebView()
+        {
+            try
+            {
+                if (DocWebView?.CoreWebView2 != null)
+                {
+                    DocWebView.CoreWebView2.IsMuted = true;
+                }
+                else
+                {
+                    // 如果尚未初始化则异步尝试初始化后静音
+                    _ = MuteWhenReadyAsync();
+                }
+            }
+            catch { }
+        }
+
+        private void TryUnmuteWebView()
+        {
+            try
+            {
+                if (DocWebView?.CoreWebView2 != null)
+                {
+                    DocWebView.CoreWebView2.IsMuted = false;
+                }
+                else
+                {
+                    // 如果尚未初始化则异步尝试初始化后取消静音
+                    _ = UnmuteWhenReadyAsync();
+                }
+            }
+            catch { }
+        }
+
+        private async System.Threading.Tasks.Task UnmuteWhenReadyAsync()
+        {
+            try
+            {
+                await DocWebView.EnsureCoreWebView2Async();
+                if (DocWebView.CoreWebView2 != null)
+                {
+                    DocWebView.CoreWebView2.IsMuted = false;
+                }
+            }
+            catch { }
+        }
+
+        private async System.Threading.Tasks.Task MuteWhenReadyAsync()
+        {
+            try
+            {
+                await DocWebView.EnsureCoreWebView2Async();
+                if (DocWebView.CoreWebView2 != null)
+                {
+                    DocWebView.CoreWebView2.IsMuted = true;
+                }
+            }
+            catch { }
         }
 
         private async void DocumentPage_Loaded(object sender, RoutedEventArgs e)

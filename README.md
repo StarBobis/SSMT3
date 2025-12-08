@@ -12,13 +12,13 @@
 
 基于 3Dmigoto 的模型提取与 Mod 制作工具箱。
 
-下载请去 Release 页面 📦
+下载请前往 [Release 页面](https://github.com/StarBobis/SSMT3/releases) 📦
 
 ## 文档 📚
 
 详细使用说明请参见项目文档：
 
-https://starbobis.github.io/SSMT-Documents/
+[https://starbobis.github.io/SSMT-Documents/](https://starbobis.github.io/SSMT-Documents/)
 
 ## 开发环境 🛠️
 
@@ -48,4 +48,4 @@ GPL3.0，详情请参阅仓库中的 `LICENSE` 文件。
 
 SSMT 后端核心完全基于开源项目 3Dmigoto，感谢其开发者的辛勤付出！
 
-https://github.com/bo3b/3Dmigotohttps://github.com/bo3b/3Dmigoto
+[https://github.com/bo3b/3Dmigoto](https://github.com/bo3b/3Dmigoto)

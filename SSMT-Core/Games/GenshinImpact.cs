@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -131,18 +131,9 @@ namespace SSMT
                             LOG.Info("CategoryTxtFilePath: " + CategoryTxtFilePath);
                             
                             string VertexCountTxtShow = DBMTFileUtils.FindMigotoIniAttributeInFile(CategoryTxtFilePath, "vertex count");
-                            if (VertexCountTxtShow.Trim() != "")
+                            if (VertexCountTxtShow.Trim() == "")
                             {
-                                int TxtShowVertexCount = int.Parse(VertexCountTxtShow);
-                                if (TxtShowVertexCount != TmpNumber)
-                                {
-                                    LOG.Info("槽位的txt文件顶点数与Buffer数据类型统计顶点数不符，跳过此数据类型。");
-                                    AllMatch = false;
-                                    break;
-                                }
-                            }
-                            else
-                            {
+                            
                                 string ShowStride = DBMTFileUtils.FindMigotoIniAttributeInFile(CategoryTxtFilePath, "stride");
                                 if (ShowStride.Trim() != "")
                                 {

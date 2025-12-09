@@ -1,4 +1,4 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Media.Imaging;
 using SSMT_Core;
 using System;
@@ -46,26 +46,26 @@ namespace SSMT
                 }
 
                 //自动补全Games文件夹
+                //只有不存在Games文件夹时才自动补全Games文件夹
+                //这样让新用户可以直接使用预设内容
+                //老用户也不会被覆盖文件了
                 if (!Directory.Exists(PathManager.Path_GamesFolder))
                 {
                     Directory.CreateDirectory(PathManager.Path_GamesFolder);
-                }
-                string OurGamesPath = Path.Combine(PathManager.Path_BaseFolder, "Games\\");
 
-                DBMTFileUtils.CopyDirectory(OurGamesPath, PathManager.Path_GamesFolder, true, false);
+                    string OurGamesPath = Path.Combine(PathManager.Path_BaseFolder, "Games\\");
+
+                    DBMTFileUtils.CopyDirectory(OurGamesPath, PathManager.Path_GamesFolder, true, false);
+                }
+                
 
 
                 //自动补全3Dmigoto文件夹
                 string Target3DmigotoFolderPath = Path.Combine(GlobalConfig.SSMTCacheFolderPath, "3Dmigoto\\");
-                string Our3DmigotoPath = Path.Combine(PathManager.Path_BaseFolder, "3Dmigoto\\");
-
                 if (!Directory.Exists(Target3DmigotoFolderPath))
                 {
                     Directory.CreateDirectory(Target3DmigotoFolderPath);
                 }
-
-                DBMTFileUtils.CopyDirectory(Our3DmigotoPath, Target3DmigotoFolderPath, true, OverwriteMigotoFiles);
-
 
             }
         }

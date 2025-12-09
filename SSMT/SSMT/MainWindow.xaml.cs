@@ -45,37 +45,7 @@ namespace SSMT
     /// </summary>
     public sealed partial class MainWindow : Window
     {
-        [DllImport("user32.dll", SetLastError = true)]
-        private static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-
-        private const int SW_MAXIMIZE = 3;
-        private const int SW_RESTORE = 9;
-
-        /// <summary>
-        /// 使用原生 Win32 最大化窗口（保留右上角按钮）。
-        /// </summary>
-        public void NativeMaximize()
-        {
-            try
-            {
-                var hwnd = WindowNative.GetWindowHandle(this);
-                ShowWindow(hwnd, SW_MAXIMIZE);
-            }
-            catch { }
-        }
-
-        /// <summary>
-        /// 使用原生 Win32 恢复窗口（取消最大化）。
-        /// </summary>
-        public void NativeRestore()
-        {
-            try
-            {
-                var hwnd = WindowNative.GetWindowHandle(this);
-                ShowWindow(hwnd, SW_RESTORE);
-            }
-            catch { }
-        }
+    
 
         //public Image MainWindowImageBrushW;
         /// <summary>
@@ -262,8 +232,7 @@ namespace SSMT
 
                 ResetBackground();
 
-                // 取消最大化（恢复到普通窗口）
-                NativeRestore();
+              
 
             }
             else if (args.InvokedItemContainer is NavigationViewItem item)
@@ -300,19 +269,7 @@ namespace SSMT
                         break;
                 }
 
-                if (pageType == typeof(DocumentPage))
-                {
-                    // 最大化窗口
-                    //AppWindow.SetPresenter(AppWindowPresenterKind.FullScreen);
-
-                    NativeMaximize();
-                }
-                else
-                {
-                    //AppWindow.SetPresenter(AppWindowPresenterKind.Overlapped);
-                    NativeRestore();
-                }
-
+         
 
                 if (pageType != null)
                 {
@@ -339,7 +296,6 @@ namespace SSMT
 
         private void Window_Closed(object sender, WindowEventArgs args)
         {
-            NativeRestore();
 
             //退出程序时，保存窗口大小
             //用户反馈蓝屏的时候，全局配置文件会损坏导致SSMT无法启动，启动后闪退。

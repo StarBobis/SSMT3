@@ -3,7 +3,7 @@ using SSMT_Core;
 using System;
 using System.IO;
 
-namespace SSMT.Configs
+namespace SSMT.Pages.TextureToolBoxPage
 {
     public class TextToolBoxConfig
     {

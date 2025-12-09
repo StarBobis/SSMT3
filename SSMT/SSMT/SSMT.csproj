@@ -33,13 +33,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="3Dmigoto\Nioh2\Mods\" />
-    <Folder Include="3Dmigoto\SnowBreak\Mods\" />
-    <Folder Include="3Dmigoto\YYSLS\Mods\" />
-    <Folder Include="Pages\TextureToolBoxPage\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\SSMT-Core\SSMT-Core.csproj" />
   </ItemGroup>
 
@@ -61,16 +54,8 @@
 		<Content Include="GameTypeConfigs\**" CopyToOutputDirectory="Always" />
 		<Content Include="Plugins\**" CopyToOutputDirectory="Always" />
 		<Content Include="Games\**" CopyToOutputDirectory="Always" />
-		<Content Include="3Dmigoto\**" CopyToOutputDirectory="Always" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Pages\DocumentPage.xaml" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Page Update="Pages\DocumentPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </Page>
-	</ItemGroup>
+
 	
     <!--禁用空值检查，没必要那么严格，只是一个小工具，一切从简-->
     <PropertyGroup>

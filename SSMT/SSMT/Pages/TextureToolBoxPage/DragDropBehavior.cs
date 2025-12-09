@@ -8,7 +8,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.Storage;
 using System.Windows.Input;
 
-namespace SSMT.Behaviors
+namespace SSMT.Pages.TextureToolBoxPage
 {
     public static class DragDropBehavior
     {
